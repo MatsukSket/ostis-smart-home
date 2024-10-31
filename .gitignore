@@ -1,16 +1,18 @@
 .idea
 .vscode
-*.scs~
-ostis-web-platform
-*.log
+
 bin/
 build/
+cmake-build-debug
+cmake-build-release
 *.bin
+
 .cache/
 *.db
 *.txt
+!conanfile.txt
+*.log
 
 __pycache__
 
-cmake-build-debug
-cmake-build-release
+CMakeUserPresets.json

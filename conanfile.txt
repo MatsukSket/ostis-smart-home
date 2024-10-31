@@ -1,0 +1,9 @@
+[requires]
+sc-machine/0.9.6
+
+[generators]
+CMakeDeps
+CMakeToolchain
+
+[layout]
+cmake_layout
