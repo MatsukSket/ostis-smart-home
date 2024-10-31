@@ -23,7 +23,7 @@ ui_menu_isomorphic_search => ui_nrel_command_template:
 			(*
 				_-> ui_arg_1;;
 			*);;
-		._action_search_isomorphic_structures_instance _<- action;;
+		._action_search_isomorphic_structures_instance <-_ action;;
 	*];;
 
 ui_menu_isomorphic_search => ui_nrel_command_lang_template: [Какие структуры соответствуют заданному шаблону $ui_arg_1?] (* <- lang_ru;; *);;

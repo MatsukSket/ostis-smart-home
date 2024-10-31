@@ -23,7 +23,7 @@ ui_menu_subdividing_search => ui_nrel_command_template:
 			(*
 				_-> rrel_1:: ui_arg_1;;
 			*);;
-		._action_search_subdividing_instance _<- action;;
+		._action_search_subdividing_instance <-_ action;;
 	*];;
 
 ui_menu_subdividing_search => ui_nrel_command_lang_template: [На что разбивается $ui_arg_1] (* <- lang_ru;; *);;

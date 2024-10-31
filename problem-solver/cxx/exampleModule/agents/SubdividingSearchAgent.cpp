@@ -37,7 +37,7 @@ ScResult SubdividingSearchAgent::DoProgram(ScAction & action)
     ScAddr const & tupleAddr = iterator5->Get(0);
     result << iterator5->Get(1) << tupleAddr << iterator5->Get(3);
     
-    ScIterator3Ptr iterator3 = m_context.CreateIterator3(tupleAddr, ScType::EdgeAccessConstPosPerm, ScType::Unknown);
+    ScIterator3Ptr iterator3 = m_context.CreateIterator3(tupleAddr, ScType::ConstPermPosArc, ScType::Unknown);
     while (iterator3->Next())
       result << iterator3->Get(1) << iterator3->Get(2);
   }
