@@ -1,5 +1,5 @@
 [requires]
-sc-machine/0.9.6
+sc-machine/0.10.0
 
 [generators]
 CMakeDeps
