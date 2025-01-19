@@ -30,6 +30,7 @@ pipx ensurepath
 ### Install components
 
 ```sh
+conan profile detect
 conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
 
 conan install . --build=missing
