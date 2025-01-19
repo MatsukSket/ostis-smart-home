@@ -27,7 +27,7 @@ ScResult IsomorphicSearchAgent::DoProgram(ScAction & action)
 
   if (!scTemplateNode.IsValid())
   {
-    SC_AGENT_LOG_ERROR("Template argument is not found");
+    m_logger.Error("Template argument is not found");
     return action.FinishWithError();
   }
 
@@ -38,7 +38,7 @@ ScResult IsomorphicSearchAgent::DoProgram(ScAction & action)
   }
   catch (ScException const & exception)
   {
-    SC_AGENT_LOG_ERROR(exception.Message());
+    m_logger.Error(exception.Message());
     return action.FinishWithError();
   }
 
@@ -64,7 +64,7 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
   {
     ScAddr const & membershipArc = m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
     result << membershipArc << Keynodes::empty_set;
-    SC_AGENT_LOG_DEBUG("Structures have not been found");
+    m_logger.Debug("Structures have not been found");
   }
   else
   {
@@ -73,7 +73,7 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
       ScAddr const & membershipArc = m_context.GenerateConnector(ScType::ConstPermPosArc, resultsSet, resultAddr);
       result << membershipArc << resultAddr;
     }
-    SC_AGENT_LOG_DEBUG("Structures have been found");
+    m_logger.Debug("Structures have been found");
   }
 }
 
