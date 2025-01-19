@@ -8,17 +8,38 @@ OSTIS example app is an ostis-system based on [**ostis-web-platform**](https://g
 
 ## Installation
 
+### Clone repository
+
 ```sh
-git clone https://github.com/ostis-apps/ostis-example-app.git
+git clone https://github.com/NikitaZotov/ostis-example-app.git
 cd ostis-example-app
 git checkout release/0.10.0
+git submodule update --init --recursive
+```
 
-conan install .
+### Install Conan
+
+```sh
+# Use pipx to install conan if not already installed
+# Install pipx first using guide: https://pipx.pypa.io/stable/installation/
+pipx install conan
+pipx ensurepath
+# relaunch your shell after installation
+```
+
+### Install components
+
+```sh
+conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
+
+conan install . --build=missing
 cmake --preset conan-release
 cmake --build --preset conan-release
 
-./interface/sc-web/scripts/install_dependencies.sh
-./interface/sc-web/scripts/build_sc_web.sh
+cd interface/sc-web
+./scripts/install_dependencies.sh
+npm run build
+cd ../..
 ```
 
 ## Build knowledge base
@@ -39,7 +60,8 @@ To launch system you should start sc-machine:
 After that launch sc-web interface:
 
 ```sh
-./interface/sc-web/scripts/run_sc_web.sh
+source .venv/bin/activate
+python3 server/app.py
 ```
 
 To check that everything is fine open localhost:8000 in your browser.
