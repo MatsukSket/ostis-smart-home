@@ -113,7 +113,7 @@ ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(
 
 ScAddr IsomorphicSearchAgent::emplaceItemElementsInStructure(ScTemplateSearchResultItem const & item)
 {
-  ScAddr const & searchResultStructure = m_context.GenerateNode(ScType::NodeConstStruct);
+  ScAddr const & searchResultStructure = m_context.GenerateNode(ScType::ConstNodeStructure);
 
   size_t const searchResultItemSize = item.Size();
   for (size_t elementIndex = 0; elementIndex < searchResultItemSize; elementIndex++)
