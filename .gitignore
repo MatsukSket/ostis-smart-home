@@ -2,9 +2,7 @@
 .vscode
 
 bin/
-build/
-cmake-build-debug
-cmake-build-release
+sc-machine/
 *.bin
 
 .cache/
