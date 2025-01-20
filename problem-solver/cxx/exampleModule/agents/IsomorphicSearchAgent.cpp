@@ -65,7 +65,8 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
 
   if (searchResults.empty())
   {
-    ScAddr const & membershipArc = m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
+    ScAddr const & membershipArc =
+        m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
     result << membershipArc << Keynodes::empty_set;
     m_logger.Debug("Structures have not been found");
   }
