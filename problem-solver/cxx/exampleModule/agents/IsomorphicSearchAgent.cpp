@@ -101,10 +101,10 @@ ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(ScAddr const & scTem
   ScAddr const & resultsSetTuple = m_context.GenerateNode(ScType::ConstNodeTuple);
   ScAddr const & searchResultRelationPair =
       m_context.GenerateConnector(ScType::ConstCommonArc, scTemplateNode, resultsSetTuple);
-  ScAddr const & relationAccessArc =
+  ScAddr const & relationMembershipArc =
       m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::nrel_search_result, searchResultRelationPair);
 
-  result << resultsSetTuple << searchResultRelationPair << relationAccessArc;
+  result << resultsSetTuple << searchResultRelationPair << relationMembershipArc;
   return resultsSetTuple;
 }
 
