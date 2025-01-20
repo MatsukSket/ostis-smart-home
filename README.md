@@ -1,10 +1,10 @@
-<h1 align="center">OSTIS example app</h1>
+<h1 align="center">ostis-example-app</h1>
 
 [![license](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## About
 
-OSTIS example app is an ostis-system based on [**ostis-web-platform**](https://github.com/ostis-ai/ostis-web-platform) and designed with [OSTIS Technology](https://github.com/ostis-ai).
+ostis-example-app is an ostis-system based on [**ostis-web-platform**](https://github.com/ostis-ai/ostis-web-platform) and designed with [OSTIS Technology](https://github.com/ostis-ai).
 
 ## Installation
 
@@ -31,6 +31,10 @@ pipx ensurepath
 
 ### Relaunch your shell after installation
 
+```sh
+exec $SHELL
+```
+
 ### Install sc-machine libraries
 
 ```sh
@@ -48,14 +52,16 @@ cmake --build --preset conan-release
 
 ```sh
 curl -LO https://github.com/NikitaZotov/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
-tar -xvzf sc-machine-0.10.0-Linux.tar -C sc-machine
+mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1
+rm -rf sc-machine-0.10.0-Linux.tar.gz
 ```
 
 #### macOS
 
 ```sh
 curl -LO https://github.com/NikitaZotov/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
-tar -xvzf sc-machine-0.10.0-Darwin.tar -C sc-machine
+mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Darwin.tar.gz -C sc-machine --strip-components 1
+rm -rf sc-machine-0.10.0-Darwin.tar.gz
 ```
 
 ### Install sc-web
