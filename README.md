@@ -17,17 +17,21 @@ git checkout release/0.10.0
 git submodule update --init --recursive
 ```
 
+### Install pipx 
+
+To install pipx, use this guide: https://pipx.pypa.io/stable/installation/.
+
 ### Install Conan
 
 ```sh
 # Use pipx to install conan if not already installed
-# Install pipx first using guide: https://pipx.pypa.io/stable/installation/
 pipx install conan
 pipx ensurepath
-# relaunch your shell after installation
 ```
 
-### Install components
+### Relaunch your shell after installation
+
+### Install sc-machine libraries
 
 ```sh
 conan profile detect
@@ -36,31 +40,63 @@ conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai
 conan install . --build=missing
 cmake --preset conan-release
 cmake --build --preset conan-release
+```
 
+### Install sc-machine binaries
+
+#### Ubuntu
+
+```sh
+curl -LO https://github.com/NikitaZotov/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
+tar -xvzf sc-machine-0.10.0-Linux.tar -C sc-machine
+```
+
+#### macOS
+
+```sh
+curl -LO https://github.com/NikitaZotov/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
+tar -xvzf sc-machine-0.10.0-Darwin.tar -C sc-machine
+```
+
+### Install sc-web
+
+#### Ubuntu
+
+```sh
 cd interface/sc-web
-./scripts/install_dependencies.sh
+./scripts/install_deps_ubuntu.sh
+npm run build
+cd ../..
+```
+
+#### macOS
+
+```sh
+cd interface/sc-web
+./scripts/install_deps_macOS.sh
 npm run build
 cd ../..
 ```
 
 ## Build knowledge base
 
-Before first launch or after changes in KB you should build knowledge base. 
+Before first launch or after changes in knowledge base you should build it. 
 
 ```sh
-<path/to/sc-builder> -i kb -o kb.bin --clear
+./sc-machine/bin/sc-builder -i kb -o kb.bin --clear
 ```
 
 ## Usage
 
-To launch system you should start sc-machine:
+To launch system you should start sc-machine in the first terminal:
 ```sh
-<path/to/sc-machine> -c ostis-example-app.ini -e "<path/to/sc-machine/extensions>;build/Release/extensions"
+./sc-machine/bin/sc-machine -s kb.bin -e "sc-machine/lib/extensions;build/Release/extensions"
 ```
 
-After that launch sc-web interface:
+After that launch sc-web interface in the second terminal:
 
 ```sh
+cd interface/sc-web
 source .venv/bin/activate
 python3 server/app.py
 ```
