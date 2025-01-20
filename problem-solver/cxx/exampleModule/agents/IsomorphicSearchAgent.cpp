@@ -88,7 +88,7 @@ void IsomorphicSearchAgent::clearPreviousSearchResults(ScAddr const & scTemplate
   while (previousResultsStructuresSetsIterator->Next())
   {
     ScIterator3Ptr previousResultsSetElementsIterator = m_context.CreateIterator3(
-        previousResultsStructuresSetsIterator->Get(2), ScType::ConstPermPosArc, ScType::NodeConstStruct);
+        previousResultsStructuresSetsIterator->Get(2), ScType::ConstPermPosArc, ScType::ConstNodeStructure);
     while (previousResultsSetElementsIterator->Next())
       m_context.EraseElement(previousResultsSetElementsIterator->Get(2));
 

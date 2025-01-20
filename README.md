@@ -17,7 +17,7 @@ git checkout release/0.10.0
 git submodule update --init --recursive
 ```
 
-### Install pipx 
+### Install pipx
 
 To install pipx, use this guide: https://pipx.pypa.io/stable/installation/.
 
