@@ -11,9 +11,9 @@ ostis-example-app is an ostis-system based on [**ostis-web-platform**](https://g
 ### Clone repository
 
 ```sh
-git clone https://github.com/NikitaZotov/ostis-example-app.git
+git clone https://github.com/ostis-ai/ostis-example-app.git
 cd ostis-example-app
-git checkout release/0.10.0
+git checkout 0.10.0
 git submodule update --init --recursive
 ```
 
@@ -48,7 +48,7 @@ conan install . --build=missing
 #### Ubuntu
 
 ```sh
-curl -LO https://github.com/NikitaZotov/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
+curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
 mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1
 rm -rf sc-machine-0.10.0-Linux.tar.gz
 ```
@@ -56,7 +56,7 @@ rm -rf sc-machine-0.10.0-Linux.tar.gz
 #### macOS
 
 ```sh
-curl -LO https://github.com/NikitaZotov/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
+curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
 mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Darwin.tar.gz -C sc-machine --strip-components 1
 rm -rf sc-machine-0.10.0-Darwin.tar.gz
 ```
