@@ -1,6 +1,6 @@
 cmake_policy(SET CMP0048 NEW)
 cmake_minimum_required(VERSION 3.24)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 17 C CXX)
 project(ostis-example-app VERSION "0.10.0")
 
 set(CMAKE_BUILD_TYPE Debug)
