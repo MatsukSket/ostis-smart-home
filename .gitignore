@@ -14,4 +14,4 @@ sc-machine/
 
 __pycache__
 
-CMakeUserPresets.json
+ConanPresets.json
