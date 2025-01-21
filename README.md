@@ -50,7 +50,7 @@ conan install . --build=missing
 ```sh
 curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
 mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1
-rm -rf sc-machine-0.10.0-Linux.tar.gz
+rm -rf sc-machine-0.10.0-Linux.tar.gz && rm -rf sc-machine/include
 ```
 
 #### macOS
@@ -58,7 +58,7 @@ rm -rf sc-machine-0.10.0-Linux.tar.gz
 ```sh
 curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
 mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Darwin.tar.gz -C sc-machine --strip-components 1
-rm -rf sc-machine-0.10.0-Darwin.tar.gz
+rm -rf sc-machine-0.10.0-Darwin.tar.gz && rm -rf sc-machine/include
 ```
 
 ### Install sc-web
