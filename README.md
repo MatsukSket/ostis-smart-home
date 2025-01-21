@@ -81,8 +81,8 @@ cd ../..
 ## Build problem solver
 
 ```sh
-cmake --preset conan-release
-cmake --build --preset conan-release
+cmake --preset release-conan
+cmake --build --preset release
 ```
 
 ## Build knowledge base
@@ -120,13 +120,22 @@ To check that everything is fine open localhost:8000 in your browser.
 
 `problem-solver` is the place for the problem solver of your app. Put your agents here. After changes in problem-solver you should rebuild it:
 
-After updating your C++ code you need to rebuild `problem-solver`:  
+After updating your C++ code you need to rebuild `problem-solver`:
+
 ```sh
-cmake --preset conan-release
-cmake --build --preset conan-release
+cmake --preset release-conan
+cmake --build --preset release
 ```
 
-To enable DEBUG set fields in ostis-example-app.ini:
+To build C++ code in debug mode, run:
+
+```sh
+conan install . --build=missing -s build_type=Debug
+cmake --preset debug-conan
+cmake --build --preset debug
+```
+
+To enable Debug set fields in ostis-example-app.ini:
 
 ```sh
 log_type = Console
