@@ -11,10 +11,8 @@ ostis-example-app is an ostis-system based on [**ostis-web-platform**](https://g
 ### Clone repository
 
 ```sh
-git clone https://github.com/ostis-ai/ostis-example-app.git
+git clone -b release/0.10.0 --recursive https://github.com/NikitaZotov/ostis-example-app.git
 cd ostis-example-app
-git checkout 0.10.0
-git submodule update --init --recursive
 ```
 
 ### Install pipx
@@ -38,9 +36,8 @@ exec $SHELL
 ### Install sc-machine libraries
 
 ```sh
-conan profile detect
 conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
-conan install . --build=missing
+conan profile detect && conan install . --build=missing
 ```
 
 ### Install sc-machine binaries
@@ -107,8 +104,7 @@ After that launch sc-web interface in the second terminal:
 
 ```sh
 cd interface/sc-web
-source .venv/bin/activate
-python3 server/app.py
+source .venv/bin/activate && python3 server/app.py
 ```
 
 To check that everything is fine open localhost:8000 in your browser.
