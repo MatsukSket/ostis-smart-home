@@ -93,7 +93,7 @@ cmake --build --preset conan-release
 Before first launch or after changes in knowledge base you should build it. 
 
 ```sh
-./sc-machine/bin/sc-builder -i kb -o kb.bin --clear
+./sc-machine/bin/sc-builder -i knowledge-base -o kb.bin --clear
 ```
 
 ## Usage
