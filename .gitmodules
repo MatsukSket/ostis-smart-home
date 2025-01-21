@@ -1,6 +1,7 @@
+[submodule "knowledge-base/ims.ostis.kb"]
+	path = knowledge-base/ims.ostis.kb
+	url = https://github.com/ostis-ai/ims.ostis.kb.git
+
 [submodule "interface/sc-web"]
 	path = interface/sc-web
 	url = https://github.com/ostis-ai/sc-web.git
-[submodule "kb/ims.ostis.kb"]
-	path = kb/ims.ostis.kb
-	url = https://github.com/ostis-ai/ims.ostis.kb.git
