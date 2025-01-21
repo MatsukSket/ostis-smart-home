@@ -29,7 +29,7 @@ pipx install conan
 pipx ensurepath
 ```
 
-### Relaunch your shell after installation
+### Relaunch shell
 
 ```sh
 exec $SHELL
@@ -40,10 +40,7 @@ exec $SHELL
 ```sh
 conan profile detect
 conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
-
 conan install . --build=missing
-cmake --preset conan-release
-cmake --build --preset conan-release
 ```
 
 ### Install sc-machine binaries
@@ -84,6 +81,13 @@ npm run build
 cd ../..
 ```
 
+## Build problem solver
+
+```sh
+cmake --preset conan-release
+cmake --build --preset conan-release
+```
+
 ## Build knowledge base
 
 Before first launch or after changes in knowledge base you should build it. 
@@ -114,7 +118,7 @@ To check that everything is fine open localhost:8000 in your browser.
 
 ### Knowledge Base
 
-`kb` is the place for the knowledge base source text files of your app. Put your **.scs** and **.gwf** files here.
+`knowledge-base` is the place for the knowledge base source text files of your app. Put your **.scs** and **.gwf** files here.
 
 ### Problem Solver
 
@@ -133,12 +137,6 @@ log_type = Console
 log_file = sc-memory.log
 log_level = Debug
 ```
-
-### Interface
-
-`interface` is the place for your interface modules.
-
-To learn more about creating web components for the new web interface version follow this [link](https://github.com/MikhailSadovsky/sc-machine/tree/example/web/client)
 
 ## Author
 
