@@ -51,7 +51,7 @@ exec $SHELL
 
 ### Install sc-machine libraries
 
-sc-machine libraries are the core components of the OSTIS Platform, used to launch ostis-systems. They're installed using Conan:
+sc-machine libraries are the core components of the OSTIS Platform, used to develop C++ agents. They're installed using Conan:
 
 ```sh
 conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
@@ -61,9 +61,9 @@ conan install . --build=missing
 
 ### Install sc-machine binaries
 
-sc-machine binaries are pre-compiled executables that provide the runtime environment for the ostis-system. The installation process differs slightly between Ubuntu and macOS:
+sc-machine binaries are pre-compiled executables that provide the runtime environment for the ostis-system: build knowledge base source and launch the ostis-system. The installation process differs slightly between Linux and macOS:
 
-#### Ubuntu
+#### Linux
 
 ```sh
 curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
