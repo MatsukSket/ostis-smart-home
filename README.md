@@ -51,7 +51,7 @@ exec $SHELL
 
 ### Install sc-machine libraries
 
-sc-machine libraries are the core components of the OSTIS platform. They're installed using Conan:
+sc-machine libraries are the core components of the OSTIS Platform, used to launch ostis-systems. They're installed using Conan:
 
 ```sh
 conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
@@ -136,6 +136,38 @@ source .venv/bin/activate && python3 server/app.py
 
 To check that everything is fine open localhost:8000 in your browser.
 ![](https://i.imgur.com/6SehI5s.png)
+
+## Docker
+
+To use Docker with ostis-example-app, follow these steps:
+
+1. Build the Docker images:
+
+    ```sh
+    docker compose build
+    ```
+
+2. Build the knowledge base:
+
+    ```sh
+    docker compose run machine build
+    ```
+
+3. Start the ostis-system: 
+
+    ```sh
+    docker compose up
+    ```
+
+These commands will set up and run the entire ostis-system using Docker containers. The system will be accessible through the web interface at localhost:8000.
+
+If you need to rebuild the knowledge base after making changes, you can run the second command again. To stop the system, use:
+
+```sh
+docker compose down
+```
+
+Note that you need to have Docker and Docker Compose installed on your system before running these commands.
 
 ## Project Structure
 
