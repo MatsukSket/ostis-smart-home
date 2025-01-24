@@ -4,11 +4,21 @@
 
 ## About
 
-ostis-example-app is an ostis-system based on [**ostis-web-platform**](https://github.com/ostis-ai/ostis-web-platform) and designed with [OSTIS Technology](https://github.com/ostis-ai).
+ostis-example-app is an example of ostis-system designed with [OSTIS Technology](https://github.com/ostis-ai). It serves as a comprehensive demonstration of how to create, structure, and run an ostis-based system.
+
+The main purpose of this example is to provide a foundation for creating custom intelligent systems based on the OSTIS technology. Developers can use this example as a starting point, adapting and extending its components to suit their specific needs.
+
+The ostis-example-app consists of several interconnected components:
+
+1. Knowledge base. Custom knowledge represented in SC-code format (.scs and .gwf files).
+2. Problem solver. Custom agents written in C++ that implement specific problem-solving logic.
+3. Interface. The web-based user interface for interacting with the system.
 
 ## Installation
 
 ### Clone repository
+
+First, clone the repository and navigate to the project directory:
 
 ```sh
 git clone https://github.com/NikitaZotov/ostis-example-app.git
@@ -23,6 +33,8 @@ To install pipx, use this guide: https://pipx.pypa.io/stable/installation/.
 
 ### Install Conan
 
+Conan is a decentralized package manager for C/C++. It's used in this project to manage dependencies.
+
 ```sh
 # Use pipx to install conan if not already installed
 pipx install conan
@@ -31,11 +43,15 @@ pipx ensurepath
 
 ### Relaunch shell
 
+After installing Conan, relaunch your shell to ensure the new PATH is loaded:
+
 ```sh
 exec $SHELL
 ```
 
 ### Install sc-machine libraries
+
+sc-machine libraries are the core components of the OSTIS platform. They're installed using Conan:
 
 ```sh
 conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
@@ -44,6 +60,8 @@ conan install . --build=missing
 ```
 
 ### Install sc-machine binaries
+
+sc-machine binaries are pre-compiled executables that provide the runtime environment for the ostis-system. The installation process differs slightly between Ubuntu and macOS:
 
 #### Ubuntu
 
@@ -63,6 +81,8 @@ rm -rf sc-machine-0.10.0-Darwin.tar.gz && rm -rf sc-machine/include
 
 ### Install sc-web
 
+sc-web provides the web-based user interface for the ostis-system. The installation process includes setting up dependencies and building the interface:
+
 #### Ubuntu
 
 ```sh
@@ -81,19 +101,23 @@ npm run build
 cd ../..
 ```
 
-## Build problem solver
+## Build
+
+### Build problem solver
+
+The problem solver contains custom agents for your ostis-system. Build it using CMake:
 
 ```sh
 cmake --preset release-conan
 cmake --build --preset release
 ```
 
-## Build knowledge base
+### Build knowledge base
 
-Before first launch or after changes in knowledge base you should build it. 
+The knowledge base contains your custom knowledge represented in SC-code. It needs to be built before launching the system or after making changes:
 
 ```sh
-./sc-machine/bin/sc-builder -i knowledge-base -o kb.bin --clear
+./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
 ```
 
 ## Usage
@@ -117,7 +141,13 @@ To check that everything is fine open localhost:8000 in your browser.
 
 ### Knowledge Base
 
-`knowledge-base` is the place for the knowledge base source text files of your app. Put your **.scs** and **.gwf** files here.
+`knowledge-base` is the place for the knowledge base source text files of your app. Put your .scs and .gwf files here.
+
+After updating your .scs and .gwf files you need to rebuild `knowledge-base`:
+
+```sh
+./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+```
 
 ### Problem Solver
 
@@ -138,7 +168,7 @@ cmake --preset debug-conan
 cmake --build --preset debug
 ```
 
-To enable Debug set fields in ostis-example-app.ini:
+To enable Debug logs set fields in ostis-example-app.ini:
 
 ```sh
 log_type = Console
