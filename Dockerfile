@@ -10,7 +10,7 @@ COPY CMakeLists.txt /example-app/CMakeLists.txt
 COPY requirements.txt /example-app/requirements.txt
 
 # tini is an init system to forward interrupt signals properly
-RUN apt update && apt install -y --no-install-recommends sudo tini curl python3 python3-pip pipx cmake build-essential ninja-build
+RUN apt update && apt install -y --no-install-recommends sudo tini curl ccache python3 python3-pip pipx cmake build-essential ninja-build
 
 # Install Conan
 RUN pipx install conan && \
@@ -20,8 +20,8 @@ FROM base AS devdeps
 WORKDIR /example-app
 
 SHELL ["/bin/bash", "-c"]
-RUN python3 -m venv .venv && \
-    source .venv/bin/activate && \
+RUN python3 -m venv /example-app/.venv && \
+    source /example-app/.venv/bin/activate && \
     pip3 install -r /example-app/requirements.txt
 
 ENV PATH="/root/.local/bin:$PATH"
@@ -46,9 +46,9 @@ RUN --mount=type=cache,target=/ccache/ cmake --preset release-conan && cmake --b
 FROM base AS final
 
 COPY --from=builder /example-app/scripts /example-app/scripts
-COPY --from=builder /example-app/repo.path /example-app/repo.path
-COPY --from=builder /example-app/ostis-example-app.ini /example-app/ostis-example-app.ini
 COPY --from=builder /example-app/sc-machine /example-app/sc-machine
+COPY --from=builder /example-app/build/Release/extensions /example-app/build/Release/extensions
+COPY --from=builder /example-app/.venv /example-app/.venv
 
 WORKDIR /example-app
 
