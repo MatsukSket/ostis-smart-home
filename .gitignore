@@ -16,3 +16,4 @@ sc-machine/
 __pycache__
 
 ConanPresets.json
+.venv
