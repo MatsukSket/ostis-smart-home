@@ -6,8 +6,8 @@ function usage() {
     cat <<USAGE
 
     Usage: 
-        $0 build -b <path/to/sc-machine/binaries> -c <path/to/config/ini> [knowledge base sources path]
-        $0 run -b <path/to/sc-machine/binaries> -c <path/to/config/ini> [sc-machine args]
+        $0 build -b <path/to/sc-machine/binaries> -c <path/to/config.ini> [knowledge base sources path]
+        $0 run -b <path/to/sc-machine/binaries> -c <path/to/config.ini> [sc-machine args]
 
     Options:
         build <PATH>:       Rebuilds KB from sources (provide absolute path to the source folder or repo.path file).
@@ -39,7 +39,7 @@ function start_machine {
     if [ -n "$REBUILD_KB" ] && [ "$REBUILD_KB" -eq 1 ];
     then
         # this expands to $KB_PATH if it's non-null and expands to "/knowledge-base" otherwise.
-        rebuild_kb "${KB_PATH:-"/knowledge-base"}"
+        build_kb "${KB_PATH:-"/knowledge-base"}"
     fi
 
     # if arguments were provided, use them instead of the default ones.
