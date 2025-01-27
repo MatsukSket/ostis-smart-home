@@ -21,7 +21,7 @@ USAGE
     exit 1
 }
 
-function rebuild_kb() {
+function build_kb() {
     if [ -e "$1" ];
     then
         "$BINARY_PATH"/sc-builder --clear -c "$CONFIG_PATH" -i "$@"
@@ -72,7 +72,7 @@ case $1 in
 build)
     shift 1;
     parse_options "$@"
-    rebuild_kb "$@"
+    build_kb "$@"
     ;;
 
 # launch sc-machine
