@@ -6,8 +6,8 @@ function usage() {
     cat <<USAGE
 
     Usage: 
-        $0 build -b binary_path -c config_path [KB path]
-        $0 run -b binary_path -c config_path [sc-machine args]
+        $0 build -b <path/to/sc-machine/binaries> -c <path/to/config/ini> [knowledge base sources path]
+        $0 run -b <path/to/sc-machine/binaries> -c <path/to/config/ini> [sc-machine args]
 
     Options:
         build <PATH>:       Rebuilds KB from sources (provide absolute path to the source folder or repo.path file).
