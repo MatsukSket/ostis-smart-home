@@ -13,7 +13,7 @@ function usage() {
         build <PATH>:       Rebuilds KB from sources (provide absolute path to the source folder or repo.path file).
         run <args>:         Starts sc-machine. Arguments passed to this command will be redirected to sc-machine binary. You can set sc-server options from common config.
 
-        Setting REBUILD_KB environment variable inside the container will trigger a KB rebuild. Setting custom starting point for sc-builder can be done using KB_PATH environment variable, "/kb" is used as a default KB_PATH.
+        Setting REBUILD_KB environment variable inside the container will trigger a KB rebuild. Setting custom starting point for sc-builder can be done using KB_PATH environment variable, "/knowledge-base" is used as a default KB_PATH.
         CONFIG_PATH and BINARY_PATH environment variables can provide the respective settings if the use of flags is undesirable.
         EXTENSIONS_PATH can be set to specify the path for extensions used by sc-machine.
 
@@ -38,8 +38,8 @@ function rebuild_kb() {
 function start_machine {
     if [ -n "$REBUILD_KB" ] && [ "$REBUILD_KB" -eq 1 ];
     then
-        # this expands to $KB_PATH if it's non-null and expands to "/kb" otherwise.
-        rebuild_kb "${KB_PATH:-"/kb"}"
+        # this expands to $KB_PATH if it's non-null and expands to "/knowledge-base" otherwise.
+        rebuild_kb "${KB_PATH:-"/knowledge-base"}"
     fi
 
     # if arguments were provided, use them instead of the default ones.
@@ -53,68 +53,37 @@ function start_machine {
     fi
 }
 
+parse_options() {
+    while getopts "b:c:h" opt; do
+        case $opt in
+            b) BINARY_PATH=$OPTARG ;;
+            c) CONFIG_PATH=$OPTARG ;;
+            h) usage ;;
+            \?) echoerr "Invalid option -$OPTARG"; usage ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+}
+
 # parse script commands
 case $1 in
 
 # rebuild KB in case the build command was passed
 build)
     shift 1;
-    while getopts "b:c:h" opt;
-    do
-        case $opt in
-        b)
-            BINARY_PATH=$OPTARG
-            ;;
-        c)
-            CONFIG_PATH=$OPTARG
-            ;;
-        h)
-            usage
-            ;;
-        \?)
-            echoerr "Invalid option -$OPTARG"
-            usage
-            ;;
-        esac
-    done
-    # skip arguments processed by getopts
-    shift $((OPTIND - 1))
+    parse_options "$@"
     rebuild_kb "$@"
     ;;
 
 # launch sc-machine
 run)
     shift 1;
-    while getopts "b:c:h" opt;
-    do
-        case $opt in
-        b)
-            BINARY_PATH=$OPTARG
-            ;;
-        c)
-            CONFIG_PATH=$OPTARG
-            ;;
-        h)
-            usage
-            ;;
-        \?)
-            echoerr "Invalid option -$OPTARG"
-            usage
-            ;;
-        esac
-    done
-    shift $((OPTIND - 1))
+    parse_options "$@"
     start_machine "$@"
     ;;
 
 # show help
---help)
-    usage
-    ;;
-help)
-    usage
-    ;;
--h)
+--help|help|-h)
     usage
     ;;
 
