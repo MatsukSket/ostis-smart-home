@@ -46,9 +46,6 @@ docker compose down
 
 Note that you need to have Docker and Docker Compose installed on your system before running these commands.
 
-To check that everything is fine open localhost:8000 in your browser.
-![](https://i.imgur.com/6SehI5s.png)
-
 ## Native
 
 ### Clone repository
