@@ -20,7 +20,10 @@ services:
       context: ./
     restart: unless-stopped
     volumes:
-      - ./:/kb
+      - ./knowledge-base:/knowledge-base
+      - ./repo-path:/knowledge-base
+      - ./ostis-example-app.ini:/knowledge-base
+      - ./problem-solver:/knowledge-base
       - kb-binary:/kb.bin
     networks:
       - sc-machine
@@ -31,13 +34,13 @@ services:
       interval: 5s
       timeout: 10s
       retries: 3
-      start_period: 0s
+      # start_period: 120s
     environment:
-      # Use the commented env variable if you need to rebuild KB every startup.
+      # Use the commented env variable if you need to rebuild KB every startup. Also, use commented start period.
       #- "REBUILD_KB=1"
-      - "KB_PATH=/kb/repo.path"
+      - "KB_PATH=/knowledge-base/repo.path"
       - "BINARY_PATH=/example-app/sc-machine/bin"
-      - "CONFIG_PATH=/kb/ostis-example-app.ini"
+      - "CONFIG_PATH=/knowledge-base/ostis-example-app.ini"
       - "EXTENSIONS_PATH=/example-app/build/Release/extensions;/example-app/sc-machine/lib/extensions"
       - "SC_SERVER_HOST=0.0.0.0"
     command:
