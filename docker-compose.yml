@@ -20,10 +20,8 @@ services:
       context: ./
     restart: unless-stopped
     volumes:
-      - ./knowledge-base:/knowledge-base
-      - ./repo-path:/knowledge-base
-      - ./ostis-example-app.ini:/knowledge-base
-      - ./problem-solver:/knowledge-base
+      # TODO(NikitaZotov): Don't load all project sources to volume to build knowledge-base.
+      - ./:/knowledge-base
       - kb-binary:/kb.bin
     networks:
       - sc-machine
