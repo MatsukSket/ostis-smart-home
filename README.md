@@ -14,7 +14,42 @@ The ostis-example-app consists of several interconnected components:
 2. Problem solver. Custom agents written in C++ that implement specific problem-solving logic.
 3. Interface. The web-based user interface for interacting with the system.
 
-## Installation
+## Docker
+
+To use Docker with ostis-example-app, follow these steps:
+
+1. Build the Docker images:
+
+    ```sh
+    docker compose build
+    ```
+
+2. Build the knowledge base:
+
+    ```sh
+    docker compose run machine build
+    ```
+
+3. Start the ostis-system: 
+
+    ```sh
+    docker compose up
+    ```
+
+These commands will set up and run the entire ostis-system using Docker containers. The system will be accessible through the web interface at localhost:8000.
+
+If you need to rebuild the knowledge base after making changes, you can run the second command again. To stop the system, use:
+
+```sh
+docker compose down
+```
+
+Note that you need to have Docker and Docker Compose installed on your system before running these commands.
+
+To check that everything is fine open localhost:8000 in your browser.
+![](https://i.imgur.com/6SehI5s.png)
+
+## Native
 
 ### Clone repository
 
@@ -136,38 +171,6 @@ source .venv/bin/activate && python3 server/app.py
 
 To check that everything is fine open localhost:8000 in your browser.
 ![](https://i.imgur.com/6SehI5s.png)
-
-## Docker
-
-To use Docker with ostis-example-app, follow these steps:
-
-1. Build the Docker images:
-
-    ```sh
-    docker compose build
-    ```
-
-2. Build the knowledge base:
-
-    ```sh
-    docker compose run machine build
-    ```
-
-3. Start the ostis-system: 
-
-    ```sh
-    docker compose up
-    ```
-
-These commands will set up and run the entire ostis-system using Docker containers. The system will be accessible through the web interface at localhost:8000.
-
-If you need to rebuild the knowledge base after making changes, you can run the second command again. To stop the system, use:
-
-```sh
-docker compose down
-```
-
-Note that you need to have Docker and Docker Compose installed on your system before running these commands.
 
 ## Project Structure
 
