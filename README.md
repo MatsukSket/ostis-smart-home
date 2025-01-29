@@ -27,7 +27,7 @@ To use Docker with ostis-example-app, follow these steps:
 2. Build the knowledge base:
 
     ```sh
-    docker compose run machine build
+    docker compose run --rm machine build
     ```
 
 3. Start the ostis-system: 
