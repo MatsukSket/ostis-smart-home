@@ -10,8 +10,8 @@ The main purpose of this example is to provide a foundation for creating custom 
 
 The ostis-example-app consists of several interconnected components:
 
-1. Knowledge base. Custom knowledge represented in SC-code format (.scs and .gwf files).
-2. Problem solver. Custom agents written in C++ that implement specific problem-solving logic.
+1. Knowledge base. Knowledge represented in SC-code format (.scs and .gwf files).
+2. Problem solver. Agents written in C++ that implement specific problem-solving logic.
 3. Interface. The web-based user interface for interacting with the system.
 
 ## Docker
