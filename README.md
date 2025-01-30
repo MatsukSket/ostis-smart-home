@@ -53,9 +53,9 @@ Note that you need to have Docker and Docker Compose installed on your system be
 First, clone the repository and navigate to the project directory:
 
 ```sh
-git clone https://github.com/NikitaZotov/ostis-example-app.git
+git clone https://github.com/ostis-apps/ostis-example-app.git
 cd ostis-example-app
-git checkout release/0.10.0
+git checkout 0.10.0
 git submodule update --init --recursive
 ```
 
