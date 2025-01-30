@@ -1,8 +1,5 @@
-# common
-ostis-web-platform/kb
-
 # components
-kb/
+knowledge-base/
 
 # specifications
 problem-solver/cxx/exampleModule/specifications/agent_of_isomorphic_search

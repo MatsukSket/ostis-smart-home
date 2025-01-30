@@ -27,7 +27,7 @@ ScResult IsomorphicSearchAgent::DoProgram(ScAction & action)
 
   if (!scTemplateNode.IsValid())
   {
-    SC_AGENT_LOG_ERROR("Template argument is not found");
+    m_logger.Error("Template argument is not found");
     return action.FinishWithError();
   }
 
@@ -38,7 +38,7 @@ ScResult IsomorphicSearchAgent::DoProgram(ScAction & action)
   }
   catch (ScException const & exception)
   {
-    SC_AGENT_LOG_ERROR(exception.Message());
+    m_logger.Error(exception.Message());
     return action.FinishWithError();
   }
 
@@ -62,18 +62,18 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
 
   if (searchResults.empty())
   {
-    ScAddr const & accessArc = m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
-    result << accessArc << Keynodes::empty_set;
-    SC_AGENT_LOG_DEBUG("Structures have not been found");
+    ScAddr const & membershipArc = m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
+    result << membershipArc << Keynodes::empty_set;
+    m_logger.Debug("Structures have not been found");
   }
   else
   {
     for (auto const & resultAddr : searchResults)
     {
-      ScAddr const & accessArc = m_context.GenerateConnector(ScType::ConstPermPosArc, resultsSet, resultAddr);
-      result << accessArc << resultAddr;
+      ScAddr const & membershipArc = m_context.GenerateConnector(ScType::ConstPermPosArc, resultsSet, resultAddr);
+      result << membershipArc << resultAddr;
     }
-    SC_AGENT_LOG_DEBUG("Structures have been found");
+    m_logger.Debug("Structures have been found");
   }
 }
 
@@ -88,7 +88,7 @@ void IsomorphicSearchAgent::clearPreviousSearchResults(ScAddr const & scTemplate
   while (previousResultsStructuresSetsIterator->Next())
   {
     ScIterator3Ptr previousResultsSetElementsIterator = m_context.CreateIterator3(
-        previousResultsStructuresSetsIterator->Get(2), ScType::ConstPermPosArc, ScType::NodeConstStruct);
+        previousResultsStructuresSetsIterator->Get(2), ScType::ConstPermPosArc, ScType::ConstNodeStructure);
     while (previousResultsSetElementsIterator->Next())
       m_context.EraseElement(previousResultsSetElementsIterator->Get(2));
 
@@ -113,7 +113,7 @@ ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(
 
 ScAddr IsomorphicSearchAgent::emplaceItemElementsInStructure(ScTemplateSearchResultItem const & item)
 {
-  ScAddr const & searchResultStructure = m_context.GenerateNode(ScType::NodeConstStruct);
+  ScAddr const & searchResultStructure = m_context.GenerateNode(ScType::ConstNodeStructure);
 
   size_t const searchResultItemSize = item.Size();
   for (size_t elementIndex = 0; elementIndex < searchResultItemSize; elementIndex++)

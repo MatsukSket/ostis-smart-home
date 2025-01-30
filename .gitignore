@@ -1,16 +1,19 @@
 .idea
 .vscode
-*.scs~
-ostis-web-platform
-*.log
+
 bin/
 build/
+sc-machine/
 *.bin
+
 .cache/
 *.db
 *.txt
+!conanfile.txt
+!requirements.txt
+*.log
 
 __pycache__
 
-cmake-build-debug
-cmake-build-release
+ConanPresets.json
+.venv
