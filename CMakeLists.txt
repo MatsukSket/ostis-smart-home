@@ -11,7 +11,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 option(AUTO_CCACHE "Use ccache to speed up rebuilds" ON)
 
-option(SC_BUILD_TESTS "Blah blah" ON)
+option(SC_BUILD_TESTS "Build project tests" ON)
 
 if(${SC_BUILD_TESTS})
     include(CTest)
