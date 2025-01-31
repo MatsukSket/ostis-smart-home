@@ -8,11 +8,11 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
 
 add_library(example-module SHARED ${SOURCES})
 target_link_libraries(example-module
-        LINK_PUBLIC sc-machine::sc-memory
-        LINK_PUBLIC sc-machine::sc-agents-common
+    LINK_PUBLIC sc-machine::sc-memory
+    LINK_PUBLIC sc-machine::sc-agents-common
 )
 target_include_directories(example-module
-        PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 )
 set_target_properties(example-module PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/extensions)
 
@@ -20,6 +20,6 @@ if(${SC_CLANG_FORMAT_CODE})
     target_clangformat_setup(example-module)
 endif()
 
-if (${SC_BUILD_TESTS})
+if(${SC_BUILD_TESTS})
     add_subdirectory(test)
 endif ()
