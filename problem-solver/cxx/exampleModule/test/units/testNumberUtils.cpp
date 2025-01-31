@@ -14,7 +14,7 @@
 namespace numberUtilsTest
 {
 ScsLoader loader;
-std::string const EXAMPLE_MODULE_TEST_FILES_DIR_PATH = EXAMPLE_MODULE_TEST_SRC_PATH "/testStructures/";
+std::string const EXAMPLE_MODULE_TEST_FILES_DIR_PATH = "../testStructures/";
 
 using NumberUtilsTest = ScMemoryTest;
 

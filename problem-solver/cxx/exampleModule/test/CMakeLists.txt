@@ -22,8 +22,6 @@ make_tests_from_folder(${CMAKE_CURRENT_LIST_DIR}/units
     DEPENDS sc-machine::sc-builder-lib example-module-test-utils
     INCLUDES ${EXAMPLE_MODULE_SRC} ${CMAKE_CURRENT_LIST_DIR})
 
-add_definitions(-DEXAMPLE_MODULE_TEST_SRC_PATH="${CMAKE_CURRENT_LIST_DIR}")
-
 if(${SC_CLANG_FORMAT_CODE})
     target_clangformat_setup(example-module-test-starter)
 endif()
