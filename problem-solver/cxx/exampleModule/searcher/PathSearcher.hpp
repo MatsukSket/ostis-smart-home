@@ -27,7 +27,7 @@ public:
       PathInfo & pathInfo) const;
 
 private:
-  ScMemoryContext * context;
+  ScMemoryContext * m_context;
 
   void getNeighborsWithConnectorsInfo(
       ScAddr const & graph,

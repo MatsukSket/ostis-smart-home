@@ -10,7 +10,7 @@
 #include "utils/NumberUtils.hpp"
 
 PathSearcher::PathSearcher(ScMemoryContext * context)
-  : context(context)
+  : m_context(context)
 {
 }
 
@@ -84,9 +84,9 @@ void PathSearcher::getNeighborsWithConnectorsInfo(
   ScTemplateParams connectorTemplateParams;
   connectorTemplateParams.Add(connectorTemplateInfo.connectorStartVariable, startNode);
   ScTemplate connectorTemplate;
-  context->BuildTemplate(connectorTemplate, connectorTemplateInfo.templateAddr, connectorTemplateParams);
+  m_context->BuildTemplate(connectorTemplate, connectorTemplateInfo.templateAddr, connectorTemplateParams);
 
-  context->SearchByTemplate(
+  m_context->SearchByTemplate(
       connectorTemplate,
       [&](ScTemplateResultItem const & item)
       {
@@ -101,7 +101,7 @@ void PathSearcher::getNeighborsWithConnectorsInfo(
       },
       [this, &graph](ScAddr const & elementAddr) -> bool
       {
-        return context->CheckConnector(graph, elementAddr, ScType::ConstPermPosArc);
+        return m_context->CheckConnector(graph, elementAddr, ScType::ConstPermPosArc);
       });
 }
 
@@ -110,11 +110,11 @@ unsigned PathSearcher::getConnectorWeight(ScAddr const & connector, WeightTempla
   ScTemplateParams connectorWeightTemplateParams;
   connectorWeightTemplateParams.Add(weightTemplateInfo.measuredObjectVariable, connector);
   ScTemplate connectorWeightTemplate;
-  context->BuildTemplate(connectorWeightTemplate, weightTemplateInfo.templateAddr, connectorWeightTemplateParams);
+  m_context->BuildTemplate(connectorWeightTemplate, weightTemplateInfo.templateAddr, connectorWeightTemplateParams);
 
   unsigned weight;
   bool isFound = false;
-  context->SearchByTemplateInterruptibly(
+  m_context->SearchByTemplateInterruptibly(
       connectorWeightTemplate,
       [this, &isFound, &weightTemplateInfo, &weight](ScTemplateResultItem const & item) -> ScTemplateSearchRequest
       {
@@ -133,15 +133,30 @@ unsigned PathSearcher::getConnectorWeight(ScAddr const & connector, WeightTempla
 
 unsigned PathSearcher::getNumberValue(ScAddr const & number) const
 {
-  ScIterator5Ptr idtfsIterator = context->CreateIterator5(
+  ScIterator5Ptr idtfsIterator = m_context->CreateIterator5(
       number, ScType::ConstCommonArc, ScType::ConstNodeLink, ScType::ConstPermPosArc, Keynodes::nrel_idtf);
   while (idtfsIterator->Next())
   {
     ScAddr const & idtfLink = idtfsIterator->Get(2);
     std::string idtfString;
-    context->GetLinkContent(idtfLink, idtfString);
-    if (utils::NumberUtils::isPositiveInteger(idtfString))
-      return atoi(idtfString.c_str());
+    m_context->GetLinkContent(idtfLink, idtfString);
+    if (!utils::NumberUtils::isPositiveInteger(idtfString))
+      continue;
+
+    unsigned numericValue;
+    try
+    {
+      numericValue = std::stoi(idtfString.c_str());
+    }
+    catch (std::invalid_argument const & exception)
+    {
+      SC_LOG_WARNING("Error during idtf to number conversion: " << exception.what());
+    }
+    catch (std::out_of_range const & exception)
+    {
+      SC_LOG_WARNING("Error during idtf to number conversion: " << exception.what());
+    }
+    return numericValue;
   }
 
   SC_THROW_EXCEPTION(utils::ExceptionItemNotFound, "Number " << number.Hash() << " numeric idtf is not found");

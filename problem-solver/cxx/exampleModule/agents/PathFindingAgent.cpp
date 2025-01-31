@@ -13,7 +13,6 @@
 #include "utils/TemplateUtils.hpp"
 #include "utils/NumberUtils.hpp"
 
-using namespace std;
 using namespace utils;
 
 ScAddr PathFindingAgent::GetActionClass() const
@@ -28,37 +27,37 @@ ScResult PathFindingAgent::DoProgram(ScAction & action)
 
   if (!graph.IsValid())
   {
-    SC_AGENT_LOG_ERROR("Graph argument is not found");
+    m_logger.Error("Graph argument is not found");
     return action.FinishWithError();
   }
 
   if (!startNode.IsValid())
   {
-    SC_AGENT_LOG_ERROR("Start node argument is not found");
+    m_logger.Error("Start node argument is not found");
     return action.FinishWithError();
   }
 
   if (!endNode.IsValid())
   {
-    SC_AGENT_LOG_ERROR("End node argument is not found");
+    m_logger.Error("End node argument is not found");
     return action.FinishWithError();
   }
 
   if (!connectorTemplateAddr.IsValid())
   {
-    SC_AGENT_LOG_ERROR("Connector template argument is not found");
+    m_logger.Error("Connector template argument is not found");
     return action.FinishWithError();
   }
 
   if (!connectorWeightTemplateAddr.IsValid())
   {
-    SC_AGENT_LOG_ERROR("Connector weight template argument is not found");
+    m_logger.Error("Connector weight template argument is not found");
     return action.FinishWithError();
   }
 
   if (startNode == endNode)
   {
-    SC_AGENT_LOG_ERROR("Start and end nodes should not match");
+    m_logger.Error("Start and end nodes should not match");
     return action.FinishWithError();
   }
 
@@ -80,7 +79,7 @@ ScResult PathFindingAgent::DoProgram(ScAction & action)
   }
   catch (ScException const & exception)
   {
-    SC_AGENT_LOG_ERROR(exception.Message());
+    m_logger.Error(exception.Message());
     return action.FinishWithError();
   }
 
