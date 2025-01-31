@@ -1,4 +1,5 @@
-site_name: ostis-example-ap
+site_name: ostis-example-app
+dev_addr: 127.0.0.1:8005
 repo_url: https://github.com/ostis-apps/ostis-example-app
 
 extra_css:
@@ -21,8 +22,8 @@ plugins:
 
 theme:
   name: material
-  favicon: ostis-logo.png
-  logo: ostis-logo.png
+  favicon: _assets/ostis-logo.png
+  logo: _assets/ostis-logo.png
   palette:  # Defines color schemes for light and dark modes
     - media: "(prefers-color-scheme: light)"
       scheme: default

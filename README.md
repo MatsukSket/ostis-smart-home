@@ -178,7 +178,7 @@ pip3 install mkdocs markdown-include mkdocs-material
 mkdocs serve
 ```
 
-Then open http://127.0.0.1:8000/ in your browser.
+Then open http://127.0.0.1:8005/ in your browser.
 
 Please note that the documentation for this project is still under development and contains only partial information.
 
