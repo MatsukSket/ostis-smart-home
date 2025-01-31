@@ -221,6 +221,10 @@ log_file = sc-memory.log
 log_level = Debug
 ```
 
+## Codestyle
+
+This project inherits its codestyle from sc-machine, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
+
 ## Author
 
 * GitHub: [@ostis-apps](https://github.com/ostis-apps), [@ostis-ai](https://github.com/ostis-ai)
