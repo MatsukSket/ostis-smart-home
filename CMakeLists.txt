@@ -20,6 +20,10 @@ if(${SC_BUILD_TESTS})
     include(${CMAKE_MODULE_PATH}/tests.cmake)
 endif()
 
+if(${SC_CLANG_FORMAT_CODE})
+    include(${CMAKE_MODULE_PATH}/ClangFormat.cmake)
+endif()
+
 find_program(CCACHE_PROGRAM ccache)
 if(CCACHE_PROGRAM AND ${AUTO_CCACHE})
     message(STATUS "Using ${CCACHE_PROGRAM} as compiler launcher")
