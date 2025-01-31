@@ -1,4 +1,19 @@
+
+
 # Documentation
 
-- **ostis-example-app agents**
-    * [Path finding agent](agents/path_finding_agent.md)
+Welcome to the [ostis-example-app](https://github.com/ostis-apps/ostis-example-app) documentation! Over time, as it expands, this documentation should become a guide for work with ostis-example-app.
+
+!!! note
+    This documentation is still under development and contains only partial information. For more information please refer to [README](https://github.com/ostis-apps/ostis-example-app/blob/0.10.0/README.md).
+
+## What is ostis-example-app?
+
+ostis-example-app is an ostis-system designed with [OSTIS Technology](https://github.com/ostis-ai). It serves as a demonstration of how to create, structure, and run an ostis-based system.
+
+The main purpose of this example is to provide a simple example of system based on the OSTIS technology, so developers can use it as example for their own projects.
+
+Table of contents:
+
+- **C++ agents**
+    * [Path Finding Agent](agents/path_finding_agent.md)

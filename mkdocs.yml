@@ -11,8 +11,8 @@ extra_javascript:
 
 nav:
   - Home: index.md
-  - ostis-example-app agents:
-    - Path finding agent: agents/path_finding_agent.md
+  - C++ agents:
+    - Path Finding Agent: agents/path_finding_agent.md
   - License: https://github.com/ostis-apps/ostis-example-app/blob/0.10.0/LICENSE
 
 plugins:

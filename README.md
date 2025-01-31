@@ -223,7 +223,7 @@ log_level = Debug
 
 ## Codestyle
 
-This project inherits its codestyle from sc-machine, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
+This project inherits codestyle from sc-machine, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
 
 ## Author
 
