@@ -221,6 +221,27 @@ log_file = sc-memory.log
 log_level = Debug
 ```
 
+## Tests
+
+To build tests turn on `SC_BUILD_TESTS` option in the root CMakeLists file and rebuild the code.
+To run built tests:
+
+```sh
+cd build/Debug
+```
+
+or 
+
+```sh
+cd build/Release
+```
+
+depending on used build mode. After that:
+
+```sh
+ctest -V
+```
+
 ## Codestyle
 
 This project inherits codestyle from sc-machine, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
