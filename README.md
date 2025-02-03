@@ -169,6 +169,19 @@ source .venv/bin/activate && python3 server/app.py
 To check that everything is fine open localhost:8000 in your browser.
 ![](https://i.imgur.com/6SehI5s.png)
 
+## Documentation
+
+Run on Linux:
+```sh
+#Terminal
+pip3 install mkdocs markdown-include mkdocs-material
+mkdocs serve
+```
+
+Then open http://127.0.0.1:8005/ in your browser.
+
+Please note that the documentation for this project is still under development and contains only partial information.
+
 ## Project Structure
 
 ### Knowledge Base
@@ -207,6 +220,31 @@ log_type = Console
 log_file = sc-memory.log
 log_level = Debug
 ```
+
+## Tests
+
+To build tests turn on `SC_BUILD_TESTS` option in the root CMakeLists file and rebuild the code.
+To run built tests, use:
+
+```sh
+cd build/Debug
+```
+
+or 
+
+```sh
+cd build/Release
+```
+
+depending on used build mode. After that:
+
+```sh
+ctest -V
+```
+
+## Codestyle
+
+This project inherits codestyle from sc-machine, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
 
 ## Author
 

@@ -1,11 +1,25 @@
-file(GLOB_RECURSE SOURCES "*.cpp" "*.hpp")
+file(GLOB SOURCES CONFIGURE_DEPENDS
+    "*.cpp" "*.hpp"
+    "agents/*.cpp" "agents/*.hpp"
+    "keynodes/*.hpp"
+    "structures/*.cpp" "structures/*.hpp"
+    "searcher/*.cpp" "searcher/*.hpp"
+    "utils/*.cpp" "utils/*.hpp")
 
 add_library(example-module SHARED ${SOURCES})
 target_link_libraries(example-module
-    LINK_PRIVATE sc-machine::sc-memory
-    LINK_PRIVATE sc-machine::sc-agents-common
+    LINK_PUBLIC sc-machine::sc-memory
+    LINK_PUBLIC sc-machine::sc-agents-common
 )
 target_include_directories(example-module
-    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 )
 set_target_properties(example-module PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/extensions)
+
+if(${SC_CLANG_FORMAT_CODE})
+    target_clangformat_setup(example-module)
+endif()
+
+if(${SC_BUILD_TESTS})
+    add_subdirectory(test)
+endif ()

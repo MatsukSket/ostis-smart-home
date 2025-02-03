@@ -56,13 +56,17 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
   ScAddr const & resultsSet = formNewResultsSetConstruction(scTemplateNode, result);
 
   ScAddrVector searchResults;
-  m_context.SearchByTemplate(scTemplate, [&searchResults, this](ScTemplateSearchResultItem const & item) {
-    searchResults.push_back(emplaceItemElementsInStructure(item));
-  });
+  m_context.SearchByTemplate(
+      scTemplate,
+      [&searchResults, this](ScTemplateSearchResultItem const & item)
+      {
+        searchResults.push_back(emplaceItemElementsInStructure(item));
+      });
 
   if (searchResults.empty())
   {
-    ScAddr const & membershipArc = m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
+    ScAddr const & membershipArc =
+        m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::empty_set, resultsSet);
     result << membershipArc << Keynodes::empty_set;
     m_logger.Debug("Structures have not been found");
   }
@@ -80,11 +84,7 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
 void IsomorphicSearchAgent::clearPreviousSearchResults(ScAddr const & scTemplateNode)
 {
   ScIterator5Ptr previousResultsStructuresSetsIterator = m_context.CreateIterator5(
-      scTemplateNode,
-      ScType::ConstCommonArc,
-      ScType::ConstNode,
-      ScType::ConstPermPosArc,
-      Keynodes::nrel_search_result);
+      scTemplateNode, ScType::ConstCommonArc, ScType::ConstNode, ScType::ConstPermPosArc, Keynodes::nrel_search_result);
   while (previousResultsStructuresSetsIterator->Next())
   {
     ScIterator3Ptr previousResultsSetElementsIterator = m_context.CreateIterator3(
@@ -97,17 +97,15 @@ void IsomorphicSearchAgent::clearPreviousSearchResults(ScAddr const & scTemplate
   }
 }
 
-ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(
-    ScAddr const & scTemplateNode,
-    ScStructure & result)
+ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(ScAddr const & scTemplateNode, ScStructure & result)
 {
   ScAddr const & resultsSetTuple = m_context.GenerateNode(ScType::ConstNodeTuple);
   ScAddr const & searchResultRelationPair =
       m_context.GenerateConnector(ScType::ConstCommonArc, scTemplateNode, resultsSetTuple);
-  ScAddr const & relationAccessArc =
+  ScAddr const & relationMembershipArc =
       m_context.GenerateConnector(ScType::ConstPermPosArc, Keynodes::nrel_search_result, searchResultRelationPair);
 
-  result << resultsSetTuple << searchResultRelationPair << relationAccessArc;
+  result << resultsSetTuple << searchResultRelationPair << relationMembershipArc;
   return resultsSetTuple;
 }
 

@@ -12,6 +12,7 @@ sc-machine/
 !conanfile.txt
 !requirements.txt
 *.log
+*.scdb
 
 __pycache__
 
