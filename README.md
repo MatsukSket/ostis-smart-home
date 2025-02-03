@@ -224,7 +224,7 @@ log_level = Debug
 ## Tests
 
 To build tests turn on `SC_BUILD_TESTS` option in the root CMakeLists file and rebuild the code.
-To run built tests:
+To run built tests, use:
 
 ```sh
 cd build/Debug
