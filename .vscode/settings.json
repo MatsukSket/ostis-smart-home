@@ -25,8 +25,8 @@
     "testMate.cpp.test.advancedExecutables": [
         // Unittests configuration
         {
-            "pattern": "build/**/bin/example-module-test-starter",
-            "cwd": "${workspaceFolder}/problem-solver/cxx/exampleModule/test/units",
+            "pattern": "build/**/bin/example-module-tests",
+            "cwd": "${workspaceFolder}/problem-solver/cxx/example-module/test/units",
             "gtest": {
                 "testGrouping": {
                     "groupByLabel": {

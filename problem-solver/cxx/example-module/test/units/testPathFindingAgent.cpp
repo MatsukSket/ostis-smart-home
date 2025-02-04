@@ -17,7 +17,7 @@
 namespace pathFindingAgentTest
 {
 ScsLoader loader;
-std::string const EXAMPLE_MODULE_TEST_FILES_DIR_PATH = "../testStructures/";
+std::string const EXAMPLE_MODULE_TEST_FILES_DIR_PATH = "../test-structures/";
 int const WAIT_TIME = 5000;
 
 using PathFindingAgentTest = ScMemoryTest;
