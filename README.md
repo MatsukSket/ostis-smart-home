@@ -16,6 +16,17 @@ The ostis-example-app consists of several interconnected components:
 
 ## Docker
 
+### Clone repository
+
+First, clone the repository and navigate to the project directory:
+
+```sh
+git clone https://github.com/ostis-apps/ostis-example-app.git
+cd ostis-example-app
+git checkout 0.10.0
+git submodule update --init --recursive
+```
+
 To use Docker with ostis-example-app, follow these steps:
 
 1. Build the Docker images:
