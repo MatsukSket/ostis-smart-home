@@ -8,8 +8,8 @@
 
 #include <sc-memory/sc_memory.hpp>
 
-#include "dataStructures/ConnectorTemplateInfo.hpp"
-#include "dataStructures/WeightTemplateInfo.hpp"
+#include "data-structures/ConnectorTemplateInfo.hpp"
+#include "data-structures/WeightTemplateInfo.hpp"
 
 namespace utils
 {

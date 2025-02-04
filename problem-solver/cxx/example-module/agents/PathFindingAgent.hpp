@@ -9,9 +9,9 @@
 #include <sc-memory/sc_agent.hpp>
 
 #include "keynodes/Keynodes.hpp"
-#include "dataStructures/ConnectorTemplateInfo.hpp"
-#include "dataStructures/WeightTemplateInfo.hpp"
-#include "dataStructures/PathInfo.hpp"
+#include "data-structures/ConnectorTemplateInfo.hpp"
+#include "data-structures/WeightTemplateInfo.hpp"
+#include "data-structures/PathInfo.hpp"
 
 class PathFindingAgent : public ScActionInitiatedAgent
 {

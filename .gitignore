@@ -5,6 +5,7 @@ bin/
 build/
 sc-machine/
 *.bin
+repo
 
 .cache/
 *.db

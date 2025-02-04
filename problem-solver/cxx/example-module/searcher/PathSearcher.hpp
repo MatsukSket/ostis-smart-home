@@ -8,10 +8,10 @@
 
 #include "sc-memory/sc_memory.hpp"
 
-#include "dataStructures/ConnectorTemplateInfo.hpp"
-#include "dataStructures/WeightTemplateInfo.hpp"
-#include "dataStructures/ConnectorInfo.hpp"
-#include "dataStructures/PathInfo.hpp"
+#include "data-structures/ConnectorTemplateInfo.hpp"
+#include "data-structures/WeightTemplateInfo.hpp"
+#include "data-structures/ConnectorInfo.hpp"
+#include "data-structures/PathInfo.hpp"
 
 class PathSearcher
 {
