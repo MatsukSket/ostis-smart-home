@@ -1,274 +1,277 @@
 <h1 align="center">ostis-example-app</h1>
 
-[![license](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## About
+## Overview
 
-ostis-example-app is an example of ostis-system designed with [OSTIS Technology](https://github.com/ostis-ai). It serves as a comprehensive demonstration of how to create, structure, and run an ostis-based system.
+`ostis-example-app` is a practical demonstration of an OSTIS-based system, built using the [OSTIS Technology](https://github.com/ostis-ai). This example provides a solid foundation for developers looking to create custom intelligent systems leveraging OSTIS. You can use this as a starting point, adapting and extending its components to fit your specific requirements.
 
-The main purpose of this example is to provide a foundation for creating custom intelligent systems based on the OSTIS technology. Developers can use this example as a starting point, adapting and extending its components to suit their specific needs.
+This example application showcases the core components of an OSTIS system:
 
-The ostis-example-app consists of several interconnected components:
+*   Knowledge Base: Information represented using SC-code (files with `.scs` and `.gwf` extensions);
+*   Problem Solver: Agents written in C++ that implement the system's problem-solving logic;
+*   Interface: A web-based user interface for interacting with the system.
 
-1. Knowledge base. Knowledge represented in SC-code format (.scs and .gwf files).
-2. Problem solver. Agents written in C++ that implement specific problem-solving logic.
-3. Interface. The web-based user interface for interacting with the system.
+## Getting Started
 
-## Docker
+Choose your preferred method for running the application: Docker or Native installation.
 
-### Clone repository
+### Prerequisites
 
-First, clone the repository and navigate to the project directory:
+Before you begin, ensure you have the following tools installed and configured based on your chosen installation method (Docker or Native):
 
-```sh
-git clone https://github.com/ostis-apps/ostis-example-app.git
-cd ostis-example-app
-git checkout 0.10.0
-git submodule update --init --recursive
-```
+#### Common Prerequisites (Required for Both Docker and Native Installation)
 
-To use Docker with ostis-example-app, follow these steps:
+*   **Git:**  Required for cloning the repository.
+    *   Installation:  Refer to the official Git documentation for installation instructions specific to your operating system:  [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-1. Build the Docker images:
+#### Docker Prerequisites
 
-    ```sh
+*   **Docker:**  Containerization platform.
+    *   Installation:  [https://www.docker.com/get-started/](https://www.docker.com/get-started/)
+*   **Docker Compose:**  Tool for defining and running multi-container Docker applications.
+    *   Installation:  [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)  (Usually included with Docker Desktop.  If not, follow the linked instructions.)
+
+#### Native Installation Prerequisites
+
+*   **pipx:** Python package installer for installing and running Python applications in isolated environments.
+    *   Installation: [https://pipx.pypa.io/stable/installation/](https://pipx.pypa.io/stable/installation/)
+*   **C++ Compiler:**  A compiler such as GCC or Clang is necessary for building the C++ problem solver.
+    *   Installation (Ubuntu/Debian - GCC):  `sudo apt-get update && sudo apt-get install build-essential`
+    *   Installation (macOS - Clang):  Usually included with Xcode Command Line Tools. Install with `xcode-select --install`
+*   **CMake:**  Cross-platform build system generator.
+    *   Installation: [https://cmake.org/download/](https://cmake.org/download/) or via your system's package manager (e.g., `sudo apt-get install cmake` on Ubuntu). Ensure CMake is added to your system's PATH.
+*   **Conan:**  C/C++ package manager.
+    *   Installation: See the Native Installation steps for detailed instructions.
+*   **Node.js and npm (Node Package Manager):** Required for building the sc-web interface.
+    *   Installation: Download and install from [https://nodejs.org/](https://nodejs.org/). npm is typically included with Node.js.
+
+## Docker Setup
+
+This is the recommended method for most users as it simplifies the setup process.
+
+1.  **Clone the repository:**
+
+    ```
+    git clone https://github.com/ostis-apps/ostis-example-app.git
+    cd ostis-example-app
+    git checkout 0.10.0
+    git submodule update --init --recursive
+    ```
+
+2.  **Build Docker images:**
+
+    ```
     docker compose build
     ```
 
-2. Build the knowledge base:
+3.  **Build the knowledge base:**
 
-    ```sh
+    ```
     docker compose run --rm machine build
     ```
 
-3. Start the ostis-system: 
+4.  **Start the ostis-system:**
 
-    ```sh
+    ```
     docker compose up
     ```
 
-These commands will set up and run the entire ostis-system using Docker containers. The system will be accessible through the web interface at localhost:8000.
+    The system will be accessible through your web browser at `localhost:8000`.
 
-If you need to rebuild the knowledge base after making changes, you can run the second command again. To stop the system, use:
+5.  **Stop the system:**
 
-```sh
-docker compose down
-```
+    ```
+    docker compose down
+    ```
 
-Note that you need to have Docker and Docker Compose installed on your system before running these commands.
+    If you make changes to the knowledge base, rebuild it using step 3.
 
-## Native
+## Native Installation
 
-### Clone repository
+Follow these steps to set up the application natively on your system.
 
-First, clone the repository and navigate to the project directory:
+1.  **Clone the repository:**
 
-```sh
-git clone https://github.com/ostis-apps/ostis-example-app.git
-cd ostis-example-app
-git checkout 0.10.0
-git submodule update --init --recursive
-```
+    ```
+    git clone https://github.com/ostis-apps/ostis-example-app.git
+    cd ostis-example-app
+    git checkout 0.10.0
+    git submodule update --init --recursive
+    ```
 
-### Install pipx
+2.  **Install `pipx`:**
 
-To install pipx, use this guide: https://pipx.pypa.io/stable/installation/.
+    Follow the instructions here: [https://pipx.pypa.io/stable/installation/](https://pipx.pypa.io/stable/installation/).
 
-### Install Conan
+3.  **Install Conan:**
 
-Conan is a decentralized package manager for C/C++. It's used in this project to manage dependencies.
+    Conan is a decentralized package manager for C/C++. It's used in this project to manage C++ dependencies.
 
-```sh
-# Use pipx to install conan if not already installed
-pipx install conan
-pipx ensurepath
-```
+    ```
+    pipx install conan
+    pipx ensurepath
+    ```
 
-### Relaunch shell
+4.  **Restart your shell:**
 
-After installing Conan, relaunch your shell to ensure the new PATH is loaded:
+    ```
+    exec $SHELL
+    ```
 
-```sh
-exec $SHELL
-```
+5.  **Install C++ problem solver dependencies**
 
-### Install sc-machine libraries
+    ```
+    conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
+    conan profile detect
+    conan install . --build=missing
+    ```
 
-sc-machine libraries are the core components of the OSTIS Platform, used to develop C++ agents. They're installed using Conan:
+6.  **Install sc-machine binaries:**
 
-```sh
-conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
-conan profile detect
-conan install . --build=missing
-```
+    *   **Linux:**
 
-### Install sc-machine binaries
+        ```
+        curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
+        mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1
+        rm -rf sc-machine-0.10.0-Linux.tar.gz && rm -rf sc-machine/include
+        ```
 
-sc-machine binaries are pre-compiled executables that provide the runtime environment for the ostis-system: build knowledge base source and launch the ostis-system. The installation process differs slightly between Linux and macOS:
+    *   **macOS:**
 
-#### Linux
+        ```
+        curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
+        mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Darwin.tar.gz -C sc-machine --strip-components 1
+        rm -rf sc-machine-0.10.0-Darwin.tar.gz && rm -rf sc-machine/include
+        ```
 
-```sh
-curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
-mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1
-rm -rf sc-machine-0.10.0-Linux.tar.gz && rm -rf sc-machine/include
-```
+7.  **Install sc-web:**
 
-#### macOS
+    *   **Ubuntu:**
 
-```sh
-curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
-mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Darwin.tar.gz -C sc-machine --strip-components 1
-rm -rf sc-machine-0.10.0-Darwin.tar.gz && rm -rf sc-machine/include
-```
+        ```
+        cd interface/sc-web
+        ./scripts/install_deps_ubuntu.sh
+        npm install  # Ensure npm dependencies are installed
+        npm run build
+        cd ../..
+        ```
 
-### Install sc-web
+    *   **macOS:**
 
-sc-web provides the web-based user interface for the ostis-system. The installation process includes setting up dependencies and building the interface:
+        ```
+        cd interface/sc-web
+        ./scripts/install_deps_macOS.sh
+        npm install  # Ensure npm dependencies are installed
+        npm run build
+        cd ../..
+        ```
 
-#### Ubuntu
+## Building Application
 
-```sh
-cd interface/sc-web
-./scripts/install_deps_ubuntu.sh
-npm run build
-cd ../..
-```
+1.  **Build problem solver:**
 
-#### macOS
+    ```
+    cmake --preset release-conan
+    cmake --build --preset release
+    ```
 
-```sh
-cd interface/sc-web
-./scripts/install_deps_macOS.sh
-npm run build
-cd ../..
-```
+2.  **Build knowledge base:**
 
-## Build
+    ```
+    ./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ```
 
-### Build problem solver
+## Running Application
 
-The problem solver contains custom agents for your ostis-system. Build it using CMake:
+1.  **Start `sc-machine` (in a terminal):**
 
-```sh
-cmake --preset release-conan
-cmake --build --preset release
-```
+    ```
+    ./sc-machine/bin/sc-machine -s kb.bin -e "sc-machine/lib/extensions;build/Release/extensions"
+    ```
 
-### Build knowledge base
+2.  **Start `sc-web` interface (in a separate terminal):**
 
-The knowledge base contains your custom knowledge represented in SC-code. It needs to be built before launching the system or after making changes:
+    ```
+    cd interface/sc-web
+    source .venv/bin/activate && python3 server/app.py
+    ```
 
-```sh
-./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
-```
+3.  **Access the interface:** Open `localhost:8000` in your web browser.
 
-## Usage
-
-To launch system you should start sc-machine in the first terminal:
-```sh
-./sc-machine/bin/sc-machine -s kb.bin -e "sc-machine/lib/extensions;build/Release/extensions"
-```
-
-After that launch sc-web interface in the second terminal:
-
-```sh
-cd interface/sc-web
-source .venv/bin/activate && python3 server/app.py
-```
-
-To check that everything is fine open localhost:8000 in your browser.
-![](https://i.imgur.com/6SehI5s.png)
+    ![Example Screenshot](https://i.imgur.com/6SehI5s.png)
 
 ## Documentation
 
-Run on Linux:
+To generate local documentation:
+
 ```sh
-#Terminal
-pip3 install mkdocs markdown-include mkdocs-material
+pip3 install mkdocs mkdocs-material markdown-include
 mkdocs serve
 ```
 
-Then open http://127.0.0.1:8005/ in your browser.
+Then open `http://127.0.0.1:8005/` in your browser.
 
-Please note that the documentation for this project is still under development and contains only partial information.
+*Note: The documentation is currently under development and may be incomplete.*
 
 ## Project Structure
 
-### Knowledge Base
+*   **`knowledge-base`**: Contains the knowledge base source files (`.scs`, `.gwf`).  Remember to rebuild the knowledge base after making changes:
 
-`knowledge-base` is the place for the knowledge base source text files of your app. Put your .scs and .gwf files here.
+    ```
+    ./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ```
 
-After updating your .scs and .gwf files you need to rebuild `knowledge-base`:
+*   **`problem-solver`**: Contains the C++ agents that implement the problem-solving logic.  Rebuild after modifying:
 
-```sh
-./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
-```
+    ```
+    cmake --preset release-conan
+    cmake --build --preset release
+    ```
 
-### Problem Solver
+    For debug mode:
 
-`problem-solver` is the place for the problem solver of your app. Put your agents here. After changes in problem-solver you should rebuild it:
+    ```
+    conan install . --build=missing -s build_type=Debug
+    cmake --preset debug-conan
+    cmake --build --preset debug
+    ```
 
-After updating your C++ code you need to rebuild `problem-solver`:
+    To enable debug logs, configure `ostis-example-app.ini`:
 
-```sh
-cmake --preset release-conan
-cmake --build --preset release
-```
+    ```
+    log_type = Console
+    log_file = sc-memory.log
+    log_level = Debug
+    ```
 
-To build C++ code in debug mode, run:
+## Testing
 
-```sh
-conan install . --build=missing -s build_type=Debug
-cmake --preset debug-conan
-cmake --build --preset debug
-```
+1.  Enable tests in `CMakeLists.txt` by setting `SC_BUILD_TESTS` to `ON`.
+2.  Rebuild the project.
+3.  Run tests:
 
-To enable Debug logs set fields in ostis-example-app.ini:
+    ```
+    cd build/Debug  # or build/Release
+    ctest -V
+    ```
 
-```sh
-log_type = Console
-log_file = sc-memory.log
-log_level = Debug
-```
+## Code Style
 
-## Tests
-
-To build tests turn on `SC_BUILD_TESTS` option in the root CMakeLists file and rebuild the code.
-To run built tests, use:
-
-```sh
-cd build/Debug
-```
-
-or 
-
-```sh
-cd build/Release
-```
-
-depending on used build mode. After that:
-
-```sh
-ctest -V
-```
-
-## Codestyle
-
-This project inherits codestyle from sc-machine, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
+This project follows the code style guidelines of `sc-machine`, which can be found [here](https://ostis-ai.github.io/sc-machine/dev/codestyle/).
 
 ## Author
 
-* GitHub: [@ostis-apps](https://github.com/ostis-apps), [@ostis-ai](https://github.com/ostis-ai)
+*  GitHub: [@ostis-apps](https://github.com/ostis-apps), [@ostis-ai](https://github.com/ostis-ai)
 
-## Show your support
+## Support
 
-Give us a ⭐️ if you've liked this project!
+Give us a ⭐️ if you like this project!
 
-## 🤝 Contributing
+## Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/ostis-apps/ostis-example-app/issues). 
+Contributions, issues, and feature requests are welcome! Check the [issues page](https://github.com/ostis-apps/ostis-example-app/issues).
 
-## 📝 License
+## License
 
-This project is [MIT](https://opensource.org/license/mit/) licensed.
+This project is licensed under the [MIT License](https://opensource.org/license/mit/)
