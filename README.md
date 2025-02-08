@@ -164,6 +164,8 @@ Steps for installing and running the application directly on your system.
 
 7.  **Install C++ problem solver dependencies:**
 
+    They include sc-machine libraries -- the core components of the OSTIS Platform, used to develop C++ agents. They're installed using Conan:
+
     ```sh
     conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/ostis-ai-sc-machine
     conan profile detect
@@ -173,6 +175,8 @@ Steps for installing and running the application directly on your system.
     `--build=missing` builds dependencies from source if pre-built binaries are not available.
 
 8.  **Install sc-machine binaries:**
+   
+    sc-machine binaries are pre-compiled executables that provide the runtime environment for the ostis-system: build knowledge base source and launch the ostis-system. The installation process differs slightly between Linux and macOS:
 
     *   **Linux:**
 
@@ -193,6 +197,8 @@ Steps for installing and running the application directly on your system.
     Downloads and extracts pre-built `sc-machine` binaries for your operating system. The `include` directory is removed because it is not required.
 
 9.  **Install sc-web:**
+
+    sc-web provides the web-based user interface for the ostis-system. The installation process includes setting up dependencies and building the interface:
 
     *   **Ubuntu/Debian:**
 
@@ -219,6 +225,8 @@ Steps for installing and running the application directly on your system.
 ## Building ostis-system
 
 1.  **Build problem solver:**
+   
+    The problem solver contains custom agents for your ostis-system. Build it using CMake:
 
     ```sh
     cmake --preset release-conan
@@ -228,6 +236,8 @@ Steps for installing and running the application directly on your system.
     These commands use CMake to build the C++ problem solver in Release mode. The `--preset` option specifies a pre-configured build setup.
 
 2.  **Build knowledge base:**
+
+    The knowledge base contains your custom knowledge represented in SC-code. It needs to be built before launching the system or after making changes:
 
     ```sh
     ./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
