@@ -2,5 +2,5 @@
 knowledge-base/
 
 # specifications
-problem-solver/cxx/exampleModule/specifications/agent_of_isomorphic_search
-problem-solver/cxx/exampleModule/specifications/agent_of_subdividing_search
+problem-solver/cxx/example-module/specifications/agent_of_isomorphic_search
+problem-solver/cxx/example-module/specifications/agent_of_subdividing_search
