@@ -74,7 +74,7 @@ Docker simplifies setup and provides a consistent environment.
     docker compose stop
     ```
 
-    This command stops and removes the containers created by `docker compose up`.
+    This command stops and removes the containers created by `docker compose up`. To fully remove the containers, you can use `docker compose down` instead.
 
     *Important: Rebuild the knowledge base (step 4) after any changes to the knowledge base files.*
 
