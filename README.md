@@ -262,7 +262,7 @@ Steps for installing and running the application directly on your system.
     source .venv/bin/activate && python3 server/app.py
     ```
     
-    Starts the web interface. `source .venv/bin/activate` activates the virtual environment for `sc-web`, and `python3 server/app.py` starts the web server.
+    Starts the `sc-web`. `source .venv/bin/activate` activates the virtual environment for `sc-web`, and `python3 server/app.py` starts the web server.
 
 3.  **Access interface:** Open `localhost:8000` in your web browser.
 
@@ -302,6 +302,13 @@ Then open `http://127.0.0.1:8005/` in your browser.
     conan install . --build=missing -s build_type=Debug
     cmake --preset debug-conan
     cmake --build --preset debug
+    ```
+
+    For release mode with tests:
+
+    ```sh
+    cmake --preset release-with-tests-conan
+    cmake --build --preset release
     ```
 
     To enable debug logs, configure `ostis-example-app.ini`:
