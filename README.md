@@ -268,6 +268,8 @@ Steps for installing and running the application directly on your system.
 
     ![Example Screenshot](https://i.imgur.com/6SehI5s.png)
 
+To stop the running servers for the ostis-example-app, press `Ctrl+C` in the terminals where sc-machine and sc-web are running.
+
 ## Documentation
 
 To generate local documentation:
