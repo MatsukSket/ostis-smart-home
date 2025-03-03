@@ -4,7 +4,8 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
     "keynodes/*.hpp"
     "structures/*.cpp" "structures/*.hpp"
     "searcher/*.cpp" "searcher/*.hpp"
-    "utils/*.cpp" "utils/*.hpp")
+    "utils/*.cpp" "utils/*.hpp"
+)
 
 add_library(example-module SHARED ${SOURCES})
 target_link_libraries(example-module
@@ -22,4 +23,4 @@ endif()
 
 if(${SC_BUILD_TESTS})
     add_subdirectory(test)
-endif ()
+endif()
