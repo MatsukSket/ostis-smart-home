@@ -3,7 +3,7 @@
 
 bin/
 build/
-sc-machine/
+install/
 *.bin
 repo
 

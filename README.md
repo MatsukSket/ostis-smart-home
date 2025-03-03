@@ -174,25 +174,15 @@ Steps for installing and running the application directly on your system.
     
     `--build=missing` builds dependencies from source if pre-built binaries are not available.
 
-8.  **Install sc-machine binaries:**
+8.  **Install sc-machine and scl-machine binaries:**
    
     sc-machine binaries are pre-compiled executables that provide the runtime environment for the ostis-system: build knowledge base source and launch the ostis-system. The installation process differs slightly between Linux and macOS:
 
-    *   **Linux:**
-
-        ```sh
-        curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz
-        mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1
-        rm -rf sc-machine-0.10.0-Linux.tar.gz && rm -rf sc-machine/include
-        ```
-
-    *   **macOS:**
-
-        ```sh
-        curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Darwin.tar.gz
-        mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Darwin.tar.gz -C sc-machine --strip-components 1
-        rm -rf sc-machine-0.10.0-Darwin.tar.gz && rm -rf sc-machine/include
-        ```
+    scl-machine binaries are pre-compiled modules with agents of logical inferences.
+    
+    ```sh
+    ./scripts/install_cxx_problem_solver.sh
+    ```
     
     Downloads and extracts pre-built `sc-machine` binaries for your operating system. The `include` directory is removed because it is not required.
 
@@ -240,7 +230,7 @@ Steps for installing and running the application directly on your system.
     The knowledge base contains your custom knowledge represented in SC-code. It needs to be built before launching the system or after making changes:
 
     ```sh
-    ./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ./install/sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
     ```
     
     This command builds the knowledge base from the `.scs` and `.gwf` files in the `knowledge-base` directory, creating the `kb.bin` file. The `--clear` flag clears the knowledge base before building.
@@ -250,7 +240,8 @@ Steps for installing and running the application directly on your system.
 1.  **Start `sc-machine` (in a terminal):**
 
     ```sh
-    ./sc-machine/bin/sc-machine -s kb.bin -e "sc-machine/lib/extensions;build/Release/extensions"
+    ./install/sc-machine/bin/sc-machine -s kb.bin \
+        -e "install/sc-machine/lib/extensions;install/scl-machine/lib/extensions;build/Release/extensions"
     ```
     
     Starts the `sc-machine`, loading the knowledge base (`kb.bin`) and specifying the paths to the extensions.
@@ -288,7 +279,7 @@ Then open `http://127.0.0.1:8005/` in your browser.
 *   **`knowledge-base`**: Contains the knowledge base source files (`.scs`, `.gwf`). Rebuild the knowledge base after making changes:
 
     ```sh
-    ./sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ./install/sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
     ```
 
 *   **`problem-solver`**: Contains the C++ agents that implement the problem-solving logic. Rebuild after modifying:
