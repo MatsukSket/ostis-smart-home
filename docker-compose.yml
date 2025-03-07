@@ -37,9 +37,9 @@ services:
       # Use the commented env variable if you need to rebuild KB every startup. Also, use commented start period.
       #- "REBUILD_KB=1"
       - "KB_PATH=/knowledge-base/repo.path"
-      - "BINARY_PATH=/example-app/sc-machine/bin"
+      - "BINARY_PATH=/example-app/install/sc-machine/bin"
       - "CONFIG_PATH=/knowledge-base/ostis-example-app.ini"
-      - "EXTENSIONS_PATH=/example-app/build/Release/extensions;/example-app/sc-machine/lib/extensions"
+      - "EXTENSIONS_PATH=/example-app/build/Release/extensions;/example-app/install/sc-machine/lib/extensions;/example-app/install/scl-machine/lib/extensions"
       - "SC_SERVER_HOST=0.0.0.0"
     command:
       - "run"
