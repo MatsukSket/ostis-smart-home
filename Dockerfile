@@ -30,9 +30,7 @@ RUN conan remote add ostis-ai https://conan.ostis.net/artifactory/api/conan/osti
     conan install . --build=missing
 
 # Install sc-machine binaries
-RUN curl -LO https://github.com/ostis-ai/sc-machine/releases/download/0.10.0/sc-machine-0.10.0-Linux.tar.gz && \
-    mkdir sc-machine && tar -xvzf sc-machine-0.10.0-Linux.tar.gz -C sc-machine --strip-components 1 && \
-    rm -rf sc-machine-0.10.0-Linux.tar.gz && rm -rf sc-machine/include
+RUN ./scripts/install_cxx_problem_solver.sh
 
 FROM devdeps AS devcontainer
 RUN apt install -y --no-install-recommends cppcheck valgrind gdb bash-completion ninja-build curl
@@ -46,7 +44,7 @@ RUN --mount=type=cache,target=/ccache/ cmake --preset release-conan && cmake --b
 FROM base AS final
 
 COPY --from=builder /example-app/scripts /example-app/scripts
-COPY --from=builder /example-app/sc-machine /example-app/sc-machine
+COPY --from=builder /example-app/install /example-app/install
 COPY --from=builder /example-app/build/Release/extensions /example-app/build/Release/extensions
 COPY --from=builder /example-app/.venv /example-app/.venv
 
