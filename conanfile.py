@@ -10,7 +10,9 @@ class ostis_example_appRecipe(ConanFile):
         return tools.get_env("CONAN_RUN_TESTS", False)
     
     def requirements(self):
-        self.requires("sc-machine/0.10.0")
+        self.requires("sc-machine/0.10.3", override=True)
+        self.requires("scl-machine/0.3.0")
+        self.requires("ps-common-lib/0.1.0")
 
     def build_requirements(self):
         self.test_requires("gtest/1.14.0")

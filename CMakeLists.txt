@@ -32,5 +32,7 @@ if(CCACHE_PROGRAM AND ${AUTO_CCACHE})
 endif()
 
 find_package(sc-machine REQUIRED)
+find_package(scl-machine REQUIRED)
+find_package(ps-common-lib REQUIRED)
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/problem-solver)
