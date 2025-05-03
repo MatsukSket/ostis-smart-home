@@ -241,7 +241,7 @@ Steps for installing and running the application directly on your system.
 
     ```sh
     ./install/sc-machine/bin/sc-machine -s kb.bin \
-        -e "install/sc-machine/lib/extensions;install/scl-machine/lib/extensions;build/Release/extensions"
+        -e "install/sc-machine/lib/extensions;install/scl-machine/lib/extensions;install/non-atomic-action-interpreter-module/lib/extensions;build/Release/extensions"
     ```
     
     Starts the `sc-machine`, loading the knowledge base (`kb.bin`) and specifying the paths to the extensions.
