@@ -15,6 +15,11 @@
 
 using namespace utils;
 
+PathFindingAgent::PathFindingAgent()
+{
+  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::Console, "", utils::ScLogLevel::Debug);
+}
+
 ScAddr PathFindingAgent::GetActionClass() const
 {
   return Keynodes::action_find_minimum_path;

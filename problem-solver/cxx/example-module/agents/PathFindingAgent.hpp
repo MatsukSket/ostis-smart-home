@@ -16,6 +16,8 @@
 class PathFindingAgent : public ScActionInitiatedAgent
 {
 public:
+  PathFindingAgent();
+
   ScAddr GetActionClass() const;
 
   ScResult DoProgram(ScAction & action);

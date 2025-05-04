@@ -11,6 +11,8 @@
 class ExampleInferenceAgent : public ScActionInitiatedAgent
 {
 public:
+  ExampleInferenceAgent();
+
   ScAddr GetActionClass() const override;
 
   ScResult DoProgram(ScActionInitiatedEvent const & event, ScAction & action) override;

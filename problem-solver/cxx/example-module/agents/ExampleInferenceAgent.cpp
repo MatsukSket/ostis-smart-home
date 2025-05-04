@@ -16,6 +16,11 @@
 
 using namespace inference;
 
+ExampleInferenceAgent::ExampleInferenceAgent()
+{
+  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::Console, "", utils::ScLogLevel::Debug);
+}
+
 ScResult ExampleInferenceAgent::DoProgram(ScActionInitiatedEvent const & event, ScAction & action)
 {
   auto const [targetStructure, formulasSet, arguments, inputStructure] = action.GetArguments<4>();

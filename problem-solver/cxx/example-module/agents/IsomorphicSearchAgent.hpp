@@ -13,6 +13,8 @@
 class IsomorphicSearchAgent : public ScActionInitiatedAgent
 {
 public:
+  IsomorphicSearchAgent();
+
   ScAddr GetActionClass() const;
 
   ScResult DoProgram(ScAction & action);

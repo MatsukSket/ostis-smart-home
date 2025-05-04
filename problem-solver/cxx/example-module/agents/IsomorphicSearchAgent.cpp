@@ -16,6 +16,11 @@
 using namespace std;
 using namespace utils;
 
+IsomorphicSearchAgent::IsomorphicSearchAgent()
+{
+  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::Console, "", utils::ScLogLevel::Debug);
+}
+
 ScAddr IsomorphicSearchAgent::GetActionClass() const
 {
   return Keynodes::action_search_isomorphic_structures;

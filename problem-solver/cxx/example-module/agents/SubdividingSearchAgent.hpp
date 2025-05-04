@@ -13,6 +13,8 @@
 class SubdividingSearchAgent : public ScActionInitiatedAgent
 {
 public:
+  SubdividingSearchAgent();
+
   ScAddr GetActionClass() const;
 
   ScResult DoProgram(ScAction & action);
