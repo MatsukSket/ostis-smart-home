@@ -13,8 +13,8 @@ namespace utils
 class TestUtils
 {
 public:
-  static void getSoleIdtf(ScMemoryContext & context, ScAddr const & element, std::string & idtf);
+  static void GetSoleIdtf(ScMemoryContext & context, ScAddr const & element, std::string & idtf);
 
-  static unsigned getAmountOfOutgoingMembershipArcs(ScMemoryContext & context, ScAddr const & element);
+  static unsigned GetAmountOfOutgoingMembershipArcs(ScMemoryContext & context, ScAddr const & element);
 };
 }  // namespace utils

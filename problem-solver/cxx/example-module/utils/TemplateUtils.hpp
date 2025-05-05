@@ -16,12 +16,12 @@ namespace utils
 class TemplateUtils
 {
 public:
-  static void getConnectorTemplateInfo(
+  static void GetConnectorTemplateInfo(
       ScMemoryContext & context,
       ScAddr const & connectorTemplateAddr,
       ConnectorTemplateInfo & templateInfo);
 
-  static void getWeightTemplateInfo(
+  static void GetWeightTemplateInfo(
       ScMemoryContext & context,
       ScAddr const & connectorWeightTemplateAddr,
       WeightTemplateInfo & templateInfo);

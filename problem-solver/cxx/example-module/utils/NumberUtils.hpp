@@ -13,8 +13,8 @@ namespace utils
 class NumberUtils
 {
 public:
-  static bool isPositiveInteger(std::string const & str);
+  static bool IsPositiveInteger(std::string const & str);
 
-  static ScAddr resolveNumber(ScMemoryContext & context, unsigned value);
+  static ScAddr ResolveNumber(ScMemoryContext & context, unsigned value);
 };
 }  // namespace utils

@@ -13,7 +13,7 @@
 namespace utils
 {
 
-void TemplateUtils::getConnectorTemplateInfo(
+void TemplateUtils::GetConnectorTemplateInfo(
     ScMemoryContext & context,
     ScAddr const & connectorTemplateAddr,
     ConnectorTemplateInfo & templateInfo)
@@ -35,7 +35,7 @@ void TemplateUtils::getConnectorTemplateInfo(
     SC_THROW_EXCEPTION(utils::ExceptionItemNotFound, "Incorrect connector template - connector variable is not found.");
 }
 
-void TemplateUtils::getWeightTemplateInfo(
+void TemplateUtils::GetWeightTemplateInfo(
     ScMemoryContext & context,
     ScAddr const & connectorWeightTemplateAddr,
     WeightTemplateInfo & templateInfo)

@@ -18,7 +18,7 @@ class PathSearcher
 public:
   explicit PathSearcher(ScMemoryContext * context);
 
-  void findPath(
+  void FindPath(
       ScAddr const & graph,
       ScAddr const & startNode,
       ScAddr const & endNode,
@@ -29,14 +29,14 @@ public:
 private:
   ScMemoryContext * m_context;
 
-  void getNeighborsWithConnectorsInfo(
+  void GetNeighborsWithConnectorsInfo(
       ScAddr const & graph,
       ScAddr const & startNode,
       ConnectorTemplateInfo const & connectorTemplateInfo,
       WeightTemplateInfo const & weightTemplateInfo,
       ScAddrToValueUnorderedMap<ConnectorInfo> & neighborsWithConnectorsInfo) const;
 
-  unsigned getConnectorWeight(ScAddr const & connector, WeightTemplateInfo const & weightTemplateInfo) const;
+  unsigned GetConnectorWeight(ScAddr const & connector, WeightTemplateInfo const & weightTemplateInfo) const;
 
-  unsigned getNumberValue(ScAddr const & number) const;
+  unsigned GetNumberValue(ScAddr const & number) const;
 };

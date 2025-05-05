@@ -14,7 +14,7 @@ PathSearcher::PathSearcher(ScMemoryContext * context)
 {
 }
 
-void PathSearcher::findPath(
+void PathSearcher::FindPath(
     ScAddr const & graph,
     ScAddr const & startNode,
     ScAddr const & endNode,
@@ -36,7 +36,7 @@ void PathSearcher::findPath(
     vertexesToCheck.pop();
 
     ScAddrToValueUnorderedMap<ConnectorInfo> neighborsWithConnectorsInfo;
-    getNeighborsWithConnectorsInfo(
+    GetNeighborsWithConnectorsInfo(
         graph, currentVertex, connectorTemplateInfo, weightTemplateInfo, neighborsWithConnectorsInfo);
 
     for (auto const & neighborWithPathLength : neighborsWithConnectorsInfo)
@@ -74,7 +74,7 @@ void PathSearcher::findPath(
   pathInfo.connectors = pathToVertexConnectors[endNode];
 }
 
-void PathSearcher::getNeighborsWithConnectorsInfo(
+void PathSearcher::GetNeighborsWithConnectorsInfo(
     ScAddr const & graph,
     ScAddr const & startNode,
     ConnectorTemplateInfo const & connectorTemplateInfo,
@@ -93,7 +93,7 @@ void PathSearcher::getNeighborsWithConnectorsInfo(
         ScAddr const & connector = item[connectorTemplateInfo.connectorVariable];
 
         ScAddr const & neighbor = item[connectorTemplateInfo.connectorEndVariable];
-        unsigned const connectorWeight = getConnectorWeight(connector, weightTemplateInfo);
+        unsigned const connectorWeight = GetConnectorWeight(connector, weightTemplateInfo);
 
         if (neighborsWithConnectorsInfo.find(neighbor) == neighborsWithConnectorsInfo.cend()
             || neighborsWithConnectorsInfo[neighbor].weight > connectorWeight)
@@ -105,7 +105,7 @@ void PathSearcher::getNeighborsWithConnectorsInfo(
       });
 }
 
-unsigned PathSearcher::getConnectorWeight(ScAddr const & connector, WeightTemplateInfo const & weightTemplateInfo) const
+unsigned PathSearcher::GetConnectorWeight(ScAddr const & connector, WeightTemplateInfo const & weightTemplateInfo) const
 {
   ScTemplateParams connectorWeightTemplateParams;
   connectorWeightTemplateParams.Add(weightTemplateInfo.measuredObjectVariable, connector);
@@ -120,7 +120,7 @@ unsigned PathSearcher::getConnectorWeight(ScAddr const & connector, WeightTempla
       {
         isFound = true;
 
-        weight = getNumberValue(item[weightTemplateInfo.numberVariable]);
+        weight = GetNumberValue(item[weightTemplateInfo.numberVariable]);
 
         return ScTemplateSearchRequest::STOP;
       });
@@ -131,7 +131,7 @@ unsigned PathSearcher::getConnectorWeight(ScAddr const & connector, WeightTempla
   return weight;
 }
 
-unsigned PathSearcher::getNumberValue(ScAddr const & number) const
+unsigned PathSearcher::GetNumberValue(ScAddr const & number) const
 {
   ScIterator5Ptr idtfsIterator = m_context->CreateIterator5(
       number, ScType::ConstCommonArc, ScType::ConstNodeLink, ScType::ConstPermPosArc, Keynodes::nrel_idtf);
@@ -140,7 +140,7 @@ unsigned PathSearcher::getNumberValue(ScAddr const & number) const
     ScAddr const & idtfLink = idtfsIterator->Get(2);
     std::string idtfString;
     m_context->GetLinkContent(idtfLink, idtfString);
-    if (!utils::NumberUtils::isPositiveInteger(idtfString))
+    if (!utils::NumberUtils::IsPositiveInteger(idtfString))
       continue;
 
     unsigned numericValue;

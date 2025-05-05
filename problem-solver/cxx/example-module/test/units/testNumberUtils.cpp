@@ -21,11 +21,11 @@ using NumberUtilsTest = ScMemoryTest;
 TEST_F(NumberUtilsTest, isPositiveIntegerTest)
 {
   std::string const & positiveNumberStr = "250";
-  ASSERT_TRUE(utils::NumberUtils::isPositiveInteger(positiveNumberStr));
+  ASSERT_TRUE(utils::NumberUtils::IsPositiveInteger(positiveNumberStr));
   std::string const & notANumberStr = "number_250";
-  ASSERT_FALSE(utils::NumberUtils::isPositiveInteger(notANumberStr));
+  ASSERT_FALSE(utils::NumberUtils::IsPositiveInteger(notANumberStr));
   std::string const & notAPositiveNumberStr = "-250";
-  ASSERT_FALSE(utils::NumberUtils::isPositiveInteger(notAPositiveNumberStr));
+  ASSERT_FALSE(utils::NumberUtils::IsPositiveInteger(notAPositiveNumberStr));
 }
 
 TEST_F(NumberUtilsTest, resolveEistingNumberTest)
@@ -37,7 +37,7 @@ TEST_F(NumberUtilsTest, resolveEistingNumberTest)
   ScAddr existingNumber = context.SearchElementBySystemIdentifier("number_100");
   ASSERT_TRUE(existingNumber.IsValid());
 
-  ScAddr const & resolvedNumber = utils::NumberUtils::resolveNumber(context, 100);
+  ScAddr const & resolvedNumber = utils::NumberUtils::ResolveNumber(context, 100);
   ASSERT_EQ(resolvedNumber, existingNumber);
 }
 
@@ -45,10 +45,10 @@ TEST_F(NumberUtilsTest, resolveNonExistingNumberTest)
 {
   ScAgentContext & context = *m_ctx;
 
-  ScAddr const & resolvedNumber = utils::NumberUtils::resolveNumber(context, 100);
+  ScAddr const & resolvedNumber = utils::NumberUtils::ResolveNumber(context, 100);
 
   std::string lengthNumberIdtf;
-  utils::TestUtils::getSoleIdtf(context, resolvedNumber, lengthNumberIdtf);
+  utils::TestUtils::GetSoleIdtf(context, resolvedNumber, lengthNumberIdtf);
   ASSERT_EQ("100", lengthNumberIdtf);
 }
 

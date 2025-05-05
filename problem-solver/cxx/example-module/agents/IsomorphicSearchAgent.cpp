@@ -6,14 +6,13 @@
 
 #include "IsomorphicSearchAgent.hpp"
 
-#include <iostream>
-
 #include <sc-memory/sc_memory.hpp>
 #include <sc-memory/sc_stream.hpp>
 
 #include <sc-agents-common/utils/IteratorUtils.hpp>
 
-using namespace std;
+#include "keynodes/Keynodes.hpp"
+
 using namespace utils;
 
 IsomorphicSearchAgent::IsomorphicSearchAgent()
@@ -39,7 +38,7 @@ ScResult IsomorphicSearchAgent::DoProgram(ScAction & action)
   ScStructure result = m_context.GenerateStructure();
   try
   {
-    formSearchResults(scTemplateNode, result);
+    FormSearchResults(scTemplateNode, result);
   }
   catch (ScException const & exception)
   {
@@ -51,21 +50,21 @@ ScResult IsomorphicSearchAgent::DoProgram(ScAction & action)
   return action.FinishSuccessfully();
 }
 
-void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScStructure & result)
+void IsomorphicSearchAgent::FormSearchResults(ScAddr const & scTemplateNode, ScStructure & result)
 {
-  clearPreviousSearchResults(scTemplateNode);
+  ClearPreviousSearchResults(scTemplateNode);
 
   ScTemplate scTemplate;
   m_context.BuildTemplate(scTemplate, scTemplateNode);
 
-  ScAddr const & resultsSet = formNewResultsSetConstruction(scTemplateNode, result);
+  ScAddr const & resultsSet = FormNewResultsSetConstruction(scTemplateNode, result);
 
   ScAddrVector searchResults;
   m_context.SearchByTemplate(
       scTemplate,
       [&searchResults, this](ScTemplateSearchResultItem const & item)
       {
-        searchResults.push_back(emplaceItemElementsInStructure(item));
+        searchResults.push_back(EmplaceItemElementsInStructure(item));
       });
 
   if (searchResults.empty())
@@ -86,7 +85,7 @@ void IsomorphicSearchAgent::formSearchResults(ScAddr const & scTemplateNode, ScS
   }
 }
 
-void IsomorphicSearchAgent::clearPreviousSearchResults(ScAddr const & scTemplateNode)
+void IsomorphicSearchAgent::ClearPreviousSearchResults(ScAddr const & scTemplateNode)
 {
   ScIterator5Ptr previousResultsStructuresSetsIterator = m_context.CreateIterator5(
       scTemplateNode, ScType::ConstCommonArc, ScType::ConstNode, ScType::ConstPermPosArc, Keynodes::nrel_search_result);
@@ -102,7 +101,7 @@ void IsomorphicSearchAgent::clearPreviousSearchResults(ScAddr const & scTemplate
   }
 }
 
-ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(ScAddr const & scTemplateNode, ScStructure & result)
+ScAddr IsomorphicSearchAgent::FormNewResultsSetConstruction(ScAddr const & scTemplateNode, ScStructure & result)
 {
   ScAddr const & resultsSetTuple = m_context.GenerateNode(ScType::ConstNodeTuple);
   ScAddr const & searchResultRelationPair =
@@ -114,7 +113,7 @@ ScAddr IsomorphicSearchAgent::formNewResultsSetConstruction(ScAddr const & scTem
   return resultsSetTuple;
 }
 
-ScAddr IsomorphicSearchAgent::emplaceItemElementsInStructure(ScTemplateSearchResultItem const & item)
+ScAddr IsomorphicSearchAgent::EmplaceItemElementsInStructure(ScTemplateSearchResultItem const & item)
 {
   ScAddr const & searchResultStructure = m_context.GenerateNode(ScType::ConstNodeStructure);
 

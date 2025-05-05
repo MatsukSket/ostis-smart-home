@@ -10,6 +10,7 @@
 #include <sc-agents-common/utils/IteratorUtils.hpp>
 
 #include "agents/PathFindingAgent.hpp"
+#include "keynodes/Keynodes.hpp"
 #include "utils/NumberUtils.hpp"
 
 #include "utils/TestUtils.hpp"
@@ -61,12 +62,12 @@ void checkResultAndGetPathWithLength(
       });
   ASSERT_EQ(amountOfResults, 1);
 
-  ASSERT_EQ(utils::TestUtils::getAmountOfOutgoingMembershipArcs(context, result), expectedAmountOfElements);
+  ASSERT_EQ(utils::TestUtils::GetAmountOfOutgoingMembershipArcs(context, result), expectedAmountOfElements);
 
   std::string lengthNumberIdtf;
-  utils::TestUtils::getSoleIdtf(context, lengthNumberAddr, lengthNumberIdtf);
+  utils::TestUtils::GetSoleIdtf(context, lengthNumberAddr, lengthNumberIdtf);
 
-  ASSERT_TRUE(utils::NumberUtils::isPositiveInteger(lengthNumberIdtf));
+  ASSERT_TRUE(utils::NumberUtils::IsPositiveInteger(lengthNumberIdtf));
 
   length = atoi(lengthNumberIdtf.c_str());
 }
@@ -98,7 +99,7 @@ void checkPathStructure(
       });
   ASSERT_EQ(amountOfResults, 1);
 
-  ASSERT_EQ(utils::TestUtils::getAmountOfOutgoingMembershipArcs(context, pathAddr), expectedAmountOfElements);
+  ASSERT_EQ(utils::TestUtils::GetAmountOfOutgoingMembershipArcs(context, pathAddr), expectedAmountOfElements);
 }
 
 void successfulPathfindingTestBody(
@@ -135,7 +136,7 @@ void successfulPathfindingTestBody(
 
   // unlike the roadWeightTemplate above, this check template doesn't have duplicating membership arcs
   unsigned expectedAmountOfElementsInPath =
-      utils::TestUtils::getAmountOfOutgoingMembershipArcs(context, pathCheckTemplateAddr);
+      utils::TestUtils::GetAmountOfOutgoingMembershipArcs(context, pathCheckTemplateAddr);
   checkPathStructure(context, pathAddr, pathCheckTemplateAddr, expectedAmountOfElementsInPath);
 }
 

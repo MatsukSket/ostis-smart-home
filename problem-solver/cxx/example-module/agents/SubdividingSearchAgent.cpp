@@ -9,7 +9,8 @@
 #include <sc-agents-common/utils/GenerationUtils.hpp>
 #include <sc-agents-common/utils/IteratorUtils.hpp>
 
-using namespace std;
+#include "keynodes/Keynodes.hpp"
+
 using namespace utils;
 
 SubdividingSearchAgent::SubdividingSearchAgent()
