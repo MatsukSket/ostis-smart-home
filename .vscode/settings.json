@@ -87,6 +87,13 @@
         "unordered_set": "cpp",
         "variant": "cpp",
         "vector": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "*.tpp": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "any": "cpp"
     }
 }
