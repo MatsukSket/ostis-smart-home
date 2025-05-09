@@ -304,12 +304,14 @@ Then open `http://127.0.0.1:8005/` in your browser.
     cmake --build --preset release
     ```
 
-    To enable debug logs, configure `ostis-example-app.ini`:
+    To update log type and log level of agent, modify constructor of agent class. By default, logs of agents execution are stored in the `logs` directory:
 
-    ```sh
-    log_type = Console
-    log_file = sc-memory.log
-    log_level = Debug
+    ```plain
+    logs/
+    |--ExampleInferenceAgent.log
+    |--IsomorphicSearchAgent.log
+    |--PathFindingAgent.log
+    |--SubdividingSearchAgent.log
     ```
 
 ## Code Style
