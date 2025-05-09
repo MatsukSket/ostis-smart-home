@@ -4,7 +4,7 @@
  * COPYING.MIT or copy at http://opensource.org/licenses/MIT)
  */
 
-#include "PathFindingAgent.hpp"
+#include "PathSearchAgent.hpp"
 
 #include <sc-memory/sc_memory.hpp>
 #include <sc-memory/sc_stream.hpp>
@@ -17,17 +17,17 @@
 
 using namespace utils;
 
-PathFindingAgent::PathFindingAgent()
+PathSearchAgent::PathSearchAgent()
 {
-  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/PathFindingAgent.log", utils::ScLogLevel::Debug);
+  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/PathSearchAgent.log", utils::ScLogLevel::Debug);
 }
 
-ScAddr PathFindingAgent::GetActionClass() const
+ScAddr PathSearchAgent::GetActionClass() const
 {
-  return Keynodes::action_find_minimum_path;
+  return Keynodes::action_search_minimum_path;
 }
 
-ScResult PathFindingAgent::DoProgram(ScAction & action)
+ScResult PathSearchAgent::DoProgram(ScAction & action)
 {
   auto const & [graph, startNode, endNode, connectorTemplateAddr, connectorWeightTemplateAddr] =
       action.GetArguments<5>();
@@ -79,7 +79,7 @@ ScResult PathFindingAgent::DoProgram(ScAction & action)
     PathInfo pathInfo;
 
     PathSearcher searcher(&m_context);
-    searcher.FindPath(graph, startNode, endNode, connectorTemplateInfo, weightTemplateInfo, pathInfo);
+    searcher.SearchPath(graph, startNode, endNode, connectorTemplateInfo, weightTemplateInfo, pathInfo);
 
     ScStructure const & result = FormResult(pathInfo, connectorTemplateInfo, weightTemplateInfo);
     action.SetResult(result);
@@ -93,7 +93,7 @@ ScResult PathFindingAgent::DoProgram(ScAction & action)
   return action.FinishSuccessfully();
 }
 
-ScStructure PathFindingAgent::FormResult(
+ScStructure PathSearchAgent::FormResult(
     PathInfo const & pathInfo,
     ConnectorTemplateInfo const & connectorTemplateInfo,
     WeightTemplateInfo const & weightTemplateInfo) const
@@ -122,7 +122,7 @@ ScStructure PathFindingAgent::FormResult(
   return resultStructure;
 }
 
-void PathFindingAgent::AddConnectionIntoStructure(
+void PathSearchAgent::AddConnectionIntoStructure(
     ScAddr const & first,
     ScAddr const & second,
     ScAddr const & connector,
@@ -151,10 +151,10 @@ void PathFindingAgent::AddConnectionIntoStructure(
       });
 
   if (!isFound)
-    SC_THROW_EXCEPTION(utils::ExceptionItemNotFound, "PathFindingAgent: result creation failed");
+    SC_THROW_EXCEPTION(utils::ExceptionItemNotFound, "PathSearchAgent: result creation failed");
 }
 
-void PathFindingAgent::AddPathWeightIntoStructure(
+void PathSearchAgent::AddPathWeightIntoStructure(
     ScAddr const & pathAddr,
     WeightTemplateInfo const & weightTemplateInfo,
     unsigned const length,

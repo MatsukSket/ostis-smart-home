@@ -19,6 +19,6 @@ public:
       ScType::ConstNodeClass};
   static inline ScKeynode const nrel_search_result{"nrel_search_result", ScType::ConstNodeNonRole};
   static inline ScKeynode const empty_set{"empty_set", ScType::ConstNodeClass};
-  static inline ScKeynode const action_find_minimum_path{"action_find_minimum_path", ScType::ConstNodeClass};
+  static inline ScKeynode const action_search_minimum_path{"action_search_minimum_path", ScType::ConstNodeClass};
   static inline ScKeynode const action_example_inference{"action_example_inference", ScType::ConstNodeClass};
 };

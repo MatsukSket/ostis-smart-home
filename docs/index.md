@@ -9,9 +9,9 @@ Welcome to the [ostis-example-app](https://github.com/ostis-apps/ostis-example-a
 
 ostis-example-app is an ostis-system designed with [OSTIS Technology](https://github.com/ostis-ai). It serves as a demonstration of how to create, structure, and run an ostis-based system.
 
-The main purpose of this example is to provide a simple example of system based on the OSTIS technology, so developers can use it as example for their own projects.
+The main purpose of this example is to provide a simple example of system based on the OSTIS Technology, so developers can use it as example for their own projects.
 
 Table of contents:
 
 - **C++ agents**
-    * [Path Finding Agent](agents/path_finding_agent.md)
+    * [Path Search Agent](agents/path_search_agent.md)

@@ -310,7 +310,7 @@ Then open `http://127.0.0.1:8005/` in your browser.
     logs/
     |--ExampleInferenceAgent.log
     |--IsomorphicSearchAgent.log
-    |--PathFindingAgent.log
+    |--PathSearchAgent.log
     |--SubdividingSearchAgent.log
     ```
 

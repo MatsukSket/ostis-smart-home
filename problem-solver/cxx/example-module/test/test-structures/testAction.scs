@@ -1,5 +1,5 @@
 test_action
-    <- action_find_minimum_path;
+    <- action_search_minimum_path;
     -> rrel_1: network;
     -> rrel_2: city_a;
     -> rrel_3: city_d;

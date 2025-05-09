@@ -2,7 +2,7 @@ This is an agent that searches minimal path between two nodes of weighted graph.
 
 **Action class:**
 
-`action_find_minimum_path`
+`action_search_minimum_path`
 
 **Parameters:**
 
@@ -29,11 +29,11 @@ This is an agent that searches minimal path between two nodes of weighted graph.
 
 Example of an input structure:
 
-<img src="../images/path_finding_agent_input.png"></img>
+<img src="../images/path_search_agent_input.png"></img>
 
 Example of an output structure:
 
-<img src="../images/path_finding_agent_output.png"></img>
+<img src="../images/path_search_agent_output.png"></img>
 
 Example of graph:
 ```

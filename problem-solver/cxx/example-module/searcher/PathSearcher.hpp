@@ -18,7 +18,7 @@ class PathSearcher
 public:
   explicit PathSearcher(ScMemoryContext * context);
 
-  void FindPath(
+  void SearchPath(
       ScAddr const & graph,
       ScAddr const & startNode,
       ScAddr const & endNode,

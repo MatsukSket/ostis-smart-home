@@ -14,7 +14,7 @@ PathSearcher::PathSearcher(ScMemoryContext * context)
 {
 }
 
-void PathSearcher::FindPath(
+void PathSearcher::SearchPath(
     ScAddr const & graph,
     ScAddr const & startNode,
     ScAddr const & endNode,

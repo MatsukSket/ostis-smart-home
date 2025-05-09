@@ -12,10 +12,10 @@
 #include "data-structures/WeightTemplateInfo.hpp"
 #include "data-structures/PathInfo.hpp"
 
-class PathFindingAgent : public ScActionInitiatedAgent
+class PathSearchAgent : public ScActionInitiatedAgent
 {
 public:
-  PathFindingAgent();
+  PathSearchAgent();
 
   ScAddr GetActionClass() const override;
 

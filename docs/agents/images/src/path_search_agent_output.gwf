@@ -125,7 +125,7 @@
         <node type="node/const/perm/role" idtf="rrel_5" shapeColor="0" id="144132784" parent="0" left="0" top="0" right="40.4688" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="388.5" y="370.5" haveBus="false" idtf_pos="5">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
-        <node type="node/const/perm/group" idtf="action_find_minimum_path" shapeColor="0" id="143081360" parent="0" left="0" top="0" right="158.172" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="305" y="329" haveBus="false" idtf_pos="5">
+        <node type="node/const/perm/group" idtf="action_search_minimum_path" shapeColor="0" id="143081360" parent="0" left="0" top="0" right="158.172" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="305" y="329" haveBus="false" idtf_pos="5">
             <content type="0" mime_type="" content_visibility="false" file_name=""/>
         </node>
         <node type="node/const/perm/role" idtf="rrel_1" shapeColor="0" id="144027216" parent="0" left="0" top="0" right="40.4688" bottom="23" textColor="164" text_angle="0" text_font="Times New Roman" font_size="10" x="129" y="652" haveBus="false" idtf_pos="0">

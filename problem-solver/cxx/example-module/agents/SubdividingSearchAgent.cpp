@@ -15,7 +15,8 @@ using namespace utils;
 
 SubdividingSearchAgent::SubdividingSearchAgent()
 {
-  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/SubdividingSearchAgent.log", utils::ScLogLevel::Debug);
+  m_logger =
+      utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/SubdividingSearchAgent.log", utils::ScLogLevel::Debug);
 }
 
 ScAddr SubdividingSearchAgent::GetActionClass() const

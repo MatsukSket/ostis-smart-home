@@ -8,11 +8,11 @@
 
 #include "agents/SubdividingSearchAgent.hpp"
 #include "agents/IsomorphicSearchAgent.hpp"
-#include "agents/PathFindingAgent.hpp"
+#include "agents/PathSearchAgent.hpp"
 #include "agents/ExampleInferenceAgent.hpp"
 
 SC_MODULE_REGISTER(ExampleModule)
     ->Agent<SubdividingSearchAgent>()
     ->Agent<IsomorphicSearchAgent>()
-    ->Agent<PathFindingAgent>()
+    ->Agent<PathSearchAgent>()
     ->Agent<ExampleInferenceAgent>();

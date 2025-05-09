@@ -17,7 +17,8 @@ using namespace utils;
 
 IsomorphicSearchAgent::IsomorphicSearchAgent()
 {
-  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/IsomorphicSearchAgent.log", utils::ScLogLevel::Debug);
+  m_logger =
+      utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/IsomorphicSearchAgent.log", utils::ScLogLevel::Debug);
 }
 
 ScAddr IsomorphicSearchAgent::GetActionClass() const
