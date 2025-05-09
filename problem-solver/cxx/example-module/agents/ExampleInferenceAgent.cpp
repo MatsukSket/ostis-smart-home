@@ -18,7 +18,7 @@ using namespace inference;
 
 ExampleInferenceAgent::ExampleInferenceAgent()
 {
-  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::Console, "", utils::ScLogLevel::Debug);
+  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/ExampleInferenceAgent.log", utils::ScLogLevel::Debug);
 }
 
 ScResult ExampleInferenceAgent::DoProgram(ScActionInitiatedEvent const & event, ScAction & action)

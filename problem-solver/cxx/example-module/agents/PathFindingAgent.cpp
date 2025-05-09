@@ -19,7 +19,7 @@ using namespace utils;
 
 PathFindingAgent::PathFindingAgent()
 {
-  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::Console, "", utils::ScLogLevel::Debug);
+  m_logger = utils::ScLogger(utils::ScLogger::ScLogType::File, "logs/PathFindingAgent.log", utils::ScLogLevel::Debug);
 }
 
 ScAddr PathFindingAgent::GetActionClass() const
