@@ -11,6 +11,9 @@ SCL_MACHINE_DESTINATION_DIR="install/scl-machine"
 NON_ATOMIC_ACTION_INTERPRETER_MODULE_VERSION="0.1.0"
 NON_ATOMIC_ACTION_INTERPRETER_MODULE_DESTINATION_DIR="install/non-atomic-action-interpreter-module"
 
+PS_COMMON_LIB_VERSION="0.1.0"
+PS_COMMON_LIB_DESTINATION_DIR="install/ps-common-lib"
+
 get_archive_name() {
     local os_name=$(uname -s)
     case "$os_name" in
@@ -71,5 +74,12 @@ NON_ATOMIC_ACTION_INTERPRETER_MODULE_URL="https://github.com/ostis-ai/ostis-ps-l
 download_archive "${NON_ATOMIC_ACTION_INTERPRETER_MODULE_URL}"
 extract_archive "${NON_ATOMIC_ACTION_INTERPRETER_MODULE_ARCHIVE}" "${NON_ATOMIC_ACTION_INTERPRETER_MODULE_DESTINATION_DIR}"
 cleanup "${NON_ATOMIC_ACTION_INTERPRETER_MODULE_ARCHIVE}" "${NON_ATOMIC_ACTION_INTERPRETER_MODULE_DESTINATION_DIR}"
+
+PS_COMMON_LIB_ARCHIVE=$(get_archive_name "ps-common-lib" "${PS_COMMON_LIB_VERSION}")
+PS_COMMON_LIB_URL="https://github.com/ostis-ai/ostis-ps-lib/releases/download/${PS_COMMON_LIB_VERSION}/${PS_COMMON_LIB_ARCHIVE}"
+
+download_archive "${PS_COMMON_LIB_URL}"
+extract_archive "${PS_COMMON_LIB_ARCHIVE}" "${PS_COMMON_LIB_DESTINATION_DIR}"
+cleanup "${PS_COMMON_LIB_ARCHIVE}" "${PS_COMMON_LIB_DESTINATION_DIR}"
 
 echo "Installation complete!"
