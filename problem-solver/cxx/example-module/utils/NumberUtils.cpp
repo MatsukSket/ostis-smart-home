@@ -8,6 +8,8 @@
 
 #include "keynodes/Keynodes.hpp"
 
+#include <algorithm>
+
 namespace utils
 {
 
