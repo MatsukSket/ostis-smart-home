@@ -230,18 +230,17 @@ Steps for installing and running the application directly on your system.
     The knowledge base contains your custom knowledge represented in SC-code. It needs to be built before launching the system or after making changes:
 
     ```sh
-    ./install/sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ./scripts/start.sh build_kb
     ```
     
-    This command builds the knowledge base from the `.scs` and `.gwf` files in the `knowledge-base` directory, creating the `kb.bin` file. The `--clear` flag clears the knowledge base before building.
+    This command builds the knowledge base from the `.scs` and `.gwf` files in the `knowledge-base` directory, creating the `kb.bin` directory.
 
 ## Running ostis-system
 
 1.  **Start `sc-machine` (in a terminal):**
 
     ```sh
-    ./install/sc-machine/bin/sc-machine -s kb.bin \
-        -e "install/sc-machine/lib/extensions;install/scl-machine/lib/extensions;install/non-atomic-action-interpreter-module/lib/extensions;install/fixed-search-strategy-template-processing-module/lib/extensions;build/Release/extensions"
+    ./scripts/start.sh machine
     ```
     
     Starts the `sc-machine`, loading the knowledge base (`kb.bin`) and specifying the paths to the extensions.
@@ -249,43 +248,16 @@ Steps for installing and running the application directly on your system.
 2.  **Start `sc-web` interface (in a separate terminal):**
 
     ```sh
-    cd interface/sc-web
-    source .venv/bin/activate && python3 server/app.py
+    ./scripts/start.sh web
     ```
     
-    Starts the `sc-web`. `source .venv/bin/activate` activates the virtual environment for `sc-web`, and `python3 server/app.py` starts the web server.
+    Starts the web server.
 
 3.  **Access interface:** Open `localhost:8000` in your web browser.
 
     ![Example Screenshot](https://i.imgur.com/6SehI5s.png)
 
 To stop the running servers for the ostis-example-app, press `Ctrl+C` in the terminals where sc-machine and sc-web are running.
-
-
-### Using the `start.sh` script
-
-At the project root, there is a `start.sh` script that bundles the main commands:
-
-Usage examples:
-
-* **Build the knowledge base:**
-
-  ```sh
-  ./start.sh build_kb
-  ```
-
-* **Start `sc-machine`:**
-
-  ```sh
-  ./start.sh machine
-  ```
-
-* **Start the web interface (`sc-web`):**
-
-  ```sh
-  ./start.sh web
-  ```
-
 
 ## Documentation
 
@@ -305,7 +277,7 @@ Then open `http://127.0.0.1:8005/` in your browser.
 *   **`knowledge-base`**: Contains the knowledge base source files (`.scs`, `.gwf`). Rebuild the knowledge base after making changes:
 
     ```sh
-    ./install/sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
+    ./scripts/start.sh build_kb
     ```
 
 *   **`problem-solver`**: Contains the C++ agents that implement the problem-solving logic. Rebuild after modifying:
