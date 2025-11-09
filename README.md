@@ -261,6 +261,32 @@ Steps for installing and running the application directly on your system.
 
 To stop the running servers for the ostis-example-app, press `Ctrl+C` in the terminals where sc-machine and sc-web are running.
 
+
+### Using the `start.sh` script
+
+At the project root, there is a `start.sh` script that bundles the main commands:
+
+Usage examples:
+
+* **Build the knowledge base:**
+
+  ```sh
+  ./start.sh build_kb
+  ```
+
+* **Start `sc-machine`:**
+
+  ```sh
+  ./start.sh machine
+  ```
+
+* **Start the web interface (`sc-web`):**
+
+  ```sh
+  ./start.sh web
+  ```
+
+
 ## Documentation
 
 To generate local documentation:

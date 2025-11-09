@@ -8,6 +8,9 @@ SC_MACHINE_DESTINATION_DIR="install/sc-machine"
 SCL_MACHINE_VERSION="0.3.0"
 SCL_MACHINE_DESTINATION_DIR="install/scl-machine"
 
+PS_COMMON_LIB_VERSION="0.1.0"
+PS_COMMON_LIB_DESTINATION_DIR="install/ps-common-lib"
+
 NON_ATOMIC_ACTION_INTERPRETER_MODULE_VERSION="0.1.0"
 NON_ATOMIC_ACTION_INTERPRETER_MODULE_DESTINATION_DIR="install/non-atomic-action-interpreter-module"
 
@@ -67,6 +70,13 @@ SCL_MACHINE_URL="https://github.com/ostis-ai/scl-machine/releases/download/${SCL
 download_archive "${SCL_MACHINE_URL}"
 extract_archive "${SCL_MACHINE_ARCHIVE}" "${SCL_MACHINE_DESTINATION_DIR}"
 cleanup "${SCL_MACHINE_ARCHIVE}" "${SCL_MACHINE_DESTINATION_DIR}"
+
+PS_COMMON_LIB_ARCHIVE=$(get_archive_name "ps-common-lib" "${PS_COMMON_LIB_VERSION}")
+PS_COMMON_LIB_URL="https://github.com/ostis-ai/ostis-ps-lib/releases/download/${PS_COMMON_LIB_VERSION}/${PS_COMMON_LIB_ARCHIVE}"
+
+download_archive "${PS_COMMON_LIB_URL}"
+extract_archive "${PS_COMMON_LIB_ARCHIVE}" "${PS_COMMON_LIB_DESTINATION_DIR}"
+cleanup "${PS_COMMON_LIB_ARCHIVE}" "${PS_COMMON_LIB_DESTINATION_DIR}"
 
 NON_ATOMIC_ACTION_INTERPRETER_MODULE_ARCHIVE=$(get_archive_name "non-atomic-action-interpreter-module" "${NON_ATOMIC_ACTION_INTERPRETER_MODULE_VERSION}")
 NON_ATOMIC_ACTION_INTERPRETER_MODULE_URL="https://github.com/ostis-ai/ostis-ps-lib/releases/download/${NON_ATOMIC_ACTION_INTERPRETER_MODULE_VERSION}/${NON_ATOMIC_ACTION_INTERPRETER_MODULE_ARCHIVE}"
