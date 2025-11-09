@@ -1,0 +1,31 @@
+Petrov
+<- concept_student;
+=> nrel_fio:
+    [Петров П.П.]
+    (*
+        <- lang_ru;;
+    *);;
+
+Ivanov
+<- concept_student;
+=> nrel_fio:
+    [Иванов И.И.]
+    (*
+        <- lang_ru;;
+    *);;
+
+Olegov
+<- concept_student;
+=> nrel_fio:
+    [Олегов О.О.]
+    (*
+        <- lang_ru;;
+    *);;
+
+Sidorov
+<- concept_student;
+=> nrel_fio:
+    [Сидоров С.С.]
+    (*
+        <- lang_ru;;
+    *);;

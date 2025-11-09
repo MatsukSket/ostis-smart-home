@@ -39,7 +39,7 @@ services:
       - "KB_PATH=/knowledge-base/repo.path"
       - "BINARY_PATH=/example-app/install/sc-machine/bin"
       - "CONFIG_PATH=/knowledge-base/ostis-example-app.ini"
-      - "EXTENSIONS_PATH=/example-app/build/Release/extensions;/example-app/install/sc-machine/lib/extensions;/example-app/install/scl-machine/lib/extensions;/example-app/install/non-atomic-action-interpreter-module/lib/extensions"
+      - "EXTENSIONS_PATH=/example-app/build/Release/extensions;/example-app/install/sc-machine/lib/extensions;/example-app/install/scl-machine/lib/extensions;/example-app/install/non-atomic-action-interpreter-module/lib/extensions;install/fixed-search-strategy-template-processing-module/lib/extensions"
       - "SC_SERVER_HOST=0.0.0.0"
     command:
       - "run"
