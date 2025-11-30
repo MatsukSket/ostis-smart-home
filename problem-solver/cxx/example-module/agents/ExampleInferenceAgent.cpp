@@ -56,7 +56,7 @@ ScResult ExampleInferenceAgent::DoProgram(ScActionInitiatedEvent const & event, 
   InferenceParams const & inferenceParams{
       formulasSet, argumentVector, inputStructures, outputStructure, targetStructure};
   std::unique_ptr<InferenceManagerAbstract> inferenceManager =
-      InferenceManagerFactory::ConstructDirectInferenceManagerTarget(&m_context, inferenceConfig);
+      InferenceManagerFactory::ConstructDirectInferenceManagerTarget(&m_context, &m_logger, inferenceConfig);
   bool targetAchieved;
   try
   {
