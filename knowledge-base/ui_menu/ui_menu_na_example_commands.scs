@@ -11,7 +11,7 @@ ui_menu_na_example_commands
 	*);
 <= nrel_ui_commands_decomposition:
 {
-	//ui_menu_subdividing_search;
-	//ui_menu_isomorphic_search;
-	ui_menu_fixed_search_strategy_template_search
+	ui_menu_fixed_search_strategy_template_search;
+	ui_menu_run_scp_program;
+	ui_menu_for_searching_students_with_good_mark
 };;

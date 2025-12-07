@@ -1,0 +1,250 @@
+program_for_searching_students_with_good_marks
+=> nrel_main_idtf:
+	[Программа поиска студентов заданного университета, которые имеют хорошие оценки]
+    (*
+        <- lang_ru;;
+    *);
+	[Program for searching students of specified university with good marks]
+    (*
+        <- lang_en;;
+    *);
+<- scp_program;
+-> rrel_key_sc_element:
+    .._process;;
+
+program_for_searching_students_with_good_marks = [*
+.._process
+<-_ scp_process;
+
+_-> rrel_1:: rrel_in:: .._university;
+_-> rrel_2:: rrel_out:: .._result_students;
+
+<=_ nrel_decomposition_of_action:: _...
+(*
+	_-> rrel_1:: .._generate_result_set_of_students_with_good_marks
+	(*
+		<-_ genElStr3;;
+
+		_-> rrel_1:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: rrel_structure:: .._result_students;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_students_to_class;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_const:: concept_student;;
+
+		_=> nrel_goto:: .._check_university;;
+	*);;
+	_-> .._check_university
+	(*
+		<-_ searchElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_university;;
+		_-> rrel_2:: rrel_assign:: rrel_const_perm_pos_arc:: rrel_scp_var:: .._arc_from_class_to_university;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_const:: .._university;;
+
+		_=> nrel_then:: .._print_that_specified_argument_is_university;;
+		_=> nrel_else:: .._print_that_specified_argument_is_not_university;;
+	*);;
+	_-> .._print_that_specified_argument_is_university
+	(*
+		<-_ printNl;;		
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is university];;
+
+		_=> nrel_goto:: .._search_university_groups;;
+	*);;
+	_-> .._search_university_groups
+	(*
+		<-_ searchSetStr5;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: .._university;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_university_to_group;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._group;;
+		_-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_university_to_group;;
+		_-> rrel_5:: rrel_fixed:: rrel_scp_const:: rrel_group;;
+	
+		_-> rrel_set_3:: rrel_assign:: rrel_scp_var:: .._found_groups;;
+
+		_=> nrel_then:: .._get_next_group;;
+		_=> nrel_else:: .._print_that_all_groups_were_iterated;;
+	*);;
+	_-> .._get_next_group
+	(*
+		<-_ searchElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._found_groups;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_group_set_to_group;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: .._group;;
+
+		_=> nrel_then:: .._pop_group_from_set;;
+		_=> nrel_else:: .._print_that_all_groups_were_iterated;;
+	*);;
+	_-> .._pop_group_from_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._arc_from_group_set_to_group;;
+
+		_=> nrel_goto:: .._print_that_university_group_was_found;;
+	*);;
+	_-> .._print_that_university_group_was_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Group was found in specified university];;
+
+		_=> nrel_goto:: .._search_group_students;;
+	*);;
+	_-> .._search_group_students
+	(*
+		<-_ searchSetStr5;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._group;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_group_to_student;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: .._student;;
+		_-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_group_to_student;;
+		_-> rrel_5:: rrel_fixed:: rrel_scp_const:: rrel_student;;
+	
+		_-> rrel_set_3:: rrel_assign:: rrel_scp_var:: .._found_students;;
+
+		_=> nrel_then:: .._get_next_student;;
+		_=> nrel_else:: .._get_next_group;;
+	*);;
+	_-> .._get_next_student
+	(*
+		<-_ searchElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._found_students;;
+		_-> rrel_2:: rrel_assign:: rrel_const_perm_pos_arc:: rrel_scp_var:: .._arc_from_student_set_to_student;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: .._student;;
+		
+		_=> nrel_then:: .._pop_student_from_set;;
+		_=> nrel_else:: .._print_that_all_students_were_iterated;;
+	*);;
+	_-> .._pop_student_from_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._arc_from_student_set_to_student;;
+
+		_=> nrel_goto:: .._print_that_group_student_was_found;;
+	*);;
+	_-> .._print_that_group_student_was_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Student was found in specified group];;
+
+		_=> nrel_goto:: .._search_student_average_mark;;
+	*);;
+	_-> .._search_student_average_mark
+	(*
+		<-_ searchElStr5;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._student;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_common_arc:: .._arc_from_student_to_mark;;
+		_-> rrel_3:: rrel_assign:: rrel_scp_var:: rrel_const:: rrel_node:: rrel_node_link:: .._average_mark;;
+		_-> rrel_4:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_to_arc_from_student_to_mark;;
+		_-> rrel_5:: rrel_fixed:: rrel_scp_const:: nrel_average_mark;;
+
+		_=> nrel_then:: .._print_that_average_mark_is_found;;
+		_=> nrel_else:: .._print_that_average_mark_is_not_found;;
+	*);;
+	_-> .._print_that_average_mark_is_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Average mark is found for specified student];;
+
+		_=> nrel_goto:: .._check_student_average_mark;;
+	*);;
+	_-> .._check_student_average_mark
+	(*
+		<-_ ifGr;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._average_mark;;
+		_-> rrel_2:: rrel_fixed:: rrel_scp_const:: [8.0];;
+
+		_=> nrel_then:: .._check_student_class;;
+		_=> nrel_else:: .._get_next_student;;
+	*);;
+	_-> .._check_student_class
+	(*
+		<-_ searchSetStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: concept_student;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_class_to_student;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._student;;
+
+		_-> rrel_set_2:: rrel_fixed:: rrel_scp_var:: .._result_students;;
+
+		_=> nrel_goto:: .._add_student_to_result_students_set;;
+	*);;
+	_-> .._add_student_to_result_students_set
+	(*
+		<-_ genElStr3;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: .._result_students;;
+		_-> rrel_2:: rrel_assign:: rrel_scp_var:: rrel_const_perm_pos_arc:: .._arc_from_result_students_set_to_student;;
+		_-> rrel_3:: rrel_fixed:: rrel_scp_var:: .._student;;
+
+		_=> nrel_goto:: .._print_that_student_was_added_to_result_students_set;;
+	*);;
+	_-> .._print_that_student_was_added_to_result_students_set
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Student was added to result students set];;
+
+		_=> nrel_goto:: .._get_next_student;;
+	*);;
+	_-> .._print_that_average_mark_is_not_found
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Average mark is not found for specified student];;
+
+		_=> nrel_goto:: .._get_next_student;;
+	*);;
+	_-> .._print_that_all_students_were_iterated
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [All students were iterated in specified group];;
+
+		_=> nrel_goto:: .._erase_found_students_set;;
+	*);;
+	_-> .._erase_found_students_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._found_students;;
+
+		_=> nrel_goto:: .._get_next_group;;
+	*);;
+	_-> .._print_that_all_groups_were_iterated
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [All groups were iterated in specified university];;
+
+		_=> nrel_goto:: .._erase_found_groups_set;;
+	*);;
+	_-> .._erase_found_groups_set
+	(*
+		<-_ eraseEl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_var:: rrel_erase:: .._found_groups;;
+
+		_=> nrel_goto:: .._return_result;;
+	*);;
+	_-> .._print_that_specified_argument_is_not_university
+	(*
+		<-_ printNl;;
+
+		_-> rrel_1:: rrel_fixed:: rrel_scp_const:: [Specified argument is not university];;
+
+		_=> nrel_goto:: .._return_result;;
+	*);;
+	_-> .._return_result
+	(*
+		<-_ return;;
+	*);;
+*);;
+*];;
