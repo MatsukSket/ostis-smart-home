@@ -1,0 +1,42 @@
+subject_domain_of_smart_home
+<- subject_domain;
+=> nrel_main_idtf:
+    [Предметная область умного дома]
+    (* <- lang_ru;; *);
+=> nrel_main_idtf:
+    [Subject domain of smart home]
+    (* <- lang_en;; *);
+
+-> rrel_maximum_studied_object_class:
+    concept_smart_home;
+
+-> rrel_not_maximum_studied_object_class:
+    concept_room;
+    concept_kitchen;
+    concept_bathroom;
+    concept_bedroom;
+    concept_hall;
+    concept_human;
+    concept_smart_device;
+    concept_sensor;
+    concept_temperature_sensor;
+    concept_humidity_sensor;
+    concept_motion_sensor;
+    concept_effector;
+    concept_humidifier;
+    concept_light_bulb;
+    concept_air_conditioner;
+    concept_device_state;
+    concept_state_on;
+    concept_state_off;
+
+-> rrel_explored_relation:
+    nrel_owner;
+    nrel_room;
+    nrel_location;
+    nrel_sensor;
+    nrel_effector;
+    nrel_schedule;
+    rrel_on_time;
+    rrel_off_time;
+    rrel_day;;

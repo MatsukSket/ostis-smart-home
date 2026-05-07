@@ -1,0 +1,30 @@
+nrel_owner
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [владелец*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [owner*] (* <- lang_en;; *);;
+
+nrel_room
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [комнаты*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [rooms*] (* <- lang_en;; *);;
+
+nrel_location
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [местоположение*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [location*] (* <- lang_en;; *);;
+
+nrel_sensor
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [датчики*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [sensors*] (* <- lang_en;; *);;
+
+nrel_effector
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [эффекторы*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [effectors*] (* <- lang_en;; *);;
+
+nrel_schedule
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [расписание*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [schedule*] (* <- lang_en;; *);;
+

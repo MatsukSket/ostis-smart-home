@@ -1,0 +1,24 @@
+concept_room
+<- sc_node_class;
+=> nrel_main_idtf: [комната] (* <- lang_ru;; *);
+=> nrel_main_idtf: [room] (* <- lang_en;; *);;
+
+concept_kitchen
+<- sc_node_class;
+<= nrel_inclusion: concept_room;
+=> nrel_main_idtf: [кухня] (* <- lang_ru;; *);;
+
+concept_bathroom
+<- sc_node_class;
+<= nrel_inclusion: concept_room;
+=> nrel_main_idtf: [ванная] (* <- lang_ru;; *);;
+
+concept_bedroom
+<- sc_node_class;
+<= nrel_inclusion: concept_room;
+=> nrel_main_idtf: [спальня] (* <- lang_ru;; *);;
+
+concept_hall
+<- sc_node_class;
+<= nrel_inclusion: concept_room;
+=> nrel_main_idtf: [коридор] (* <- lang_ru;; *);;

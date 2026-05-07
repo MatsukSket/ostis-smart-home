@@ -1,0 +1,14 @@
+rrel_on_time
+<- sc_node_role_relation;
+=> nrel_main_idtf: [время включения'] (* <- lang_ru;; *);
+=> nrel_main_idtf: [on time'] (* <- lang_en;; *);;
+
+rrel_off_time
+<- sc_node_role_relation;
+=> nrel_main_idtf: [время отключения'] (* <- lang_ru;; *);
+=> nrel_main_idtf: [off time'] (* <- lang_en;; *);;
+
+rrel_day
+<- sc_node_role_relation;
+=> nrel_main_idtf: [день'] (* <- lang_ru;; *);
+=> nrel_main_idtf: [day'] (* <- lang_en;; *);;
