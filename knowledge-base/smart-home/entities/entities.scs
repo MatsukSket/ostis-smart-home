@@ -98,6 +98,6 @@ my_smart_home => nrel_effector: {
 humidifier_bedroom => nrel_schedule: ... (*
     <- sc_node_tuple;;
     -> rrel_day: [пн] (* <- lang_ru;; *);;
-    -> rrel_on_time: [9:00] (* <- lang_ru;; *);;
+    -> rrel_on_time: [09:00] (* <- lang_ru;; *);;
     -> rrel_off_time: [10:00] (* <- lang_ru;; *);;
 *);;
