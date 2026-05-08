@@ -3,7 +3,6 @@
 #include <sc-memory/sc_agent.hpp>
 #include "keynodes/Keynodes.hpp"
 
-
 #include "DeviceScheduleMonitorAgent.generated.hpp"
 
 namespace smart_home

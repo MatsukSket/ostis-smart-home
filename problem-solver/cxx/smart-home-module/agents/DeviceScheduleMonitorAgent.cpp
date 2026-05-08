@@ -16,7 +16,7 @@ SC_AGENT_IMPLEMENTATION(DeviceScheduleMonitorAgent)
   timeStream << now->tm_hour << ":" << std::setw(2) << std::setfill('0') << now->tm_min;
   std::string currentTime = timeStream.str();
 
-  const char* days[] = {"пн", "вт", "ср", "чт", "пт", "сб", "вс"};
+  const char* days[] = {"вс", "пн", "вт", "ср", "чт", "пт", "сб"};
   std::string currentDay = days[now->tm_wday];
 
   SC_LOG_INFO("SmartHome Monitor Tick. Time: " << currentTime << ", Day: " << currentDay);
