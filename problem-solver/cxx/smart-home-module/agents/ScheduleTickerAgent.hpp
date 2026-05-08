@@ -1,27 +1,28 @@
 #pragma once
 
 #include <sc-memory/sc_agent.hpp>
+#include <sc-memory/sc_memory.hpp>
 #include <atomic>
 #include <thread>
-#include "keynodes/Keynodes.hpp"
-#include "ScheduleTickerAgent.generated.hpp"
+#include "keynodes/keynodes.hpp"
 
 namespace smart_home
 {
 
-class ScheduleTickerAgent : public ScAgent
+class ScheduleTickerAgent : public ScActionInitiatedAgent
 {
-  SC_CLASS(Agent, Event(Keynodes::action_start_schedule_ticker, ScEvent::Type::AddOutputEdge))
-  SC_GENERATED_BODY()
-
 public:
-  static void StopTicker();
+  ScAddr GetActionClass() const override;
+  ScResult DoProgram(ScAction & action) override;
+
+  static void Start();
+  static void Stop();
 
 private:
   static std::atomic<bool> m_running;
   static std::thread m_tickerThread;
 
-  static void TickerLoop(ScMemoryContext * ctx);
+  static void TickerLoop();
 };
 
 }

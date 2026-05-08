@@ -1,7 +1,6 @@
 #pragma once
 
 #include <sc-memory/sc_keynodes.hpp>
-#include <sc-memory/sc_addr.hpp>
 
 namespace smart_home
 {
@@ -9,17 +8,17 @@ namespace smart_home
 class Keynodes : public ScKeynodes
 {
 public:
-  static ScAddr concept_effector;
-  static ScAddr concept_state_on;
-  static ScAddr concept_state_off;
+  static inline ScKeynode const concept_effector{"concept_effector"};
+  static inline ScKeynode const concept_state_on{"concept_state_on"};
+  static inline ScKeynode const concept_state_off{"concept_state_off"};
 
-  static ScAddr nrel_schedule;
-  static ScAddr rrel_on_time;
-  static ScAddr rrel_off_time;
-  static ScAddr rrel_day;
+  static inline ScKeynode const nrel_schedule{"nrel_schedule"};
+  static inline ScKeynode const rrel_on_time{"rrel_on_time"};
+  static inline ScKeynode const rrel_off_time{"rrel_off_time"};
+  static inline ScKeynode const rrel_day{"rrel_day"};
 
-  static ScAddr action_check_schedule;
-  static ScAddr action_start_schedule_ticker;
+  static inline ScKeynode const action_check_schedule{"action_check_schedule"};
+  static inline ScKeynode const action_start_schedule_ticker{"action_start_schedule_ticker"};
 };
 
 }

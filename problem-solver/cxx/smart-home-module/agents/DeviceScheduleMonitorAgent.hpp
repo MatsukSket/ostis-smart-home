@@ -1,20 +1,20 @@
 #pragma once
 
 #include <sc-memory/sc_agent.hpp>
-#include "keynodes/Keynodes.hpp"
-
-
-#include "DeviceScheduleMonitorAgent.generated.hpp"
+#include "keynodes/keynodes.hpp"
 
 namespace smart_home
 {
-class DeviceScheduleMonitorAgent : public ScAgent
+
+class DeviceScheduleMonitorAgent : public ScActionInitiatedAgent
 {
-  SC_CLASS(Agent, Event(Keynodes::action_check_schedule, ScEvent::Type::AddOutputEdge))
-  SC_GENERATED_BODY()
+public:
+  ScAddr GetActionClass() const override;
+  ScResult DoProgram(ScAction & action) override;
 
 private:
-  std::string GetLinkContent(ScMemoryContext * ctx, ScAddr linkAddr);
-  void SwitchDeviceState(ScMemoryContext * ctx, ScAddr deviceAddr, ScAddr targetState, ScAddr oppositeState);
+  std::string GetLinkContent(ScAddr const & linkAddr);
+  void SwitchDeviceState(ScAddr const & deviceAddr, ScAddr const & targetState, ScAddr const & oppositeState);
 };
+
 }

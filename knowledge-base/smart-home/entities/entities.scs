@@ -105,6 +105,6 @@ humidifier_bedroom => nrel_schedule: ... (*
     *);;
     -> ... (*
         <- sc_node_tuple;;
-        -> rrel_on_time: [18:00];;
+        -> rrel_on_time: [06:41];;
     *);;
 *);;
