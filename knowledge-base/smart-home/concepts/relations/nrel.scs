@@ -28,3 +28,13 @@ nrel_schedule
 => nrel_main_idtf: [расписание*] (* <- lang_ru;; *);
 => nrel_main_idtf: [schedule*] (* <- lang_en;; *);;
 
+action_start_schedule_ticker
+<- sc_node;
+=> nrel_main_idtf: [запуск таймера расписания] (* <- lang_ru;; *);
+=> nrel_main_idtf: [start schedule ticker] (* <- lang_en;; *);;
+
+action_check_schedule
+<- sc_node;
+=> nrel_main_idtf: [проверка расписания] (* <- lang_ru;; *);
+=> nrel_main_idtf: [check schedule] (* <- lang_en;; *);;
+

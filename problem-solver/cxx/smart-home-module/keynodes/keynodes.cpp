@@ -11,5 +11,6 @@ ScAddr Keynodes::rrel_on_time;
 ScAddr Keynodes::rrel_off_time;
 ScAddr Keynodes::rrel_day;
 ScAddr Keynodes::action_check_schedule;
+ScAddr Keynodes::action_start_schedule_ticker; 
 
 }

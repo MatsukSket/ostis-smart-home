@@ -19,6 +19,7 @@ public:
   static ScAddr rrel_day;
 
   static ScAddr action_check_schedule;
+  static ScAddr action_start_schedule_ticker;
 };
 
-} 
+}
