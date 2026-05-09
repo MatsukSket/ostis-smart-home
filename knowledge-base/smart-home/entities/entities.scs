@@ -47,6 +47,7 @@ sensor_humidity_bedroom
 sensor_motion_bedroom
     <- concept_motion_sensor;
     => nrel_main_idtf: [Датчик движения в спальне] (* <- lang_ru;; *);
+    <- concept_action_not_detected;
     => nrel_location: room_bedroom;;
 
 sensor_motion_bathroom
@@ -78,6 +79,8 @@ lamp_bedroom
     <- concept_light_bulb;
     => nrel_main_idtf: [Лампочка в спальне] (* <- lang_ru;; *);
     => nrel_location: room_bedroom;
+    => nrel_timer: [5 минут];
+    => nrel_sensor: sensor_motion_bedroom;
     <- concept_state_off;;
 
 lamp_bathroom

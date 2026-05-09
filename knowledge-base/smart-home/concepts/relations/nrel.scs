@@ -38,3 +38,8 @@ action_check_schedule
 => nrel_main_idtf: [проверка расписания] (* <- lang_ru;; *);
 => nrel_main_idtf: [check schedule] (* <- lang_en;; *);;
 
+nrel_timer
+<- sc_node_non_role_relation;
+=> nrel_main_idtf: [таймер лампочки] (* <- lang_ru;; *);
+=> nrel_main_idtf: [lamp timer] (* <- lang_en;; *);;
+
