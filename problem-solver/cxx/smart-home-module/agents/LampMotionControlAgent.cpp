@@ -1,98 +1,90 @@
 #include "LampMotionControlAgent.hpp"
+#include <sc-memory/sc_event_subscription.hpp>
 
 using namespace smart_home;
 
-ScAddr LampMotionControlAgent::GetActionClass() const
+static void HandleSensorChange(
+    ScMemoryContext & ctx,
+    ScAddr const & sensorAddr,
+    ScAddr const & targetState,
+    ScAddr const & oppositeState)
 {
-  return Keynodes::action_check_motion_sensor;
-}
+  ScIterator3Ptr motionIt = ctx.CreateIterator3(
+      Keynodes::concept_motion_sensor,
+      ScType::ConstPermPosArc,
+      sensorAddr);
 
-ScResult LampMotionControlAgent::DoProgram(ScAction & action)
-{
-  SC_LOG_INFO("LampMotionControlAgent: начало обработки.");
+  if (!motionIt->Next())
+    return;
 
-  ScIterator3Ptr lampIt = m_context.CreateIterator3(
+  ScIterator3Ptr lampIt = ctx.CreateIterator3(
       Keynodes::concept_light_bulb,
       ScType::ConstPermPosArc,
       ScType::ConstNode);
 
-  bool foundAnyLamp = false;
-
   while (lampIt->Next())
   {
-    foundAnyLamp = true;
     ScAddr lampAddr = lampIt->Get(2);
-    SC_LOG_INFO("LampMotionControlAgent: проверяю лампочку.");
 
-    ScIterator5Ptr sensorIt = m_context.CreateIterator5(
+    ScIterator5Ptr sensorRelationIt = ctx.CreateIterator5(
         lampAddr,
         ScType::ConstCommonArc,
-        ScType::ConstNode,
+        sensorAddr,
         ScType::ConstPermPosArc,
         Keynodes::nrel_sensor);
 
-    if (!sensorIt->Next())
+    if (sensorRelationIt->Next())
     {
-      SC_LOG_INFO("LampMotionControlAgent: у лампочки нет nrel_sensor, пропускаю.");
-      continue;
-    }
+      ScIterator3Ptr checkIt = ctx.CreateIterator3(
+          targetState,
+          ScType::ConstPermPosArc,
+          lampAddr);
 
-    ScAddr sensorAddr = sensorIt->Get(2);
+      if (!checkIt->Next())
+      {
+        ScIterator3Ptr oldIt = ctx.CreateIterator3(
+            oppositeState,
+            ScType::ConstPermPosArc,
+            lampAddr);
+        while (oldIt->Next())
+          ctx.EraseElement(oldIt->Get(1));
 
-    ScIterator3Ptr motionCheckIt = m_context.CreateIterator3(
-        Keynodes::concept_motion_sensor,
-        ScType::ConstPermPosArc,
-        sensorAddr);
-
-    if (!motionCheckIt->Next())
-    {
-      SC_LOG_INFO("LampMotionControlAgent: привязанный датчик не является датчиком движения, пропускаю.");
-      continue;
-    }
-
-    ScIterator3Ptr detectedIt = m_context.CreateIterator3(
-        Keynodes::concept_action_detected,
-        ScType::ConstPermPosArc,
-        sensorAddr);
-
-    if (detectedIt->Next())
-    {
-      SC_LOG_INFO("LampMotionControlAgent: движение обнаружено -> включаю лампочку.");
-      SwitchDeviceState(lampAddr, Keynodes::concept_state_on, Keynodes::concept_state_off);
-    }
-    else
-    {
-      SC_LOG_INFO("LampMotionControlAgent: движения нет -> выключаю лампочку.");
-      SwitchDeviceState(lampAddr, Keynodes::concept_state_off, Keynodes::concept_state_on);
+        ctx.GenerateConnector(ScType::ConstPermPosArc, targetState, lampAddr);
+      }
     }
   }
+}
 
-  if (!foundAnyLamp)
-    SC_LOG_INFO("LampMotionControlAgent: лампочки не найдены.");
+ScAddr LampMotionControlAgent::GetEventSubscriptionElement() const
+{
+  return Keynodes::concept_action_detected;
+}
 
+ScEventType LampMotionControlAgent::GetEventType() const
+{
+  return ScEventType::AddOutputEdge;
+}
+
+ScResult LampMotionControlAgent::DoProgram(ScElementaryEvent const & event, ScAction & action)
+{
+  ScAddr const sensorAddr = event.GetArcTargetElement();
+  HandleSensorChange(m_context, sensorAddr, Keynodes::concept_state_on, Keynodes::concept_state_off);
   return action.FinishSuccessfully();
 }
 
-void LampMotionControlAgent::SwitchDeviceState(
-    ScAddr const & deviceAddr,
-    ScAddr const & targetState,
-    ScAddr const & oppositeState)
+ScAddr LampMotionControlAgentOff::GetEventSubscriptionElement() const
 {
-  ScIterator3Ptr checkIt = m_context.CreateIterator3(
-      targetState,
-      ScType::ConstPermPosArc,
-      deviceAddr);
+  return Keynodes::concept_action_not_detected;
+}
 
-  if (checkIt->Next())
-    return;
+ScEventType LampMotionControlAgentOff::GetEventType() const
+{
+  return ScEventType::AddOutputEdge;
+}
 
-  ScIterator3Ptr oldIt = m_context.CreateIterator3(
-      oppositeState,
-      ScType::ConstPermPosArc,
-      deviceAddr);
-
-  while (oldIt->Next())
-    m_context.EraseElement(oldIt->Get(1));
-
-  m_context.GenerateConnector(ScType::ConstPermPosArc, targetState, deviceAddr);
+ScResult LampMotionControlAgentOff::DoProgram(ScElementaryEvent const & event, ScAction & action)
+{
+  ScAddr const sensorAddr = event.GetArcTargetElement();
+  HandleSensorChange(m_context, sensorAddr, Keynodes::concept_state_off, Keynodes::concept_state_on);
+  return action.FinishSuccessfully();
 }

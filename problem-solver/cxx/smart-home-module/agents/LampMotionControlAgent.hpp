@@ -6,11 +6,26 @@
 namespace smart_home
 {
 
-class LampMotionControlAgent : public ScActionInitiatedAgent
+class LampMotionControlAgent : public ScElementaryEventAgent
 {
 public:
-  ScAddr GetActionClass() const override;
-  ScResult DoProgram(ScAction & action) override;
+  ScAddr GetEventSubscriptionElement() const override;
+  ScEventType GetEventType() const override;
+  ScResult DoProgram(ScElementaryEvent const & event, ScAction & action) override;
+
+private:
+  void SwitchDeviceState(
+      ScAddr const & deviceAddr,
+      ScAddr const & targetState,
+      ScAddr const & oppositeState);
+};
+
+class LampMotionControlAgentOff : public ScElementaryEventAgent
+{
+public:
+  ScAddr GetEventSubscriptionElement() const override;
+  ScEventType GetEventType() const override;
+  ScResult DoProgram(ScElementaryEvent const & event, ScAction & action) override;
 
 private:
   void SwitchDeviceState(
