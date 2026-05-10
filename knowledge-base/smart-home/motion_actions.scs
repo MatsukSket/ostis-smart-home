@@ -1,0 +1,9 @@
+action_check_motion_sensor
+<- sc_node;
+=> nrel_main_idtf: [проверить датчик движения] (* <- lang_ru;; *);
+=> nrel_main_idtf: [check motion sensor] (* <- lang_en;; *);;
+
+action_toggle_motion_sensor
+<- sc_node;
+=> nrel_main_idtf: [переключить датчик движения] (* <- lang_ru;; *);
+=> nrel_main_idtf: [toggle motion sensor] (* <- lang_en;; *);;
