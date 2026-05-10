@@ -1,0 +1,39 @@
+[ 14%] Building CXX object problem-solver/cxx/smart-home-module/CMakeFiles/smart-home-module.dir/SmartHomeModule.cpp.o
+In file included from /home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp:1:
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.hpp:17:48: error: type/value mismatch at argument 1 in template parameter list for ‘template<class _Tp> class std::shared_ptr’
+   17 |   std::shared_ptr<ScElementaryEventSubscription> m_lampSubscription;
+      |                                                ^
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.hpp:17:48: note:   expected a type, got ‘ScElementaryEventSubscription’
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.hpp:18:48: error: type/value mismatch at argument 1 in template parameter list for ‘template<class _Tp> class std::shared_ptr’
+   18 |   std::shared_ptr<ScElementaryEventSubscription> m_motionSubscription;
+      |                                                ^
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.hpp:18:48: note:   expected a type, got ‘ScElementaryEventSubscription’
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp: In constructor ‘smart_home::SmartHomeModule::SmartHomeModule()’:
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp:19:102: error: cannot convert ‘std::shared_ptr<ScElementaryEventSubscription<ScEventAfterGenerateOutgoingArc<ScType::ConstPermPosArc> > >’ to ‘int’ in assignment
+   19 |       ctx.CreateElementaryEventSubscription<ScEventAfterGenerateOutgoingArc<ScType::ConstPermPosArc>>(
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+      |                                                                                                      |
+      |                                                                                                      std::shared_ptr<ScElementaryEventSubscription<ScEventAfterGenerateOutgoingArc<ScType::ConstPermPosArc> > >
+   20 |           Keynodes::concept_action_detected,
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                          
+   21 |           &LampMotionControlAgent::OnMotionDetected);
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                  
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp:24:102: error: cannot convert ‘std::shared_ptr<ScElementaryEventSubscription<ScEventAfterGenerateOutgoingArc<ScType::ConstPermPosArc> > >’ to ‘int’ in assignment
+   24 |       ctx.CreateElementaryEventSubscription<ScEventAfterGenerateOutgoingArc<ScType::ConstPermPosArc>>(
+      |       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+      |                                                                                                      |
+      |                                                                                                      std::shared_ptr<ScElementaryEventSubscription<ScEventAfterGenerateOutgoingArc<ScType::ConstPermPosArc> > >
+   25 |           Keynodes::concept_action_not_detected,
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                      
+   26 |           &MotionSensorAgent::OnMotionCleared);
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                                        
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp: In destructor ‘virtual smart_home::SmartHomeModule::~SmartHomeModule()’:
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp:31:22: error: request for member ‘reset’ in ‘((smart_home::SmartHomeModule*)this)->smart_home::SmartHomeModule::m_lampSubscription’, which is of non-class type ‘int’
+   31 |   m_lampSubscription.reset();
+      |                      ^~~~~
+/home/brew/gti/ostis-smart-home/problem-solver/cxx/smart-home-module/SmartHomeModule.cpp:32:24: error: request for member ‘reset’ in ‘((smart_home::SmartHomeModule*)this)->smart_home::SmartHomeModule::m_motionSubscription’, which is of non-class type ‘int’
+   32 |   m_motionSubscription.reset();
+      |                        ^~~~~
+gmake[2]: *** [problem-solver/cxx/smart-home-module/CMakeFiles/smart-home-module.dir/build.make:79: problem-solver/cxx/smart-home-module/CMakeFiles/smart-home-module.dir/SmartHomeModule.cpp.o] Ошибка 1
+gmake[1]: *** [CMakeFiles/Makefile2:144: problem-solver/cxx/smart-home-module/CMakeFiles/smart-home-module.dir/all] Ошибка 2
+gmake: *** [Makefile:91: all] Ошибка 2
