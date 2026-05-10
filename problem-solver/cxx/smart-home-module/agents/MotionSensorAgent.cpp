@@ -1,7 +1,13 @@
 #include "MotionSensorAgent.hpp"
 #include <sc-memory/sc_agent_context.hpp>
+#include <thread>
+#include <chrono>
 
 using namespace smart_home;
+
+std::atomic<bool> MotionSensorAgent::m_running(false);
+std::thread MotionSensorAgent::m_monitorThread;
+bool MotionSensorAgent::m_lastMotionState = false;
 
 ScAddr MotionSensorAgent::GetActionClass() const
 {
@@ -10,61 +16,58 @@ ScAddr MotionSensorAgent::GetActionClass() const
 
 ScResult MotionSensorAgent::DoProgram(ScAction & action)
 {
-  SC_LOG_INFO("MotionSensorAgent: начало обработки.");
-
-  ScAddr const sensorAddr = Keynodes::sensor_motion_bedroom;
-
-  bool isDetected = false;
-
-  ScIterator3Ptr detectedIt = m_context.CreateIterator3(
-      Keynodes::concept_action_detected,
-      ScType::ConstPermPosArc,
-      sensorAddr);
-
-  if (detectedIt->Next())
-    isDetected = true;
-
-  if (isDetected)
-  {
-    SC_LOG_INFO("MotionSensorAgent: движение было обнаружено -> переключаю на НЕ обнаружено.");
-    SwitchSensorState(
-        sensorAddr,
-        Keynodes::concept_action_not_detected,
-        Keynodes::concept_action_detected);
-  }
-  else
-  {
-    SC_LOG_INFO("MotionSensorAgent: движение не было обнаружено -> переключаю на ОБНАРУЖЕНО.");
-    SwitchSensorState(
-        sensorAddr,
-        Keynodes::concept_action_detected,
-        Keynodes::concept_action_not_detected);
-  }
-
-  SC_LOG_INFO("MotionSensorAgent: инициирую action_check_motion_sensor.");
-  m_context.GenerateAction(Keynodes::action_check_motion_sensor).Initiate();
-
   return action.FinishSuccessfully();
 }
 
-void MotionSensorAgent::SwitchSensorState(
-    ScAddr const & sensorAddr,
-    ScAddr const & targetState,
-    ScAddr const & oppositeState)
+void MotionSensorAgent::Start()
 {
-  ScIterator3Ptr oldIt = m_context.CreateIterator3(
-      oppositeState,
-      ScType::ConstPermPosArc,
-      sensorAddr);
+  if (m_running.load())
+    return;
 
-  while (oldIt->Next())
-    m_context.EraseElement(oldIt->Get(1));
+  SC_LOG_INFO("MotionSensorAgent: starting monitor thread.");
+  m_running.store(true);
+  m_monitorThread = std::thread(MonitorLoop);
+  m_monitorThread.detach();
+}
 
-  ScIterator3Ptr checkIt = m_context.CreateIterator3(
-      targetState,
-      ScType::ConstPermPosArc,
-      sensorAddr);
+void MotionSensorAgent::Stop()
+{
+  m_running.store(false);
+  SC_LOG_INFO("MotionSensorAgent: stopped.");
+}
 
-  if (!checkIt->Next())
-    m_context.GenerateConnector(ScType::ConstPermPosArc, targetState, sensorAddr);
+void MotionSensorAgent::MonitorLoop()
+{
+  while (m_running.load())
+  {
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+    if (!m_running.load())
+      break;
+
+    try
+    {
+      ScAgentContext ctx;
+      ScAddr const sensor = Keynodes::sensor_motion_bedroom;
+
+      if (!sensor.IsValid())
+        continue;
+
+      bool const currentState =
+          ctx.CheckConnector(Keynodes::concept_action_detected, sensor, ScType::ConstPermPosArc);
+
+      if (currentState != m_lastMotionState)
+      {
+        m_lastMotionState = currentState;
+        SC_LOG_INFO(
+            std::string("MotionSensorAgent: state changed -> ") +
+            (currentState ? "detected" : "not detected"));
+        ctx.GenerateAction(Keynodes::action_check_motion_sensor).Initiate();
+      }
+    }
+    catch (std::exception const & e)
+    {
+      SC_LOG_ERROR("MotionSensorAgent monitor error: " << e.what());
+    }
+  }
 }

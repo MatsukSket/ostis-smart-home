@@ -1,6 +1,9 @@
 #pragma once
 
 #include <sc-memory/sc_agent.hpp>
+#include <sc-memory/sc_memory.hpp>
+#include <atomic>
+#include <thread>
 #include "keynodes/keynodes.hpp"
 
 namespace smart_home
@@ -12,11 +15,15 @@ public:
   ScAddr GetActionClass() const override;
   ScResult DoProgram(ScAction & action) override;
 
+  static void Start();
+  static void Stop();
+
 private:
-  void SwitchSensorState(
-      ScAddr const & sensorAddr,
-      ScAddr const & targetState,
-      ScAddr const & oppositeState);
+  static std::atomic<bool> m_running;
+  static std::thread m_monitorThread;
+  static bool m_lastMotionState;
+
+  static void MonitorLoop();
 };
 
 }
