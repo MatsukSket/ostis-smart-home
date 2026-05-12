@@ -1,8 +1,8 @@
 #include "SmartHomeModule.hpp"
-#include "agents/DeviceScheduleMonitorAgent.hpp"
-#include "agents/ScheduleTickerAgent.hpp"
-#include "agents/MotionSensorAgent.hpp"
-#include "agents/LightBulbAgent.hpp"
+#include "agents/schedule-humanizer/DeviceScheduleMonitorAgent.hpp"
+#include "agents/schedule-humanizer/ScheduleTickerAgent.hpp"
+#include "agents/movement-lamp/MotionSensorAgent.hpp"
+#include "agents/movement-lamp/LightBulbAgent.hpp"
 
 using namespace smart_home;
 

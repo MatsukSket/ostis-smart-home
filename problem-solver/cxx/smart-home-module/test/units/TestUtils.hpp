@@ -1,0 +1,16 @@
+#pragma once
+
+#include <sc-memory/test/sc_test.hpp>
+#include <sc-builder/scs_loader.hpp>
+
+#include <agents/LightBulbAgent.hpp>
+#include <agents/MotionSensorAgent.hpp>
+#include <keynodes/keynodes.hpp>
+
+using namespace smart_home;
+
+using SmartHomeTest = ScMemoryTest;
+
+std::string const TEST_FILES_DIR = TEST_FILES_DIR_PATH;
+
+void LoadTestStructure(ScAgentContext & context, std::string const & filename);

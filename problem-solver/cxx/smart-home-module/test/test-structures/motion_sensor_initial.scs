@@ -1,0 +1,8 @@
+sensor_motion_bedroom
+<- concept_motion_sensor;
+<- concept_action_not_detected;;
+
+lamp_bedroom
+<- concept_light_bulb;
+<- concept_state_off;
+=> nrel_sensor: sensor_motion_bedroom;;
