@@ -1,4 +1,4 @@
-#include "utils/TestUtils.hpp"
+#include "TestUtils.hpp"
 
 TEST_F(SmartHomeTest, LightBulbTurnsOnWhenMotionDetected)
 {

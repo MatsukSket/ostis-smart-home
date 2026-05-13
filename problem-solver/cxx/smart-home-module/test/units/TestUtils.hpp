@@ -3,8 +3,8 @@
 #include <sc-memory/test/sc_test.hpp>
 #include <sc-builder/scs_loader.hpp>
 
-#include <agents/LightBulbAgent.hpp>
-#include <agents/MotionSensorAgent.hpp>
+#include <agents/movement-lamp/LightBulbAgent.hpp>
+#include <agents/movement-lamp/MotionSensorAgent.hpp>
 #include <keynodes/keynodes.hpp>
 
 using namespace smart_home;

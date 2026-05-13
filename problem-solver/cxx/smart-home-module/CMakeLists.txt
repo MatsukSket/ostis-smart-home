@@ -1,8 +1,8 @@
 file(GLOB SOURCES CONFIGURE_DEPENDS
     "*.cpp" "*.hpp"
-    "*/*.cpp" "*/*.hpp"
+    "keynodes/*.cpp" "keynodes/*.hpp"
+    "agents/*/*.cpp" "agents/*/*.hpp"
 )
-
 add_library(smart-home-module SHARED ${SOURCES})
 target_link_libraries(smart-home-module
     LINK_PUBLIC sc-machine::sc-memory

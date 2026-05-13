@@ -6,6 +6,7 @@ file(GLOB SOURCES CONFIGURE_DEPENDS
 )
 
 add_executable(smart-home-module-tests ${SOURCES})
+
 target_link_libraries(smart-home-module-tests
     LINK_PRIVATE GTest::gtest_main
     LINK_PRIVATE smart-home-module

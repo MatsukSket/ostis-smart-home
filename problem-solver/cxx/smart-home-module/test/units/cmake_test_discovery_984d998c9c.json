@@ -1,0 +1,32 @@
+{
+  "tests": 4,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "SmartHomeTest",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "LightBulbTurnsOnWhenMotionDetected",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "line": 3
+        },
+        {
+          "name": "LightBulbTurnsOffWhenMotionNotDetected",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "line": 41
+        },
+        {
+          "name": "LightBulbNotFoundWhenNoSensorRelation",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "line": 88
+        },
+        {
+          "name": "LampStateRemainsOnAfterRepeatTrigger",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "line": 104
+        }
+      ]
+    }
+  ]
+}
