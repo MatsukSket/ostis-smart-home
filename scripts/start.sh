@@ -16,6 +16,9 @@ case "$1" in
   build_kb)
     "$PROJECT_ROOT_PATH"/install/sc-machine/bin/sc-builder -i repo.path -o kb.bin --clear
     ;;
+  test)
+    /home/matsuk/ostis-smart-home/build/Debug/bin/smart-home-module-tests
+    ;;
   machine)
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH" \
       $SC_MACHINE_PATH/bin/sc-machine -s kb.bin \
