@@ -11,6 +11,7 @@ public:
   static inline ScKeynode const concept_effector{"concept_effector"};
   static inline ScKeynode const concept_state_on{"concept_state_on"};
   static inline ScKeynode const concept_state_off{"concept_state_off"};
+  static inline ScKeynode const concept_state_hard_off{"concept_state_hard_off"};
 
   static inline ScKeynode const nrel_schedule{"nrel_schedule"};
   static inline ScKeynode const rrel_on_time{"rrel_on_time"};

@@ -41,8 +41,12 @@ CurrentDateTime DeviceScheduleMonitorAgent::GetCurrentDateTime() const
 void DeviceScheduleMonitorAgent::ProcessAllEffectors(CurrentDateTime const & now)
 {
   ScIterator5Ptr subclassIt = m_context.CreateIterator5(
-      Keynodes::concept_effector, ScType::ConstCommonArc, ScType::ConstNode,
-      ScType::ConstPermPosArc, Keynodes::nrel_inclusion);
+      Keynodes::concept_effector, 
+      ScType::ConstCommonArc, 
+      ScType::ConstNode,
+      ScType::ConstPermPosArc, 
+      Keynodes::nrel_inclusion
+    );
 
   bool foundAnySubclass = false;
   while (subclassIt->Next())
@@ -51,7 +55,10 @@ void DeviceScheduleMonitorAgent::ProcessAllEffectors(CurrentDateTime const & now
     ScAddr subclass = subclassIt->Get(2);
 
     ScIterator3Ptr effectorIt = m_context.CreateIterator3(
-        subclass, ScType::ConstPermPosArc, ScType::ConstNode);
+        subclass, 
+        ScType::ConstPermPosArc, 
+        ScType::ConstNode
+      );
 
     while (effectorIt->Next())
     {
@@ -63,19 +70,62 @@ void DeviceScheduleMonitorAgent::ProcessAllEffectors(CurrentDateTime const & now
     SC_LOG_INFO("No effector subclasses found.");
 }
 
-// schedule searcching
+// device processing
 void DeviceScheduleMonitorAgent::ProcessDeviceSchedule(ScAddr const & deviceAddr, CurrentDateTime const & now)
 {
+  if (IsDeviceHardOff(deviceAddr))
+  {
+    SC_LOG_INFO("Device is in 'hard off' state. Skipping schedule.");
+    return;
+  }
+
+  ScAddr scheduleSet = GetDeviceScheduleSet(deviceAddr);
+  if (!scheduleSet.IsValid()) 
+    return;
+
+  ProcessScheduleSet(scheduleSet, deviceAddr, now);
+}
+
+// hard_off checking
+bool DeviceScheduleMonitorAgent::IsDeviceHardOff(ScAddr const & deviceAddr)
+{
+  ScIterator3Ptr hardOffIt = m_context.CreateIterator3(
+      Keynodes::concept_state_hard_off,
+      ScType::ConstPermPosArc,
+      deviceAddr
+    );
+
+  return hardOffIt->Next();
+}
+
+// schedule searching
+ScAddr DeviceScheduleMonitorAgent::GetDeviceScheduleSet(ScAddr const & deviceAddr)
+{
   ScIterator5Ptr scheduleSetIt = m_context.CreateIterator5(
-      deviceAddr, ScType::ConstCommonArc, ScType::ConstNode,
-      ScType::ConstPermPosArc, Keynodes::nrel_schedule);
+      deviceAddr, 
+      ScType::ConstCommonArc, 
+      ScType::ConstNode,
+      ScType::ConstPermPosArc, 
+      Keynodes::nrel_schedule
+    );
 
-  if (!scheduleSetIt->Next()) 
-    return; 
+  if (scheduleSetIt->Next())
+    return scheduleSetIt->Get(2);
 
-  ScAddr scheduleSet = scheduleSetIt->Get(2);
+  return ScAddr();
+}
+
+// schedule processing
+void DeviceScheduleMonitorAgent::ProcessScheduleSet(
+  ScAddr const & scheduleSet, 
+  ScAddr const & deviceAddr, 
+  CurrentDateTime const & now)
+{
   ScIterator3Ptr scheduleIt = m_context.CreateIterator3(
-      scheduleSet, ScType::ConstPermPosArc, ScType::ConstNode);
+      scheduleSet, 
+      ScType::ConstPermPosArc, 
+      ScType::ConstNode
+    );
 
   while (scheduleIt->Next())
   {
@@ -83,9 +133,11 @@ void DeviceScheduleMonitorAgent::ProcessDeviceSchedule(ScAddr const & deviceAddr
   }
 }
 
-
 // schedule processing
-void DeviceScheduleMonitorAgent::ProcessScheduleTuple(ScAddr const & scheduleTuple, ScAddr const & deviceAddr, CurrentDateTime const & now)
+void DeviceScheduleMonitorAgent::ProcessScheduleTuple(
+    ScAddr const & scheduleTuple, 
+    ScAddr const & deviceAddr, 
+    CurrentDateTime const & now)
 {
   if (!IsDayMatching(scheduleTuple, now.day))
     return;
@@ -99,35 +151,51 @@ void DeviceScheduleMonitorAgent::ProcessScheduleTuple(ScAddr const & scheduleTup
                           deviceAddr, now.time);
 }
 
+
+// day compare 
 bool DeviceScheduleMonitorAgent::IsDayMatching(ScAddr const & scheduleTuple, std::string const & currentDay)
 {
   ScIterator5Ptr dayIt = m_context.CreateIterator5(
-      scheduleTuple, ScType::ConstPermPosArc, ScType::ConstNodeLink,
-      ScType::ConstPermPosArc, Keynodes::rrel_day);
+      scheduleTuple, 
+      ScType::ConstPermPosArc, 
+      ScType::ConstNodeLink,
+      ScType::ConstPermPosArc, 
+      Keynodes::rrel_day
+    );
 
   bool hasConstraint = false;
   while (dayIt->Next())
   {
     hasConstraint = true;
-    if (GetLinkContent(dayIt->Get(2)) == currentDay)
+    std::string day;  
+    m_context.GetLinkContent(dayIt->Get(2), day);
+    
+    if (day == currentDay)
       return true;
   }
   
   return !hasConstraint; 
 }
 
+// turning ON or OFF
 void DeviceScheduleMonitorAgent::CheckAndApplyTimeAction(
     ScAddr const & scheduleTuple, ScAddr const & timeRelation, 
     ScAddr const & targetState, ScAddr const & oppositeState, 
     ScAddr const & deviceAddr, std::string const & currentTime)
 {
   ScIterator5Ptr timeIt = m_context.CreateIterator5(
-      scheduleTuple, ScType::ConstPermPosArc, ScType::ConstNodeLink,
-      ScType::ConstPermPosArc, timeRelation);
+      scheduleTuple, 
+      ScType::ConstPermPosArc, 
+      ScType::ConstNodeLink,
+      ScType::ConstPermPosArc, 
+      timeRelation
+    );
 
   if (timeIt->Next())
   {
-    std::string scheduledTime = GetLinkContent(timeIt->Get(2));
+    std::string scheduledTime;
+    m_context.GetLinkContent(timeIt->Get(2), scheduledTime);
+
     if (scheduledTime == currentTime)
     {
       SC_LOG_INFO("Time matched: " + scheduledTime + ". Switching state.");
@@ -137,14 +205,7 @@ void DeviceScheduleMonitorAgent::CheckAndApplyTimeAction(
 }
 
 
-
-std::string DeviceScheduleMonitorAgent::GetLinkContent(ScAddr const & linkAddr)
-{
-  std::string content;
-  m_context.GetLinkContent(linkAddr, content);
-  return content;
-}
-
+// switch device state
 void DeviceScheduleMonitorAgent::SwitchDeviceState(
     ScAddr const & deviceAddr,
     ScAddr const & targetState,

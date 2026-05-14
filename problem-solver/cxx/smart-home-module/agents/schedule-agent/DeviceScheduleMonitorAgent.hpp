@@ -30,8 +30,11 @@ private:
                                ScAddr const & targetState, ScAddr const & oppositeState, 
                                ScAddr const & deviceAddr, std::string const & currentTime);
 
-  std::string GetLinkContent(ScAddr const & linkAddr);
   void SwitchDeviceState(ScAddr const & deviceAddr, ScAddr const & targetState, ScAddr const & oppositeState);
+
+  bool IsDeviceHardOff(ScAddr const & deviceAddr);
+  ScAddr GetDeviceScheduleSet(ScAddr const & deviceAddr);
+  void ProcessScheduleSet(ScAddr const & scheduleSet, ScAddr const & deviceAddr, CurrentDateTime const & now);
 };
 
 }
