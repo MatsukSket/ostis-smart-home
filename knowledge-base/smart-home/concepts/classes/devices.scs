@@ -1,0 +1,46 @@
+concept_smart_device
+<- sc_node_class;
+=> nrel_main_idtf: [умное устройство] (* <- lang_ru;; *);
+=> nrel_main_idtf: [smart device] (* <- lang_en;; *);;
+
+
+concept_sensor
+<- sc_node_class;
+<= nrel_inclusion: concept_smart_device;
+=> nrel_main_idtf: [датчик] (* <- lang_ru;; *);;
+
+concept_temperature_sensor
+<- sc_node_class;
+<= nrel_inclusion: concept_sensor;
+=> nrel_main_idtf: [датчик температуры] (* <- lang_ru;; *);;
+
+concept_humidity_sensor
+<- sc_node_class;
+<= nrel_inclusion: concept_sensor;
+=> nrel_main_idtf: [датчик влажности] (* <- lang_ru;; *);;
+
+concept_motion_sensor
+<- sc_node_class;
+<= nrel_inclusion: concept_sensor;
+=> nrel_main_idtf: [датчик движения] (* <- lang_ru;; *);;
+
+
+concept_effector
+<- sc_node_class;
+<= nrel_inclusion: concept_smart_device;
+=> nrel_main_idtf: [эффектор] (* <- lang_ru;; *);;
+
+concept_humidifier
+<- sc_node_class;
+<= nrel_inclusion: concept_effector;
+=> nrel_main_idtf: [увлажнитель] (* <- lang_ru;; *);;
+
+concept_light_bulb
+<- sc_node_class;
+<= nrel_inclusion: concept_effector;
+=> nrel_main_idtf: [лампочка] (* <- lang_ru;; *);;
+
+concept_air_conditioner
+<- sc_node_class;
+<= nrel_inclusion: concept_effector;
+=> nrel_main_idtf: [кондиционер] (* <- lang_ru;; *);;

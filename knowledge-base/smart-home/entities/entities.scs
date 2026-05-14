@@ -1,0 +1,113 @@
+my_smart_home
+<- concept_smart_home;
+=> nrel_main_idtf: [Мой умный дом] (* <- lang_ru;; *);;
+
+zakhar
+<- concept_human;
+=> nrel_main_idtf: [Захар] (* <- lang_ru;; *);;
+
+my_smart_home => nrel_owner: zakhar;;
+
+
+room_kitchen
+<- concept_kitchen;
+=> nrel_main_idtf: [Кухня] (* <- lang_ru;; *);;
+
+room_bedroom
+<- concept_bedroom;
+=> nrel_main_idtf: [Спальня] (* <- lang_ru;; *);;
+
+room_bathroom
+<- concept_bathroom;
+=> nrel_main_idtf: [Ванная комната] (* <- lang_ru;; *);;
+
+room_hall
+<- concept_hall;
+=> nrel_main_idtf: [Прихожая] (* <- lang_ru;; *);;
+
+my_smart_home 
+=> nrel_room: { 
+    room_kitchen; 
+    room_bedroom; 
+    room_bathroom; 
+    room_hall 
+};;
+
+
+sensor_temp_hall
+    <- concept_temperature_sensor;
+    => nrel_main_idtf: [Датчик температуры в прихожей] (* <- lang_ru;; *);
+    => nrel_location: room_hall;;
+
+sensor_humidity_bedroom
+    <- concept_humidity_sensor;
+    => nrel_main_idtf: [Датчик влажности в спальне] (* <- lang_ru;; *);
+    => nrel_location: room_bedroom;;
+
+sensor_motion_bedroom
+    <- concept_motion_sensor;
+    => nrel_main_idtf: [Датчик движения в спальне] (* <- lang_ru;; *);
+    <- concept_action_not_detected;
+    => nrel_location: room_bedroom;;
+
+sensor_motion_bathroom
+    <- concept_motion_sensor;
+    => nrel_main_idtf: [Датчик движения в ванной] (* <- lang_ru;; *);
+    => nrel_location: room_bathroom;;
+
+my_smart_home => nrel_sensor: {
+    sensor_temp_hall;
+    sensor_humidity_bedroom;
+    sensor_motion_bedroom;
+    sensor_motion_bathroom
+};;
+
+
+conditioner_hall
+    <- concept_air_conditioner;
+    => nrel_main_idtf: [Кондиционер в прихожей] (* <- lang_ru;; *);
+    => nrel_location: room_hall;
+    <- concept_state_off;;
+
+humidifier_bedroom
+    <- concept_humidifier;
+    => nrel_main_idtf: [Увлажнитель в спальне] (* <- lang_ru;; *);
+    => nrel_location: room_bedroom;
+    <- concept_state_off;;
+
+lamp_bedroom
+    <- concept_light_bulb;
+    => nrel_main_idtf: [Лампочка в спальне] (* <- lang_ru;; *);
+    => nrel_location: room_bedroom;
+    => nrel_timer: [5 минут];
+    => nrel_sensor: sensor_motion_bedroom;
+    <- concept_state_off;;
+
+lamp_bathroom
+    <- concept_light_bulb;
+    => nrel_main_idtf: [Лампочка в ванной] (* <- lang_ru;; *);
+    => nrel_location: room_bathroom;
+    <- concept_state_off;;
+
+my_smart_home => nrel_effector: {
+    conditioner_hall;
+    humidifier_bedroom;
+    lamp_bedroom;
+    lamp_bathroom
+};;
+
+
+humidifier_bedroom => nrel_schedule: ... (*
+    <- sc_node_set;;
+    -> ... (*
+        <- sc_node_tuple;;
+        -> rrel_day: [пн] (* <- lang_ru;; *);;
+        -> rrel_day: [ср] (* <- lang_ru;; *);;
+        -> rrel_on_time: [09:00];;
+        -> rrel_off_time: [10:00];;
+    *);;
+    -> ... (*
+        <- sc_node_tuple;;
+        -> rrel_on_time: [06:41];;
+    *);;
+*);;

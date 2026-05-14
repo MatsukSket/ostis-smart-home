@@ -1,0 +1,28 @@
+concept_device_state
+<- sc_node_class;
+=> nrel_main_idtf: [состояние устройства] (* <- lang_ru;; *);;
+
+concept_state_on
+<- sc_node_class;
+<= nrel_inclusion: concept_device_state;
+=> nrel_main_idtf: [включен] (* <- lang_ru;; *);;
+
+concept_state_off
+<- sc_node_class;
+<= nrel_inclusion: concept_device_state;
+=> nrel_main_idtf: [выключен] (* <- lang_ru;; *);;
+
+concept_action_detected
+<- sc_node_class;
+<= nrel_inclusion: concept_device_state;
+=> nrel_main_idtf: [обнаружено движение] (* <- lang_ru;; *);;
+
+concept_action_not_detected
+<- sc_node_class;
+<= nrel_inclusion: concept_device_state;
+=> nrel_main_idtf: [не обнаружено движение] (* <- lang_ru;; *);;
+
+concept_state_hard_off
+<- sc_node_class;
+<= nrel_inclusion: concept_device_state;
+=> nrel_main_idtf: [строго выключен] (* <- lang_ru;; *);;

@@ -1,5 +1,6 @@
 .idea
 .vscode
+.DS_Store
 
 bin/
 build/
@@ -9,7 +10,6 @@ repo
 
 .cache/
 *.db
-*.txt
 !conanfile.txt
 !requirements.txt
 *.log

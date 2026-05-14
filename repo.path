@@ -1,5 +1,7 @@
 # components
-knowledge-base/
+knowledge-base/ims.ostis.kb/
+knowledge-base/smart-home/
+knowledge-base/ui_menu/
 !knowledge-base/ims.ostis.kb/ui/menu/ui_main_menu.scs
 
 # specifications

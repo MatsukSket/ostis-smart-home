@@ -1,0 +1,45 @@
+nrel_owner
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [владелец*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [owner*] (* <- lang_en;; *);;
+
+nrel_room
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [комнаты*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [rooms*] (* <- lang_en;; *);;
+
+nrel_location
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [местоположение*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [location*] (* <- lang_en;; *);;
+
+nrel_sensor
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [датчики*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [sensors*] (* <- lang_en;; *);;
+
+nrel_effector
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [эффекторы*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [effectors*] (* <- lang_en;; *);;
+
+nrel_schedule
+<- sc_node_norole_relation;
+=> nrel_main_idtf: [расписание*] (* <- lang_ru;; *);
+=> nrel_main_idtf: [schedule*] (* <- lang_en;; *);;
+
+action_start_schedule_ticker
+<- sc_node;
+=> nrel_main_idtf: [запуск таймера расписания] (* <- lang_ru;; *);
+=> nrel_main_idtf: [start schedule ticker] (* <- lang_en;; *);;
+
+action_check_schedule
+<- sc_node;
+=> nrel_main_idtf: [проверка расписания] (* <- lang_ru;; *);
+=> nrel_main_idtf: [check schedule] (* <- lang_en;; *);;
+
+nrel_timer
+<- sc_node_non_role_relation;
+=> nrel_main_idtf: [таймер лампочки] (* <- lang_ru;; *);
+=> nrel_main_idtf: [lamp timer] (* <- lang_en;; *);;
+
