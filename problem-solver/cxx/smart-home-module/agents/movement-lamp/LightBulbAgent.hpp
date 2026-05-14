@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sc-memory/sc_agent.hpp>
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 
 namespace smart_home
 {

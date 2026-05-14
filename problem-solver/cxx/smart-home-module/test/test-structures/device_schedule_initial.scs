@@ -1,0 +1,7 @@
+concept_effector => nrel_inclusion: concept_smart_humidifier;;
+concept_smart_humidifier -> humidifier_test;;
+
+concept_state_off -> humidifier_test;;
+
+humidifier_test => nrel_schedule: test_schedule_set;;
+test_schedule_set -> test_schedule_tuple;;

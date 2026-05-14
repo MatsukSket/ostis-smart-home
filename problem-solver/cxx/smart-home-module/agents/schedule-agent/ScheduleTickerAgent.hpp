@@ -4,7 +4,7 @@
 #include <sc-memory/sc_memory.hpp>
 #include <atomic>
 #include <thread>
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 
 namespace smart_home
 {

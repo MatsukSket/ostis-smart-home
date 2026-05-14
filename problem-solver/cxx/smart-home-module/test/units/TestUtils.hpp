@@ -5,7 +5,7 @@
 
 #include <agents/movement-lamp/LightBulbAgent.hpp>
 #include <agents/movement-lamp/MotionSensorAgent.hpp>
-#include <keynodes/keynodes.hpp>
+#include <keynodes/Keynodes.hpp>
 
 using namespace smart_home;
 
