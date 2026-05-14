@@ -1,0 +1,23 @@
+lib_component_ui_menu_change_device_state = [*
+ui_menu_change_device_state <- ui_user_command_class_atom; ui_user_command_class_view_kb; ui_two_argument_command_class;;
+
+ui_menu_change_device_state
+=> nrel_main_idtf:
+    [Изменить состояние устройства]
+    (* <- lang_ru;; *);
+    [Change device state]
+    (* <- lang_en;; *);;
+
+ui_menu_change_device_state => ui_nrel_command_template:
+    [*
+        action_change_device_state _-> ._action_change_device_state_instance
+            (*
+                _-> rrel_1:: ui_arg_1;;
+                _-> rrel_2:: ui_arg_2;;
+            *);;
+        ._action_change_device_state_instance <-_ action;;
+    *];;
+
+ui_menu_change_device_state => ui_nrel_command_lang_template: [Изменить состояние устройства $ui_arg_1 на $ui_arg_2] (* <- lang_ru;; *);;
+ui_menu_change_device_state => ui_nrel_command_lang_template: [Change state of $ui_arg_1 to $ui_arg_2] (* <- lang_en;; *);;
+*];;

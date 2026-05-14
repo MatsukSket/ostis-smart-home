@@ -1,0 +1,39 @@
+// Direct power saving action: only non-critical smart devices with device_can_be_disabled are switched off.
+
+power_saving_test_home
+<- concept_smart_home;
+<- home_empty;;
+
+power_saving_trigger_event
+<- away_mode_activated;;
+
+power_saving_test_light
+<- smart_device;
+<- lighting_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+power_saving_test_computer
+<- smart_device;
+<- multimedia_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+power_saving_test_security
+<- smart_device;
+<- critical_device;
+=> nrel_current_state:
+  concept_on;
+=> device_is_critical:
+  concept_on;;
+
+power_saving_action
+<- action_control_power_saving;
+-> rrel_1:
+  power_saving_test_home;
+-> rrel_2:
+  power_saving_trigger_event;;

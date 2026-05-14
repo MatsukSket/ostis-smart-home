@@ -1,0 +1,26 @@
+// Normal humidity test: device must stay switched off.
+
+normal_test_hygrometer
+<- concept_hygrometer;
+=> nrel_controls:
+  normal_test_humidifier;
+=> nrel_current_measurement:
+  normal_test_measurement;;
+
+normal_test_humidifier
+<- concept_humidifier;
+=> nrel_current_state:
+  concept_off;;
+
+normal_test_humidity_value
+<- concept_normal_humidity;;
+
+normal_test_measurement
+<- concept_measurement;
+=> rrel_value:
+  normal_test_humidity_value;;
+
+normal_test_humidity_control_action
+<- action_control_room_humidity;
+-> rrel_1:
+  normal_test_hygrometer;;

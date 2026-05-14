@@ -1,0 +1,38 @@
+// Confirmed motion event while away: person returned, away mode and power saving are stopped.
+
+away_return_test_home
+<- concept_smart_home;
+<- home_empty;
+<- away_mode_active;
+<- security_mode_active;
+<- power_saving_mode;;
+
+away_return_motion_event
+<- motion_detected;
+<- confirmed_event;;
+
+away_return_light
+<- smart_device;
+<- lighting_system;
+<- disabled_device;
+=> nrel_current_state:
+  concept_off;
+=> nrel_previous_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+away_return_router
+<- smart_device;
+<- critical_device;
+=> nrel_current_state:
+  concept_on;
+=> device_is_critical:
+  concept_on;;
+
+away_return_action
+<- action_control_away_mode;
+-> rrel_1:
+  away_return_test_home;
+-> rrel_2:
+  away_return_motion_event;;

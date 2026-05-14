@@ -1,0 +1,23 @@
+lib_component_ui_menu_control_away_mode = [*
+ui_menu_control_away_mode <- ui_user_command_class_atom; ui_user_command_class_view_kb; ui_two_arguments_command_class;;
+
+ui_menu_control_away_mode
+=> nrel_main_idtf:
+    [Проверить режим отсутствия дома]
+    (* <- lang_ru;; *);
+    [Check away mode]
+    (* <- lang_en;; *);;
+
+ui_menu_control_away_mode => ui_nrel_command_template:
+    [*
+        action_control_away_mode _-> ._action_control_away_mode_instance
+            (*
+                _-> rrel_1:: ui_arg_1;;
+                _-> rrel_2:: ui_arg_2;;
+            *);;
+        ._action_control_away_mode_instance <-_ action;;
+    *];;
+
+ui_menu_control_away_mode => ui_nrel_command_lang_template: [Проверить режим отсутствия дома $ui_arg_1 по событию $ui_arg_2] (* <- lang_ru;; *);;
+ui_menu_control_away_mode => ui_nrel_command_lang_template: [Check away mode $ui_arg_1 by event $ui_arg_2] (* <- lang_en;; *);;
+*];;

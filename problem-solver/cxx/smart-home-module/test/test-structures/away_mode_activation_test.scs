@@ -1,0 +1,39 @@
+// Away mode activation: home becomes empty and power saving disables non-critical devices.
+
+away_activation_test_home
+<- concept_smart_home;
+<- home_present;;
+
+away_activation_event
+<- away_mode_requested;;
+
+away_activation_light
+<- smart_device;
+<- lighting_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+away_activation_tv
+<- smart_device;
+<- multimedia_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+away_activation_router
+<- smart_device;
+<- critical_device;
+=> nrel_current_state:
+  concept_on;
+=> device_is_critical:
+  concept_on;;
+
+away_activation_action
+<- action_control_away_mode;
+-> rrel_1:
+  away_activation_test_home;
+-> rrel_2:
+  away_activation_event;;
