@@ -1,0 +1,22 @@
+smart_home
+<- concept_smart_home;
+=> nrel_main_idtf:
+    [Smart home]
+    (* <- lang_en;; *);;
+
+bedroom_01
+<- concept_bedroom;
+=> nrel_main_idtf:
+    [Bedroom-01]
+    (* <- lang_en;; *);;
+
+bathroom_01
+<- concept_bathroom;
+=> nrel_main_idtf:
+    [Bathroom-01]
+    (* <- lang_en;; *);;
+
+smart_home
+=> rrel_room:
+    bedroom_01;
+    bathroom_01;;

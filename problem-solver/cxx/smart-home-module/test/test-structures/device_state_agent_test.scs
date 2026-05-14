@@ -1,0 +1,13 @@
+// Device state agent test: one humidifier initially switched off.
+
+test_humidifier
+<- concept_humidifier;
+=> nrel_current_state:
+  concept_off;;
+
+test_device_state_action
+<- action_change_device_state;
+-> rrel_1:
+  test_humidifier;
+-> rrel_2:
+  concept_on;;

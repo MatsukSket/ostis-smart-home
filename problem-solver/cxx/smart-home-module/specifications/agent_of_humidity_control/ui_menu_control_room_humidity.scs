@@ -1,0 +1,22 @@
+lib_component_ui_menu_control_room_humidity = [*
+ui_menu_control_room_humidity <- ui_user_command_class_atom; ui_user_command_class_view_kb; ui_one_argument_command_class;;
+
+ui_menu_control_room_humidity
+=> nrel_main_idtf:
+    [Проверить влажность по датчику]
+    (* <- lang_ru;; *);
+    [Check humidity by sensor]
+    (* <- lang_en;; *);;
+
+ui_menu_control_room_humidity => ui_nrel_command_template:
+    [*
+        action_control_room_humidity _-> ._action_control_room_humidity_instance
+            (*
+                _-> rrel_1:: ui_arg_1;;
+            *);;
+        ._action_control_room_humidity_instance <-_ action;;
+    *];;
+
+ui_menu_control_room_humidity => ui_nrel_command_lang_template: [Проверить влажность по датчику $ui_arg_1] (* <- lang_ru;; *);;
+ui_menu_control_room_humidity => ui_nrel_command_lang_template: [Check humidity by sensor $ui_arg_1] (* <- lang_en;; *);;
+*];;

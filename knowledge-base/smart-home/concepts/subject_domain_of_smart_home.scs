@@ -1,0 +1,427 @@
+action_change_device_state
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие. изменить состояние устройства]
+    (* <- lang_ru;; *);
+    [action. change device state]
+    (* <- lang_en;; *);;
+
+action_control_room_humidity
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие. контролировать влажность помещения]
+    (* <- lang_ru;; *);
+    [action. control room humidity]
+    (* <- lang_en;; *);;
+
+action_control_away_mode
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие. контролировать режим отсутствия дома]
+    (* <- lang_ru;; *);
+    [action. control away mode]
+    (* <- lang_en;; *);;
+
+action_control_power_saving
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие. контролировать энергосбережение]
+    (* <- lang_ru;; *);
+    [action. control power saving]
+    (* <- lang_en;; *);;
+
+concept_smart_home
+<- sc_node_class;
+=> nrel_main_idtf:
+    [умный дом]
+    (* <- lang_ru;; *);;
+
+concept_room
+<- sc_node_class;
+=> nrel_main_idtf:
+    [комната]
+    (* <- lang_ru;; *);;
+
+concept_bedroom
+<- concept_room;
+=> nrel_main_idtf:
+    [спальня]
+    (* <- lang_ru;; *);;
+
+concept_bathroom
+<- concept_room;
+=> nrel_main_idtf:
+    [ванная]
+    (* <- lang_ru;; *);;
+
+concept_device
+<- sc_node_class;
+=> nrel_main_idtf:
+    [устройство]
+    (* <- lang_ru;; *);;
+
+concept_humidifier
+<- concept_device;
+=> nrel_main_idtf:
+    [увлажнитель]
+    (* <- lang_ru;; *);;
+
+concept_dehumidifier
+<- concept_device;
+=> nrel_main_idtf:
+    [осушитель воздуха]
+    (* <- lang_ru;; *);;
+
+concept_sensor
+<- sc_node_class;
+=> nrel_main_idtf:
+    [датчик]
+    (* <- lang_ru;; *);;
+
+concept_hygrometer
+<- concept_sensor;
+=> nrel_main_idtf:
+    [гигрометр]
+    (* <- lang_ru;; *);;
+
+concept_motion_sensor
+<- concept_sensor;
+=> nrel_main_idtf:
+    [датчик движения]
+    (* <- lang_ru;; *);;
+
+concept_door_sensor
+<- concept_sensor;
+=> nrel_main_idtf:
+    [датчик двери]
+    (* <- lang_ru;; *);;
+
+concept_state
+<- sc_node_class;
+=> nrel_main_idtf:
+    [состояние]
+    (* <- lang_ru;; *);;
+
+concept_on
+<- concept_state;
+=> nrel_main_idtf:
+    [включено]
+    (* <- lang_ru;; *);;
+
+concept_off
+<- concept_state;
+=> nrel_main_idtf:
+    [выключено]
+    (* <- lang_ru;; *);;
+
+home_empty
+<- sc_node_class;
+=> nrel_main_idtf:
+    [дом пуст]
+    (* <- lang_ru;; *);;
+
+away_mode_active
+<- sc_node_class;
+=> nrel_main_idtf:
+    [режим отсутствия активен]
+    (* <- lang_ru;; *);;
+
+security_mode_active
+<- sc_node_class;
+=> nrel_main_idtf:
+    [режим охраны активен]
+    (* <- lang_ru;; *);;
+
+power_saving_mode
+<- sc_node_class;
+=> nrel_main_idtf:
+    [режим энергосбережения]
+    (* <- lang_ru;; *);;
+
+home_present
+<- sc_node_class;
+=> nrel_main_idtf:
+    [кто-то находится дома]
+    (* <- lang_ru;; *);;
+
+concept_measurement
+<- sc_node_class;
+=> nrel_main_idtf:
+    [измерение]
+    (* <- lang_ru;; *);;
+
+concept_humidity_value
+<- sc_node_class;
+=> nrel_main_idtf:
+    [значение влажности]
+    (* <- lang_ru;; *);;
+
+concept_low_humidity
+<- concept_humidity_value;
+=> nrel_main_idtf:
+    [низкая влажность]
+    (* <- lang_ru;; *);;
+
+concept_normal_humidity
+<- concept_humidity_value;
+=> nrel_main_idtf:
+    [нормальная влажность]
+    (* <- lang_ru;; *);;
+
+concept_high_humidity
+<- concept_humidity_value;
+=> nrel_main_idtf:
+    [высокая влажность]
+    (* <- lang_ru;; *);;
+
+concept_device_state_event
+<- sc_node_class;
+=> nrel_main_idtf:
+    [событие изменения состояния устройства]
+    (* <- lang_ru;; *);;
+
+concept_device_enabled_event
+<- concept_device_state_event;
+=> nrel_main_idtf:
+    [событие включения устройства]
+    (* <- lang_ru;; *);;
+
+concept_device_disabled_event
+<- concept_device_state_event;
+=> nrel_main_idtf:
+    [событие выключения устройства]
+    (* <- lang_ru;; *);;
+
+away_mode_requested
+<- sc_node_class;
+=> nrel_main_idtf:
+    [запрошено включение режима отсутствия]
+    (* <- lang_ru;; *);;
+
+away_mode_activated
+<- sc_node_class;
+=> nrel_main_idtf:
+    [событие включения режима отсутствия]
+    (* <- lang_ru;; *);;
+
+motion_detected
+<- sc_node_class;
+=> nrel_main_idtf:
+    [зафиксировано движение]
+    (* <- lang_ru;; *);;
+
+door_opened
+<- sc_node_class;
+=> nrel_main_idtf:
+    [открыта дверь]
+    (* <- lang_ru;; *);;
+
+confirmed_event
+<- sc_node_class;
+=> nrel_main_idtf:
+    [подтвержденное событие]
+    (* <- lang_ru;; *);;
+
+unverified_presence_event
+<- sc_node_class;
+=> nrel_main_idtf:
+    [неподтвержденное событие присутствия]
+    (* <- lang_ru;; *);;
+
+person_returned_home
+<- sc_node_class;
+=> nrel_main_idtf:
+    [человек вернулся домой]
+    (* <- lang_ru;; *);;
+
+alarm_triggered
+<- sc_node_class;
+=> nrel_main_idtf:
+    [сработала тревога]
+    (* <- lang_ru;; *);;
+
+power_saving_started
+<- sc_node_class;
+=> nrel_main_idtf:
+    [энергосбережение включено]
+    (* <- lang_ru;; *);;
+
+power_saving_finished
+<- sc_node_class;
+=> nrel_main_idtf:
+    [энергосбережение выключено]
+    (* <- lang_ru;; *);;
+
+smart_device
+<- concept_device;
+=> nrel_main_idtf:
+    [умное устройство]
+    (* <- lang_ru;; *);;
+
+critical_device
+<- smart_device;
+=> nrel_main_idtf:
+    [критически важное устройство]
+    (* <- lang_ru;; *);;
+
+disabled_device
+<- smart_device;
+=> nrel_main_idtf:
+    [отключенное устройство]
+    (* <- lang_ru;; *);;
+
+lighting_system
+<- smart_device;
+=> nrel_main_idtf:
+    [система освещения]
+    (* <- lang_ru;; *);;
+
+multimedia_system
+<- smart_device;
+=> nrel_main_idtf:
+    [мультимедийная система]
+    (* <- lang_ru;; *);;
+
+climate_system
+<- smart_device;
+=> nrel_main_idtf:
+    [климатическая система]
+    (* <- lang_ru;; *);;
+
+power_saving_agent_node
+<- sc_node;
+=> nrel_main_idtf:
+    [агент энергосбережения]
+    (* <- lang_ru;; *);;
+
+climate_control_agent_node
+<- sc_node;
+=> nrel_main_idtf:
+    [агент климат-контроля]
+    (* <- lang_ru;; *);;
+
+security_agent_node
+<- sc_node;
+=> nrel_main_idtf:
+    [агент охраны]
+    (* <- lang_ru;; *);;
+
+rrel_room
+<- sc_node_role_relation;
+=> nrel_main_idtf:
+    [комната*]
+    (* <- lang_ru;; *);;
+
+rrel_sensor
+<- sc_node_role_relation;
+=> nrel_main_idtf:
+    [датчик*]
+    (* <- lang_ru;; *);;
+
+rrel_value
+<- sc_node_role_relation;
+=> nrel_main_idtf:
+    [значение*]
+    (* <- lang_ru;; *);;
+
+rrel_time
+<- sc_node_role_relation;
+=> nrel_main_idtf:
+    [время*]
+    (* <- lang_ru;; *);;
+
+nrel_current_state
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [текущее состояние]
+    (* <- lang_ru;; *);;
+
+nrel_current_measurement
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [текущее измерение]
+    (* <- lang_ru;; *);;
+
+nrel_normalized_measurement
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [измерение после нормализации]
+    (* <- lang_ru;; *);;
+
+nrel_controls
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [управляет]
+    (* <- lang_ru;; *);;
+
+nrel_has_sensor
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [имеет датчик]
+    (* <- lang_ru;; *);;
+
+nrel_event_device
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [устройство события]
+    (* <- lang_ru;; *);;
+
+nrel_event_state
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [состояние события]
+    (* <- lang_ru;; *);;
+
+nrel_event_home
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [дом события]
+    (* <- lang_ru;; *);;
+
+nrel_event_source
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [исходное событие]
+    (* <- lang_ru;; *);;
+
+nrel_previous_state
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [предыдущее состояние]
+    (* <- lang_ru;; *);;
+
+device_can_be_disabled
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [устройство может быть отключено]
+    (* <- lang_ru;; *);;
+
+device_is_critical
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [устройство является критически важным]
+    (* <- lang_ru;; *);;
+
+mode_affects_agent
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [режим влияет на агента]
+    (* <- lang_ru;; *);;
+
+event_triggers_action
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [событие запускает действие]
+    (* <- lang_ru;; *);;
+
+sensor_generates_event
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [датчик порождает событие]
+    (* <- lang_ru;; *);;
+
+agent_controls_device
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [агент управляет устройством]
+    (* <- lang_ru;; *);;

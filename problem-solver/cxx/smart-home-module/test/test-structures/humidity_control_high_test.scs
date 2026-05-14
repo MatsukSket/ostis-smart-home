@@ -1,0 +1,36 @@
+// High humidity test: hygrometer controls a dehumidifier.
+
+high_test_hygrometer
+<- concept_hygrometer;
+=> nrel_controls:
+  high_test_dehumidifier;
+=> nrel_current_measurement:
+  high_test_measurement;
+=> nrel_normalized_measurement:
+  high_test_normal_measurement;;
+
+high_test_dehumidifier
+<- concept_dehumidifier;
+=> nrel_current_state:
+  concept_off;;
+
+high_test_humidity_value
+<- concept_high_humidity;;
+
+high_test_normal_humidity_value
+<- concept_normal_humidity;;
+
+high_test_measurement
+<- concept_measurement;
+=> rrel_value:
+  high_test_humidity_value;;
+
+high_test_normal_measurement
+<- concept_measurement;
+=> rrel_value:
+  high_test_normal_humidity_value;;
+
+high_test_humidity_control_action
+<- action_control_room_humidity;
+-> rrel_1:
+  high_test_hygrometer;;

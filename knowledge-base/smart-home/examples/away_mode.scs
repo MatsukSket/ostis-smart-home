@@ -1,0 +1,79 @@
+// Пример подсистемы режима отсутствия дома.
+
+away_mode_motion_sensor
+<- concept_motion_sensor;
+=> sensor_generates_event:
+  motion_detected;;
+
+away_mode_door_sensor
+<- concept_door_sensor;
+=> sensor_generates_event:
+  door_opened;;
+
+living_room_light
+<- smart_device;
+<- lighting_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+living_room_tv
+<- smart_device;
+<- multimedia_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+home_climate_controller
+<- smart_device;
+<- climate_system;
+=> nrel_current_state:
+  concept_on;
+=> device_can_be_disabled:
+  concept_on;;
+
+home_router
+<- smart_device;
+<- critical_device;
+=> nrel_current_state:
+  concept_on;
+=> device_is_critical:
+  concept_on;;
+
+home_security_system
+<- smart_device;
+<- critical_device;
+=> nrel_current_state:
+  concept_on;
+=> device_is_critical:
+  concept_on;;
+
+away_mode_active
+=> mode_affects_agent:
+  power_saving_agent_node;
+=> mode_affects_agent:
+  climate_control_agent_node;
+=> mode_affects_agent:
+  security_agent_node;;
+
+home_empty
+=> mode_affects_agent:
+  climate_control_agent_node;;
+
+person_returned_home
+=> event_triggers_action:
+  action_control_power_saving;;
+
+away_mode_requested
+=> event_triggers_action:
+  action_control_away_mode;;
+
+power_saving_agent_node
+=> agent_controls_device:
+  living_room_light;
+=> agent_controls_device:
+  living_room_tv;
+=> agent_controls_device:
+  home_climate_controller;;

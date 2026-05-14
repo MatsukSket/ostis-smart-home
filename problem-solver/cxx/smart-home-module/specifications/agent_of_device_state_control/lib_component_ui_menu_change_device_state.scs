@@ -1,0 +1,9 @@
+lib_component_ui_menu_change_device_state
+=> nrel_main_idtf:
+    [Компонент библиотеки. Команда пользовательского интерфейса изменения состояния устройства]
+    (* <- lang_ru;; *);
+    [Library component. User interface command for changing a device state]
+    (* <- lang_en;; *);
+
+<- library_of_platform_independent_reusable_components;
+<- library_of_atomic_reusable_components;;

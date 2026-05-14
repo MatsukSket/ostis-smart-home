@@ -1,0 +1,71 @@
+humidity_value_35
+<- concept_low_humidity;
+=> nrel_main_idtf:
+    [35%]
+    (* <- lang_en;; *);;
+
+humidity_value_45
+<- concept_normal_humidity;
+=> nrel_main_idtf:
+    [45%]
+    (* <- lang_en;; *);;
+
+humidity_value_50
+<- concept_normal_humidity;
+=> nrel_main_idtf:
+    [50%]
+    (* <- lang_en;; *);;
+
+humidity_value_75
+<- concept_high_humidity;
+=> nrel_main_idtf:
+    [75%]
+    (* <- lang_en;; *);;
+
+humidity_measurement_low_bedroom
+<- concept_measurement;
+=> rrel_sensor:
+    hygrometer_01;
+=> rrel_value:
+    humidity_value_35;
+=> rrel_room:
+    bedroom_01;;
+
+humidity_measurement_normal_bedroom
+<- concept_measurement;
+=> rrel_sensor:
+    hygrometer_01;
+=> rrel_value:
+    humidity_value_45;
+=> rrel_room:
+    bedroom_01;;
+
+humidity_measurement_high_bathroom
+<- concept_measurement;
+=> rrel_sensor:
+    hygrometer_02;
+=> rrel_value:
+    humidity_value_75;
+=> rrel_room:
+    bathroom_01;;
+
+humidity_measurement_normal_bathroom
+<- concept_measurement;
+=> rrel_sensor:
+    hygrometer_02;
+=> rrel_value:
+    humidity_value_50;
+=> rrel_room:
+    bathroom_01;;
+
+hygrometer_01
+=> nrel_current_measurement:
+    humidity_measurement_low_bedroom;
+=> nrel_normalized_measurement:
+    humidity_measurement_normal_bedroom;;
+
+hygrometer_02
+=> nrel_current_measurement:
+    humidity_measurement_high_bathroom;
+=> nrel_normalized_measurement:
+    humidity_measurement_normal_bathroom;;

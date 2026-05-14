@@ -1,0 +1,36 @@
+// Low humidity test: hygrometer controls a humidifier.
+
+low_test_hygrometer
+<- concept_hygrometer;
+=> nrel_controls:
+  low_test_humidifier;
+=> nrel_current_measurement:
+  low_test_measurement;
+=> nrel_normalized_measurement:
+  low_test_normal_measurement;;
+
+low_test_humidifier
+<- concept_humidifier;
+=> nrel_current_state:
+  concept_off;;
+
+low_test_humidity_value
+<- concept_low_humidity;;
+
+low_test_normal_humidity_value
+<- concept_normal_humidity;;
+
+low_test_measurement
+<- concept_measurement;
+=> rrel_value:
+  low_test_humidity_value;;
+
+low_test_normal_measurement
+<- concept_measurement;
+=> rrel_value:
+  low_test_normal_humidity_value;;
+
+low_test_humidity_control_action
+<- action_control_room_humidity;
+-> rrel_1:
+  low_test_hygrometer;;

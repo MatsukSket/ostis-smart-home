@@ -1,0 +1,51 @@
+humidifier_01
+<- concept_humidifier;
+=> nrel_main_idtf:
+    [Humidifier-01]
+    (* <- lang_en;; *);;
+
+dehumidifier_01
+<- concept_dehumidifier;
+=> nrel_main_idtf:
+    [Dehumidifier-01]
+    (* <- lang_en;; *);;
+
+hygrometer_01
+<- concept_hygrometer;
+=> nrel_main_idtf:
+    [Hygrometer-01]
+    (* <- lang_en;; *);;
+
+hygrometer_02
+<- concept_hygrometer;
+=> nrel_main_idtf:
+    [Hygrometer-02]
+    (* <- lang_en;; *);;
+
+humidifier_01
+=> rrel_room:
+    bedroom_01;
+=> nrel_has_sensor:
+    hygrometer_01;
+=> nrel_current_state:
+    concept_off;;
+
+dehumidifier_01
+=> rrel_room:
+    bathroom_01;
+=> nrel_has_sensor:
+    hygrometer_02;
+=> nrel_current_state:
+    concept_off;;
+
+hygrometer_01
+=> rrel_room:
+    bedroom_01;
+=> nrel_controls:
+    humidifier_01;;
+
+hygrometer_02
+=> rrel_room:
+    bathroom_01;
+=> nrel_controls:
+    dehumidifier_01;;

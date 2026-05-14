@@ -1,0 +1,17 @@
+// Unconfirmed motion event should not disable away mode.
+
+away_false_trigger_test_home
+<- concept_smart_home;
+<- home_empty;
+<- away_mode_active;
+<- security_mode_active;;
+
+away_false_motion_event
+<- motion_detected;;
+
+away_false_action
+<- action_control_away_mode;
+-> rrel_1:
+  away_false_trigger_test_home;
+-> rrel_2:
+  away_false_motion_event;;
