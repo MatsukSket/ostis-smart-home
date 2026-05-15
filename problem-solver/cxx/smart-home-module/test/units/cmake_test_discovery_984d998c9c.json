@@ -1,7 +1,81 @@
 {
-  "tests": 4,
+  "tests": 20,
   "name": "AllTests",
   "testsuites": [
+    {
+      "name": "AutomationPrioritiesTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "HardOffBlocksHumidityAutomation",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_automation_priorities.cpp",
+          "line": 13
+        },
+        {
+          "name": "ScheduleBlocksHumidityAutomation",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_automation_priorities.cpp",
+          "line": 46
+        },
+        {
+          "name": "HardOffBlocksLightAutomation",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_automation_priorities.cpp",
+          "line": 77
+        }
+      ]
+    },
+    {
+      "name": "AwayModeAgentTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "ActivationChangesGlobalStateAndStartsPowerSaving",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_away_mode_agent.cpp",
+          "line": 27
+        },
+        {
+          "name": "UnconfirmedPresenceEventDoesNotDisableAwayMode",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_away_mode_agent.cpp",
+          "line": 74
+        },
+        {
+          "name": "ConfirmedPresenceEventDisablesAwayModeAndRestoresDevices",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_away_mode_agent.cpp",
+          "line": 101
+        }
+      ]
+    },
+    {
+      "name": "DeviceStateAgentTest",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "ChangesDeviceStateAndCreatesKnowledgeBaseEvent",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_device_state_agent.cpp",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "name": "HumidityControlAgentTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "LowHumidityTurnsHumidifierOnAndThenOffAfterNormalization",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_humidity_control_agent.cpp",
+          "line": 27
+        },
+        {
+          "name": "HighHumidityTurnsDehumidifierOnAndThenOffAfterNormalization",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_humidity_control_agent.cpp",
+          "line": 72
+        },
+        {
+          "name": "NormalHumidityKeepsDeviceOff",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_humidity_control_agent.cpp",
+          "line": 117
+        }
+      ]
+    },
     {
       "name": "SmartHomeTest",
       "tests": 4,
@@ -25,6 +99,48 @@
           "name": "LampStateRemainsOnAfterRepeatTrigger",
           "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
           "line": 104
+        }
+      ]
+    },
+    {
+      "name": "PowerSavingAgentTest",
+      "tests": 1,
+      "testsuite": [
+        {
+          "name": "DisablesOnlyNonCriticalDevicesAndCreatesEvents",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_power_saving_agent.cpp",
+          "line": 11
+        }
+      ]
+    },
+    {
+      "name": "TemperatureControlAgentTest",
+      "tests": 5,
+      "testsuite": [
+        {
+          "name": "HighTemperatureTurnsConditionerOnAndThenOffAfterNormalization",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_temperature_control_agent.cpp",
+          "line": 27
+        },
+        {
+          "name": "LowTemperatureTurnsHeaterOnAndThenOffAfterNormalization",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_temperature_control_agent.cpp",
+          "line": 72
+        },
+        {
+          "name": "NormalTemperatureKeepsBothDevicesOff",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_temperature_control_agent.cpp",
+          "line": 117
+        },
+        {
+          "name": "SensorCanSwitchFromConditionerToHeaterAcrossActions",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_temperature_control_agent.cpp",
+          "line": 143
+        },
+        {
+          "name": "MissingControlledPairFails",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_temperature_control_agent.cpp",
+          "line": 196
         }
       ]
     }
