@@ -3,7 +3,7 @@
 #include <sc-memory/test/sc_test.hpp>
 
 #include "agents/power_saving_agent.hpp"
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 #include "test_utils.hpp"
 
 using PowerSavingAgentTest = ScMemoryTest;

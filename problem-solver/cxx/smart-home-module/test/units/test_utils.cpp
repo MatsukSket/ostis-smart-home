@@ -2,7 +2,7 @@
 
 #include <sc-builder/scs_loader.hpp>
 
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 
 std::string const SMART_HOME_TEST_FILES_DIR_PATH = TEST_FILES_DIR_PATH;
 

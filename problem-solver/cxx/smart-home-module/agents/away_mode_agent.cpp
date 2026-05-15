@@ -5,7 +5,7 @@
 
 #include <sc-memory/sc_structure.hpp>
 
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 
 ScAddr AwayModeAgent::GetActionClass() const
 {

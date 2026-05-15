@@ -5,7 +5,7 @@
 #include <sc-memory/sc_structure.hpp>
 
 #include "agents/common/automation_utils.hpp"
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 
 namespace
 {

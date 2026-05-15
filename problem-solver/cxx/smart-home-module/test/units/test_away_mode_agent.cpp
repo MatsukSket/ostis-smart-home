@@ -4,7 +4,7 @@
 
 #include "agents/away_mode_agent.hpp"
 #include "agents/power_saving_agent.hpp"
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 #include "test_utils.hpp"
 
 using AwayModeAgentTest = ScMemoryTest;

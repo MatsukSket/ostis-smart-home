@@ -4,7 +4,7 @@
 
 #include "agents/device_state_agent.hpp"
 #include "agents/temperature_control_agent.hpp"
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 #include "test_utils.hpp"
 
 using TemperatureControlAgentTest = ScMemoryTest;

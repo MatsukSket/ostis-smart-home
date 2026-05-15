@@ -4,7 +4,7 @@
 
 #include <sc-memory/sc_agent_context.hpp>
 
-#include "keynodes/keynodes.hpp"
+#include "keynodes/Keynodes.hpp"
 
 namespace smart_home::automation
 {
