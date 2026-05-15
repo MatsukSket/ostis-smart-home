@@ -11,6 +11,6 @@ using namespace smart_home;
 
 using SmartHomeTest = ScMemoryTest;
 
-std::string const TEST_FILES_DIR = TEST_FILES_DIR_PATH;
+inline std::string const TEST_FILES_DIR = TEST_FILES_DIR_PATH;
 
 void LoadTestStructure(ScAgentContext & context, std::string const & filename);

@@ -1,5 +1,6 @@
 file(GLOB SOURCES CONFIGURE_DEPENDS
     "*.cpp" "*.hpp"
+    "agents/*.cpp" "agents/*.hpp"
     "keynodes/*.cpp" "keynodes/*.hpp"
     "agents/*/*.cpp" "agents/*/*.hpp"
 )

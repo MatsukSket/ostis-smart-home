@@ -19,6 +19,11 @@ concept_humidity_sensor
 <= nrel_inclusion: concept_sensor;
 => nrel_main_idtf: [датчик влажности] (* <- lang_ru;; *);;
 
+concept_hygrometer
+<- sc_node_class;
+<= nrel_inclusion: concept_humidity_sensor;
+=> nrel_main_idtf: [гигрометр] (* <- lang_ru;; *);;
+
 concept_motion_sensor
 <- sc_node_class;
 <= nrel_inclusion: concept_sensor;
@@ -35,6 +40,11 @@ concept_humidifier
 <= nrel_inclusion: concept_effector;
 => nrel_main_idtf: [увлажнитель] (* <- lang_ru;; *);;
 
+concept_dehumidifier
+<- sc_node_class;
+<= nrel_inclusion: concept_effector;
+=> nrel_main_idtf: [осушитель воздуха] (* <- lang_ru;; *);;
+
 concept_light_bulb
 <- sc_node_class;
 <= nrel_inclusion: concept_effector;
@@ -44,3 +54,8 @@ concept_air_conditioner
 <- sc_node_class;
 <= nrel_inclusion: concept_effector;
 => nrel_main_idtf: [кондиционер] (* <- lang_ru;; *);;
+
+concept_heater
+<- sc_node_class;
+<= nrel_inclusion: concept_effector;
+=> nrel_main_idtf: [обогреватель] (* <- lang_ru;; *);;

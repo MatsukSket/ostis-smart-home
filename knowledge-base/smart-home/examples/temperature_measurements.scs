@@ -1,0 +1,50 @@
+temperature_value_16
+<- concept_low_temperature;
+=> nrel_main_idtf:
+    [16 C]
+    (* <- lang_en;; *);;
+
+temperature_value_22
+<- concept_normal_temperature;
+=> nrel_main_idtf:
+    [22 C]
+    (* <- lang_en;; *);;
+
+temperature_value_28
+<- concept_high_temperature;
+=> nrel_main_idtf:
+    [28 C]
+    (* <- lang_en;; *);;
+
+temperature_measurement_high_hall
+<- concept_measurement;
+=> rrel_sensor:
+    sensor_temp_hall;
+=> rrel_value:
+    temperature_value_28;
+=> rrel_room:
+    room_hall;;
+
+temperature_measurement_normal_hall
+<- concept_measurement;
+=> rrel_sensor:
+    sensor_temp_hall;
+=> rrel_value:
+    temperature_value_22;
+=> rrel_room:
+    room_hall;;
+
+temperature_measurement_low_hall
+<- concept_measurement;
+=> rrel_sensor:
+    sensor_temp_hall;
+=> rrel_value:
+    temperature_value_16;
+=> rrel_room:
+    room_hall;;
+
+sensor_temp_hall
+=> nrel_current_measurement:
+    temperature_measurement_high_hall;
+=> nrel_normalized_measurement:
+    temperature_measurement_normal_hall;;

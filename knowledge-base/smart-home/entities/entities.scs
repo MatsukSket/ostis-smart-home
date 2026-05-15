@@ -67,7 +67,13 @@ conditioner_hall
     <- concept_air_conditioner;
     => nrel_main_idtf: [Кондиционер в прихожей] (* <- lang_ru;; *);
     => nrel_location: room_hall;
-    <- concept_state_off;;
+    => nrel_current_state: concept_off;;
+
+heater_hall
+    <- concept_heater;
+    => nrel_main_idtf: [Обогреватель в прихожей] (* <- lang_ru;; *);
+    => nrel_location: room_hall;
+    => nrel_current_state: concept_off;;
 
 humidifier_bedroom
     <- concept_humidifier;
@@ -91,10 +97,17 @@ lamp_bathroom
 
 my_smart_home => nrel_effector: {
     conditioner_hall;
+    heater_hall;
     humidifier_bedroom;
     lamp_bedroom;
     lamp_bathroom
 };;
+
+sensor_temp_hall
+    => nrel_controls: {
+        conditioner_hall;
+        heater_hall
+    };;
 
 
 humidifier_bedroom => nrel_schedule: ... (*

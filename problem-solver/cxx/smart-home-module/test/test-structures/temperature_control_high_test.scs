@@ -1,0 +1,40 @@
+high_temp_sensor
+<- concept_temperature_sensor;
+=> nrel_controls:
+  high_temp_conditioner;
+  high_temp_heater;
+=> nrel_current_measurement:
+  high_temp_measurement;
+=> nrel_normalized_measurement:
+  high_temp_normal_measurement;;
+
+high_temp_conditioner
+<- concept_air_conditioner;
+=> nrel_current_state:
+  concept_off;;
+
+high_temp_heater
+<- concept_heater;
+=> nrel_current_state:
+  concept_off;;
+
+high_temp_value
+<- concept_high_temperature;;
+
+high_temp_normal_value
+<- concept_normal_temperature;;
+
+high_temp_measurement
+<- concept_measurement;
+=> rrel_value:
+  high_temp_value;;
+
+high_temp_normal_measurement
+<- concept_measurement;
+=> rrel_value:
+  high_temp_normal_value;;
+
+high_temp_control_action
+<- action_control_room_temperature;
+-> rrel_1:
+  high_temp_sensor;;

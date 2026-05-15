@@ -1,0 +1,29 @@
+schedule_test_hygrometer
+<- concept_hygrometer;
+=> nrel_controls:
+  schedule_test_humidifier;
+=> nrel_current_measurement:
+  schedule_test_measurement;;
+
+schedule_test_humidifier
+<- concept_humidifier;
+=> nrel_current_state:
+  concept_off;
+=> nrel_schedule:
+  schedule_test_schedule;;
+
+schedule_test_schedule
+<- sc_node_set;;
+
+schedule_test_humidity_value
+<- concept_low_humidity;;
+
+schedule_test_measurement
+<- concept_measurement;
+=> rrel_value:
+  schedule_test_humidity_value;;
+
+schedule_test_humidity_control_action
+<- action_control_room_humidity;
+-> rrel_1:
+  schedule_test_hygrometer;;

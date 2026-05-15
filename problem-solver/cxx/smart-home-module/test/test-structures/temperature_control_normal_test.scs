@@ -1,0 +1,30 @@
+normal_temp_sensor
+<- concept_temperature_sensor;
+=> nrel_controls:
+  normal_temp_conditioner;
+  normal_temp_heater;
+=> nrel_current_measurement:
+  normal_temp_measurement;;
+
+normal_temp_conditioner
+<- concept_air_conditioner;
+=> nrel_current_state:
+  concept_off;;
+
+normal_temp_heater
+<- concept_heater;
+=> nrel_current_state:
+  concept_off;;
+
+normal_temp_value
+<- concept_normal_temperature;;
+
+normal_temp_measurement
+<- concept_measurement;
+=> rrel_value:
+  normal_temp_value;;
+
+normal_temp_control_action
+<- action_control_room_temperature;
+-> rrel_1:
+  normal_temp_sensor;;

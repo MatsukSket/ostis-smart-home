@@ -4,7 +4,7 @@
 
 #include "keynodes/keynodes.hpp"
 
-std::string const SMART_HOME_TEST_FILES_DIR_PATH = SMART_HOME_TEST_STRUCTURES_DIR;
+std::string const SMART_HOME_TEST_FILES_DIR_PATH = TEST_FILES_DIR_PATH;
 
 void LoadScsFile(ScAgentContext & context, std::string const & fileName)
 {

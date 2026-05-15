@@ -14,6 +14,14 @@ action_control_room_humidity
     [action. control room humidity]
     (* <- lang_en;; *);;
 
+action_control_room_temperature
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие. контролировать температуру помещения]
+    (* <- lang_ru;; *);
+    [action. control room temperature]
+    (* <- lang_en;; *);;
+
 action_control_away_mode
 <- sc_node_class;
 => nrel_main_idtf:
@@ -174,6 +182,30 @@ concept_high_humidity
     [высокая влажность]
     (* <- lang_ru;; *);;
 
+concept_temperature_value
+<- sc_node_class;
+=> nrel_main_idtf:
+    [значение температуры]
+    (* <- lang_ru;; *);;
+
+concept_low_temperature
+<- concept_temperature_value;
+=> nrel_main_idtf:
+    [низкая температура]
+    (* <- lang_ru;; *);;
+
+concept_normal_temperature
+<- concept_temperature_value;
+=> nrel_main_idtf:
+    [нормальная температура]
+    (* <- lang_ru;; *);;
+
+concept_high_temperature
+<- concept_temperature_value;
+=> nrel_main_idtf:
+    [высокая температура]
+    (* <- lang_ru;; *);;
+
 concept_device_state_event
 <- sc_node_class;
 => nrel_main_idtf:
@@ -190,6 +222,30 @@ concept_device_disabled_event
 <- concept_device_state_event;
 => nrel_main_idtf:
     [событие выключения устройства]
+    (* <- lang_ru;; *);;
+
+concept_temperature_event
+<- sc_node_class;
+=> nrel_main_idtf:
+    [событие температуры]
+    (* <- lang_ru;; *);;
+
+concept_temperature_low_event
+<- concept_temperature_event;
+=> nrel_main_idtf:
+    [событие низкой температуры]
+    (* <- lang_ru;; *);;
+
+concept_temperature_high_event
+<- concept_temperature_event;
+=> nrel_main_idtf:
+    [событие высокой температуры]
+    (* <- lang_ru;; *);;
+
+concept_temperature_normalized_event
+<- concept_temperature_event;
+=> nrel_main_idtf:
+    [событие нормализации температуры]
     (* <- lang_ru;; *);;
 
 away_mode_requested

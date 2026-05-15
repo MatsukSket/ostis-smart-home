@@ -21,14 +21,24 @@ subject_domain_of_smart_home
     concept_sensor;
     concept_temperature_sensor;
     concept_humidity_sensor;
+    concept_hygrometer;
     concept_motion_sensor;
     concept_effector;
     concept_humidifier;
+    concept_dehumidifier;
     concept_light_bulb;
     concept_air_conditioner;
+    concept_heater;
     concept_device_state;
     concept_state_on;
     concept_state_off;
+    concept_state_hard_off;
+    concept_temperature_value;
+    concept_low_temperature;
+    concept_normal_temperature;
+    concept_high_temperature;
+    action_control_room_temperature;
+    action_control_room_humidity;
 
 -> rrel_explored_relation:
     nrel_owner;
@@ -37,6 +47,10 @@ subject_domain_of_smart_home
     nrel_sensor;
     nrel_effector;
     nrel_schedule;
+    nrel_current_state;
+    nrel_current_measurement;
+    nrel_normalized_measurement;
+    nrel_controls;
     rrel_on_time;
     rrel_off_time;
     rrel_day;;

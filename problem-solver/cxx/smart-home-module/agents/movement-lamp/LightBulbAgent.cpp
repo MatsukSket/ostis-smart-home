@@ -1,5 +1,7 @@
 #include "LightBulbAgent.hpp"
 
+#include "agents/common/automation_utils.hpp"
+
 using namespace smart_home;
 
 ScAddr LightBulbAgent::GetActionClass() const
@@ -39,6 +41,12 @@ ScResult LightBulbAgent::DoProgram(ScAction & action)
   if (!lamp.IsValid())
   {
     SC_LOG_WARNING("LightBulbAgent: lamp not found.");
+    return action.FinishSuccessfully();
+  }
+
+  if (automation::IsAutomationBlocked(m_context, lamp))
+  {
+    SC_LOG_INFO("LightBulbAgent: lamp automation is blocked by hard-off or schedule.");
     return action.FinishSuccessfully();
   }
 

@@ -1,0 +1,53 @@
+switch_temp_sensor
+<- concept_temperature_sensor;
+=> nrel_controls:
+  switch_temp_conditioner;
+  switch_temp_heater;
+=> nrel_current_measurement:
+  switch_high_temp_measurement;
+=> nrel_normalized_measurement:
+  switch_high_normal_measurement;;
+
+switch_temp_conditioner
+<- concept_air_conditioner;
+=> nrel_current_state:
+  concept_off;;
+
+switch_temp_heater
+<- concept_heater;
+=> nrel_current_state:
+  concept_off;;
+
+switch_high_temp_value
+<- concept_high_temperature;;
+
+switch_low_temp_value
+<- concept_low_temperature;;
+
+switch_normal_temp_value
+<- concept_normal_temperature;;
+
+switch_high_temp_measurement
+<- concept_measurement;
+=> rrel_value:
+  switch_high_temp_value;;
+
+switch_high_normal_measurement
+<- concept_measurement;
+=> rrel_value:
+  switch_normal_temp_value;;
+
+switch_low_temp_measurement
+<- concept_measurement;
+=> rrel_value:
+  switch_low_temp_value;;
+
+switch_low_normal_measurement
+<- concept_measurement;
+=> rrel_value:
+  switch_normal_temp_value;;
+
+switch_high_temp_control_action
+<- action_control_room_temperature;
+-> rrel_1:
+  switch_temp_sensor;;

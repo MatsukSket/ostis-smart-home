@@ -1,0 +1,24 @@
+hard_off_test_hygrometer
+<- concept_hygrometer;
+=> nrel_controls:
+  hard_off_test_humidifier;
+=> nrel_current_measurement:
+  hard_off_test_measurement;;
+
+hard_off_test_humidifier
+<- concept_humidifier;
+=> nrel_current_state:
+  concept_state_hard_off;;
+
+hard_off_test_humidity_value
+<- concept_low_humidity;;
+
+hard_off_test_measurement
+<- concept_measurement;
+=> rrel_value:
+  hard_off_test_humidity_value;;
+
+hard_off_test_humidity_control_action
+<- action_control_room_humidity;
+-> rrel_1:
+  hard_off_test_hygrometer;;

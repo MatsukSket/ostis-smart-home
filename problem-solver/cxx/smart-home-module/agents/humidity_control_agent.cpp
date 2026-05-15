@@ -4,6 +4,7 @@
 
 #include <sc-memory/sc_structure.hpp>
 
+#include "agents/common/automation_utils.hpp"
 #include "keynodes/keynodes.hpp"
 
 ScAddr HumidityControlAgent::GetActionClass() const
@@ -29,6 +30,14 @@ ScResult HumidityControlAgent::DoProgram(ScAction & action)
   if (!targetState.IsValid())
     return action.FinishWithError();
 
+  if (smart_home::automation::IsAutomationBlocked(m_context, device))
+  {
+    ScStructure result = m_context.GenerateStructure();
+    result << sensor << device << measurement << humidityValue;
+    action.SetResult(result);
+    return action.FinishSuccessfully();
+  }
+
   if (!RunDeviceStateAgent(device, targetState))
     return action.FinishWithError();
 
@@ -38,14 +47,14 @@ ScResult HumidityControlAgent::DoProgram(ScAction & action)
   if (targetState == SmartHomeKeynodes::concept_on)
   {
     ScAddr const normalizedMeasurement = GetRelationTarget(sensor, SmartHomeKeynodes::nrel_normalized_measurement);
-    if (!normalizedMeasurement.IsValid())
-      return action.FinishWithError();
+    if (normalizedMeasurement.IsValid())
+    {
+      ReplaceRelationTarget(sensor, SmartHomeKeynodes::nrel_current_measurement, normalizedMeasurement);
+      result << normalizedMeasurement << SmartHomeKeynodes::nrel_normalized_measurement;
 
-    ReplaceRelationTarget(sensor, SmartHomeKeynodes::nrel_current_measurement, normalizedMeasurement);
-    result << normalizedMeasurement << SmartHomeKeynodes::nrel_normalized_measurement;
-
-    if (!RunDeviceStateAgent(device, SmartHomeKeynodes::concept_off))
-      return action.FinishWithError();
+      if (!RunDeviceStateAgent(device, SmartHomeKeynodes::concept_off))
+        return action.FinishWithError();
+    }
   }
 
   action.SetResult(result);

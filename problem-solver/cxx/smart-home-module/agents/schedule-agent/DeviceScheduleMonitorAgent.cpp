@@ -1,7 +1,10 @@
 #include "DeviceScheduleMonitorAgent.hpp"
+
 #include <ctime>
 #include <iomanip>
 #include <sstream>
+
+#include "agents/common/automation_utils.hpp"
 
 using namespace smart_home;
 
@@ -89,13 +92,7 @@ void DeviceScheduleMonitorAgent::ProcessDeviceSchedule(ScAddr const & deviceAddr
 // hard_off checking
 bool DeviceScheduleMonitorAgent::IsDeviceHardOff(ScAddr const & deviceAddr)
 {
-  ScIterator3Ptr hardOffIt = m_context.CreateIterator3(
-      Keynodes::concept_state_hard_off,
-      ScType::ConstPermPosArc,
-      deviceAddr
-    );
-
-  return hardOffIt->Next();
+  return automation::IsDeviceHardOff(m_context, deviceAddr);
 }
 
 // schedule searching

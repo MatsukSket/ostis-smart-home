@@ -1,0 +1,40 @@
+low_temp_sensor
+<- concept_temperature_sensor;
+=> nrel_controls:
+  low_temp_conditioner;
+  low_temp_heater;
+=> nrel_current_measurement:
+  low_temp_measurement;
+=> nrel_normalized_measurement:
+  low_temp_normal_measurement;;
+
+low_temp_conditioner
+<- concept_air_conditioner;
+=> nrel_current_state:
+  concept_off;;
+
+low_temp_heater
+<- concept_heater;
+=> nrel_current_state:
+  concept_off;;
+
+low_temp_value
+<- concept_low_temperature;;
+
+low_temp_normal_value
+<- concept_normal_temperature;;
+
+low_temp_measurement
+<- concept_measurement;
+=> rrel_value:
+  low_temp_value;;
+
+low_temp_normal_measurement
+<- concept_measurement;
+=> rrel_value:
+  low_temp_normal_value;;
+
+low_temp_control_action
+<- action_control_room_temperature;
+-> rrel_1:
+  low_temp_sensor;;

@@ -1,0 +1,24 @@
+invalid_temp_sensor
+<- concept_temperature_sensor;
+=> nrel_controls:
+  invalid_temp_conditioner;
+=> nrel_current_measurement:
+  invalid_temp_measurement;;
+
+invalid_temp_conditioner
+<- concept_air_conditioner;
+=> nrel_current_state:
+  concept_off;;
+
+invalid_temp_value
+<- concept_high_temperature;;
+
+invalid_temp_measurement
+<- concept_measurement;
+=> rrel_value:
+  invalid_temp_value;;
+
+invalid_temp_control_action
+<- action_control_room_temperature;
+-> rrel_1:
+  invalid_temp_sensor;;
