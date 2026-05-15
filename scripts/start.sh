@@ -19,6 +19,9 @@ case "$1" in
   test)
     /home/matsuk/ostis-smart-home/build/Debug/bin/smart-home-module-tests
     ;;
+  make)
+    cmake --build --preset release
+    ;;
   machine)
     LD_LIBRARY_PATH="$LD_LIBRARY_PATH" \
       $SC_MACHINE_PATH/bin/sc-machine -s kb.bin \

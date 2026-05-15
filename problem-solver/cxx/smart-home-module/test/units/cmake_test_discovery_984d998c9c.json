@@ -1,5 +1,5 @@
 {
-  "tests": 20,
+  "tests": 8,
   "name": "AllTests",
   "testsuites": [
     {
@@ -78,27 +78,47 @@
     },
     {
       "name": "SmartHomeTest",
-      "tests": 4,
+      "tests": 8,
       "testsuite": [
         {
           "name": "LightBulbTurnsOnWhenMotionDetected",
-          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestLightBulbAgent.cpp",
           "line": 3
         },
         {
           "name": "LightBulbTurnsOffWhenMotionNotDetected",
-          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestLightBulbAgent.cpp",
           "line": 41
         },
         {
           "name": "LightBulbNotFoundWhenNoSensorRelation",
-          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestLightBulbAgent.cpp",
           "line": 88
         },
         {
           "name": "LampStateRemainsOnAfterRepeatTrigger",
-          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/test_light_bulb_agent.cpp",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestLightBulbAgent.cpp",
           "line": 104
+        },
+        {
+          "name": "DeviceTurnsOnWhenTimeMatches",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestSchudleMonitorAgent.cpp",
+          "line": 32
+        },
+        {
+          "name": "DeviceTurnsOffWhenTimeMatches",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestSchudleMonitorAgent.cpp",
+          "line": 55
+        },
+        {
+          "name": "DeviceIgnoresIfWrongDay",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestSchudleMonitorAgent.cpp",
+          "line": 81
+        },
+        {
+          "name": "DeviceIgnoresScheduleIfHardOff",
+          "file": "\/home\/matsuk\/ostis-smart-home\/problem-solver\/cxx\/smart-home-module\/test\/units\/TestSchudleMonitorAgent.cpp",
+          "line": 106
         }
       ]
     },

@@ -16,13 +16,12 @@ ScAddr DeviceScheduleMonitorAgent::GetActionClass() const
 ScResult DeviceScheduleMonitorAgent::DoProgram(ScAction & action)
 {
   CurrentDateTime now = GetCurrentDateTime();
-  SC_LOG_INFO("Tick. Time: " + now.time + ", Day: " + now.day);
+  SC_LOG_INFO(LOG_COLOR_CYAN + "Tick. Time: " + now.time + ", Day: " + now.day + LOG_COLOR_RESET);
 
   ProcessAllEffectors(now);
 
   return action.FinishSuccessfully();
 }
-
 
 // getting time
 CurrentDateTime DeviceScheduleMonitorAgent::GetCurrentDateTime() const
@@ -38,7 +37,6 @@ CurrentDateTime DeviceScheduleMonitorAgent::GetCurrentDateTime() const
   
   return {timeStream.str(), days[now->tm_wday]};
 }
-
 
 // device searching
 void DeviceScheduleMonitorAgent::ProcessAllEffectors(CurrentDateTime const & now)
@@ -56,6 +54,8 @@ void DeviceScheduleMonitorAgent::ProcessAllEffectors(CurrentDateTime const & now
   {
     foundAnySubclass = true;
     ScAddr subclass = subclassIt->Get(2);
+    
+    SC_LOG_INFO(LOG_COLOR_GREEN + "Found effector subclass." + LOG_COLOR_RESET);
 
     ScIterator3Ptr effectorIt = m_context.CreateIterator3(
         subclass, 
@@ -65,12 +65,13 @@ void DeviceScheduleMonitorAgent::ProcessAllEffectors(CurrentDateTime const & now
 
     while (effectorIt->Next())
     {
+      SC_LOG_INFO(LOG_COLOR_GREEN + "Found device, checking schedule." + LOG_COLOR_RESET);
       ProcessDeviceSchedule(effectorIt->Get(2), now);
     }
   }
 
   if (!foundAnySubclass)
-    SC_LOG_INFO("No effector subclasses found.");
+    SC_LOG_INFO(LOG_BOLD_RED + "No effector subclasses found." + LOG_COLOR_RESET);
 }
 
 // device processing
@@ -78,13 +79,16 @@ void DeviceScheduleMonitorAgent::ProcessDeviceSchedule(ScAddr const & deviceAddr
 {
   if (IsDeviceHardOff(deviceAddr))
   {
-    SC_LOG_INFO("Device is in 'hard off' state. Skipping schedule.");
+    SC_LOG_INFO(LOG_BOLD_RED + "Device is in 'hard off' state. Skipping schedule." + LOG_COLOR_RESET);
     return;
   }
 
   ScAddr scheduleSet = GetDeviceScheduleSet(deviceAddr);
   if (!scheduleSet.IsValid()) 
+  {
+    SC_LOG_INFO(LOG_COLOR_YELLOW + "No schedule for device, skipping." + LOG_COLOR_RESET);
     return;
+  }
 
   ProcessScheduleSet(scheduleSet, deviceAddr, now);
 }
@@ -139,15 +143,15 @@ void DeviceScheduleMonitorAgent::ProcessScheduleTuple(
   if (!IsDayMatching(scheduleTuple, now.day))
     return;
 
+  // Добавили строковый префикс для логирования
   CheckAndApplyTimeAction(scheduleTuple, Keynodes::rrel_on_time, 
                           Keynodes::concept_state_on, Keynodes::concept_state_off, 
-                          deviceAddr, now.time);
+                          deviceAddr, now.time, "On time");
 
   CheckAndApplyTimeAction(scheduleTuple, Keynodes::rrel_off_time, 
                           Keynodes::concept_state_off, Keynodes::concept_state_on, 
-                          deviceAddr, now.time);
+                          deviceAddr, now.time, "Off time");
 }
-
 
 // day compare 
 bool DeviceScheduleMonitorAgent::IsDayMatching(ScAddr const & scheduleTuple, std::string const & currentDay)
@@ -167,6 +171,8 @@ bool DeviceScheduleMonitorAgent::IsDayMatching(ScAddr const & scheduleTuple, std
     std::string day;  
     m_context.GetLinkContent(dayIt->Get(2), day);
     
+    SC_LOG_INFO(LOG_COLOR_PURPLE + "Schedule day: " + day + ", current: " + currentDay + LOG_COLOR_RESET);
+    
     if (day == currentDay)
       return true;
   }
@@ -178,7 +184,8 @@ bool DeviceScheduleMonitorAgent::IsDayMatching(ScAddr const & scheduleTuple, std
 void DeviceScheduleMonitorAgent::CheckAndApplyTimeAction(
     ScAddr const & scheduleTuple, ScAddr const & timeRelation, 
     ScAddr const & targetState, ScAddr const & oppositeState, 
-    ScAddr const & deviceAddr, std::string const & currentTime)
+    ScAddr const & deviceAddr, std::string const & currentTime,
+    std::string const & logPrefix)
 {
   ScIterator5Ptr timeIt = m_context.CreateIterator5(
       scheduleTuple, 
@@ -192,15 +199,16 @@ void DeviceScheduleMonitorAgent::CheckAndApplyTimeAction(
   {
     std::string scheduledTime;
     m_context.GetLinkContent(timeIt->Get(2), scheduledTime);
+    
+    SC_LOG_INFO(LOG_COLOR_PURPLE + logPrefix + ": " + scheduledTime + ", current: " + currentTime + LOG_COLOR_RESET);
 
     if (scheduledTime == currentTime)
     {
-      SC_LOG_INFO("Time matched: " + scheduledTime + ". Switching state.");
+      SC_LOG_INFO(LOG_BOLD_GREEN + "Time matched: " + scheduledTime + ". Switching state." + LOG_COLOR_RESET);
       SwitchDeviceState(deviceAddr, targetState, oppositeState);
     }
   }
 }
-
 
 // switch device state
 void DeviceScheduleMonitorAgent::SwitchDeviceState(
