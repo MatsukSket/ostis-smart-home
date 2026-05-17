@@ -37,8 +37,6 @@ void MotionSensorAgent::Stop()
   SC_LOG_INFO("MotionSensorAgent: stopped.");
 }
 
-// ── вспомогательные функции ──────────────────────────────────────────────────
-
 bool MotionSensorAgent::ReadSensorState(ScAgentContext & ctx, ScAddr const & sensor)
 {
   return ctx.CheckConnector(Keynodes::concept_action_detected, sensor, ScType::ConstPermPosArc);
@@ -48,9 +46,6 @@ void MotionSensorAgent::CleanupConflictingStates(ScAgentContext & ctx, ScAddr co
 {
   bool const detected    = ctx.CheckConnector(Keynodes::concept_action_detected,     sensor, ScType::ConstPermPosArc);
   bool const notDetected = ctx.CheckConnector(Keynodes::concept_action_not_detected, sensor, ScType::ConstPermPosArc);
-
-  if (!detected && !notDetected)
-    return;
 
   if (detected && notDetected)
   {
@@ -90,11 +85,12 @@ ScAddr MotionSensorAgent::FindLamp(ScAgentContext & ctx, ScAddr const & sensor)
 
 bool MotionSensorAgent::IsLampInSync(ScAgentContext & ctx, ScAddr const & lamp, bool motionDetected)
 {
+  if (automation::IsDeviceHardOff(ctx, lamp))
+    return ctx.CheckConnector(Keynodes::concept_state_off, lamp, ScType::ConstPermPosArc);
+
   ScAddr const expectedState = motionDetected ? Keynodes::concept_state_on : Keynodes::concept_state_off;
   return ctx.CheckConnector(expectedState, lamp, ScType::ConstPermPosArc);
 }
-
-// ── основной цикл ────────────────────────────────────────────────────────────
 
 void MotionSensorAgent::MonitorLoop()
 {
@@ -133,10 +129,10 @@ void MotionSensorAgent::MonitorLoop()
 
       ScAddr const lamp = FindLamp(ctx, sensor);
 
-      if (lamp.IsValid() && automation::IsAutomationBlocked(ctx, lamp))
+      if (lamp.IsValid() && automation::HasScheduleControl(ctx, lamp))
         continue;
 
-      bool const stateChanged = currentState != m_lastMotionState;
+      bool const stateChanged  = currentState != m_lastMotionState;
       bool const lampOutOfSync = lamp.IsValid() && !IsLampInSync(ctx, lamp, currentState);
 
       if (stateChanged)
