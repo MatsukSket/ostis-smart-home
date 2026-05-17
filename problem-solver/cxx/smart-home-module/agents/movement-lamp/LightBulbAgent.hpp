@@ -15,6 +15,7 @@ public:
 private:
   ScAddr FindLamp(ScAddr const & sensor);
   bool IsMotionDetected(ScAddr const & sensor);
+  void ForceOff(ScAddr const & lamp);
   void ApplyLampState(ScAddr const & lamp, bool motionDetected);
   void SetState(ScAddr const & device, ScAddr const & targetState, ScAddr const & oppositeState);
 };
