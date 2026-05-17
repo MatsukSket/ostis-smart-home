@@ -1,0 +1,16 @@
+sensor_motion_bedroom
+<- concept_motion_sensor;
+<- concept_action_detected;;
+
+lamp_bedroom
+<- concept_light_bulb;
+<- concept_state_off;
+=> nrel_sensor: sensor_motion_bedroom;
+=> nrel_schedule: ... (*
+    <- sc_node_set;;
+    -> ... (*
+        <- sc_node_tuple;;
+        -> rrel_on_time: [09:00];;
+        -> rrel_off_time: [10:00];;
+    *);;
+*);;

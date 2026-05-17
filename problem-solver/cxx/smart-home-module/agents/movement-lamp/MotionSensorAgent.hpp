@@ -24,6 +24,12 @@ private:
   static bool m_lastMotionState;
 
   static void MonitorLoop();
+
+  static bool ReadSensorState(ScAgentContext & ctx, ScAddr const & sensor);
+  static void CleanupConflictingStates(ScAgentContext & ctx, ScAddr const & sensor);
+  static void EnsureDefaultState(ScAgentContext & ctx, ScAddr const & sensor);
+  static ScAddr FindLamp(ScAgentContext & ctx, ScAddr const & sensor);
+  static bool IsLampInSync(ScAgentContext & ctx, ScAddr const & lamp, bool motionDetected);
 };
 
 }

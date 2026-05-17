@@ -1,5 +1,4 @@
 #include "LightBulbAgent.hpp"
-
 #include "agents/common/automation_utils.hpp"
 
 using namespace smart_home;
@@ -11,64 +10,68 @@ ScAddr LightBulbAgent::GetActionClass() const
 
 ScResult LightBulbAgent::DoProgram(ScAction & action)
 {
-  SC_LOG_INFO("LightBulbAgent: DoProgram called.");
-
   ScAddr const sensor = Keynodes::sensor_motion_bedroom;
+  ScAddr const lamp = FindLamp(sensor);
 
-  bool const motionDetected =
-      m_context.CheckConnector(Keynodes::concept_action_detected, sensor, ScType::ConstPermPosArc);
+  if (!lamp.IsValid())
+  {
+    SC_LOG_WARNING("LightBulbAgent: lamp not found for sensor.");
+    return action.FinishSuccessfully();
+  }
 
-  SC_LOG_INFO(std::string("LightBulbAgent: motionDetected=") + (motionDetected ? "true" : "false"));
+  if (automation::IsAutomationBlocked(m_context, lamp))
+  {
+    SC_LOG_INFO("LightBulbAgent: automation blocked (hard-off or schedule).");
+    return action.FinishSuccessfully();
+  }
 
-  ScAddr lamp;
-  ScIterator5Ptr lampIt = m_context.CreateIterator5(
+  ApplyLampState(lamp, IsMotionDetected(sensor));
+  return action.FinishSuccessfully();
+}
+
+ScAddr LightBulbAgent::FindLamp(ScAddr const & sensor)
+{
+  ScIterator5Ptr it = m_context.CreateIterator5(
       ScType::ConstNode,
       ScType::ConstCommonArc,
       sensor,
       ScType::ConstPermPosArc,
       Keynodes::nrel_sensor);
 
-  while (lampIt->Next())
+  while (it->Next())
   {
-    ScAddr const candidate = lampIt->Get(0);
+    ScAddr const candidate = it->Get(0);
     if (m_context.CheckConnector(Keynodes::concept_light_bulb, candidate, ScType::ConstPermPosArc))
-    {
-      lamp = candidate;
-      break;
-    }
+      return candidate;
   }
 
-  if (!lamp.IsValid())
-  {
-    SC_LOG_WARNING("LightBulbAgent: lamp not found.");
-    return action.FinishSuccessfully();
-  }
+  return ScAddr::Empty;
+}
 
-  if (automation::IsAutomationBlocked(m_context, lamp))
-  {
-    SC_LOG_INFO("LightBulbAgent: lamp automation is blocked by hard-off or schedule.");
-    return action.FinishSuccessfully();
-  }
+bool LightBulbAgent::IsMotionDetected(ScAddr const & sensor)
+{
+  return m_context.CheckConnector(Keynodes::concept_action_detected, sensor, ScType::ConstPermPosArc);
+}
 
-  SC_LOG_INFO("LightBulbAgent: lamp found, switching state.");
-
+void LightBulbAgent::ApplyLampState(ScAddr const & lamp, bool motionDetected)
+{
   ScAddr const targetState   = motionDetected ? Keynodes::concept_state_on  : Keynodes::concept_state_off;
   ScAddr const oppositeState = motionDetected ? Keynodes::concept_state_off : Keynodes::concept_state_on;
 
-  {
-    ScIterator3Ptr it = m_context.CreateIterator3(oppositeState, ScType::ConstPermPosArc, lamp);
-    while (it->Next())
-      m_context.EraseElement(it->Get(1));
-  }
-  {
-    ScIterator3Ptr it = m_context.CreateIterator3(targetState, ScType::ConstPermPosArc, lamp);
-    while (it->Next())
-      m_context.EraseElement(it->Get(1));
-  }
-
-  m_context.GenerateConnector(ScType::ConstPermPosArc, targetState, lamp);
+  SetState(lamp, targetState, oppositeState);
 
   SC_LOG_INFO(std::string("LightBulbAgent: lamp_bedroom -> ") + (motionDetected ? "ON" : "OFF"));
+}
 
-  return action.FinishSuccessfully();
+void LightBulbAgent::SetState(ScAddr const & device, ScAddr const & targetState, ScAddr const & oppositeState)
+{
+  ScIterator3Ptr oldIt = m_context.CreateIterator3(oppositeState, ScType::ConstPermPosArc, device);
+  while (oldIt->Next())
+    m_context.EraseElement(oldIt->Get(1));
+
+  ScIterator3Ptr dupIt = m_context.CreateIterator3(targetState, ScType::ConstPermPosArc, device);
+  while (dupIt->Next())
+    m_context.EraseElement(dupIt->Get(1));
+
+  m_context.GenerateConnector(ScType::ConstPermPosArc, targetState, device);
 }

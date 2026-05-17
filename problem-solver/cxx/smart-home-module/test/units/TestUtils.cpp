@@ -1,4 +1,4 @@
-#include "TestUtils.hpp"
+q#include "TestUtils.hpp"
 
 void LoadTestStructure(ScAgentContext & context, std::string const & filename)
 {

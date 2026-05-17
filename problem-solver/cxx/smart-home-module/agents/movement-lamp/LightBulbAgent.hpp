@@ -13,7 +13,10 @@ public:
   ScResult DoProgram(ScAction & action) override;
 
 private:
-  void SwitchDeviceState(ScAddr const & device, ScAddr const & targetState, ScAddr const & oppositeState);
+  ScAddr FindLamp(ScAddr const & sensor);
+  bool IsMotionDetected(ScAddr const & sensor);
+  void ApplyLampState(ScAddr const & lamp, bool motionDetected);
+  void SetState(ScAddr const & device, ScAddr const & targetState, ScAddr const & oppositeState);
 };
 
 }
